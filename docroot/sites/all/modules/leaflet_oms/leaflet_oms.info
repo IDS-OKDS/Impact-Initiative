@@ -1,0 +1,5 @@
+name = Leaflet OMS
+description = Extended Leaflet with the Overlapping Marker Spiderfier library
+core = 7.x
+dependencies[] = libraries
+dependencies[] = leaflet

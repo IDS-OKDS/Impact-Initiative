@@ -1,0 +1,4 @@
+.views-exposed-form .views-exposed-widget,
+.views-widget .chosen-container {
+	width:100% !important;
+}

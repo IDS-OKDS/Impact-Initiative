@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * Implements hook_library().
+ */
+function leaflet_oms_library() {
+  $libraries['leaflet_oms'] = array(
+    'title' => 'Leaflet OMS',
+    'version' => 0, // we don't have a version
+    'js' => array(
+      array(
+        'type' => 'file',
+        'data' => libraries_get_path('leaflet_oms') . '/oms.min.js',
+        'group' => JS_LIBRARY,
+        'preprocess' => FALSE,
+      ),
+    ),
+  );
+
+  return $libraries;
+}
+
+function leaflet_oms_preprocess_leaflet_map(&$vars) {
+  drupal_add_library('leaflet_oms', 'leaflet_oms');
+  drupal_add_js(drupal_get_path('module', 'leaflet_oms') . '/leaflet_oms.drupal.js');  
+}
+
