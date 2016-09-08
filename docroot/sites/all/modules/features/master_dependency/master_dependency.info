@@ -6,4 +6,5 @@ package = epd
 dependencies[] = features
 
 ; Features
+dependencies[] = epd_blog
 dependencies[] = epd_files
