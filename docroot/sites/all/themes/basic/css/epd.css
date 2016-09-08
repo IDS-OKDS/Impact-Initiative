@@ -360,16 +360,16 @@ body:before {
 
 
 .node-type-resource .herocolumn.main,
-.node-type-blog .herocolumn.main {
+.node-type-blog, .node-type-news .herocolumn.main {
     width:100%;
 }
 
 .node-type-resource .herotextwrapper,
-.node-type-blog .herotextwrapper {
+.node-type-blog, .node-type-news .herotextwrapper {
     width:100%;
 }
 
-
+.node-type-news .node-content .field-items,
 .node-type-blog .node-content .field-items {
     margin-bottom: 1.5em;
 }

@@ -126,7 +126,7 @@
 		<?php
 		$title = '';
 		endif;
-		if($node->type == 'blog' || $node->type == 'resource'):
+		if($node->type == 'news' || $node->type == 'blog' || $node->type == 'resource'):
 		$image_path = basic_epd_get_field_image_path('field_supporting_image', $node);
 		$hero_project_bg_style = "background-image:url($image_path);";
 		$project_theme_color = 'aaaaaa';

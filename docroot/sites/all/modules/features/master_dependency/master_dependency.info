@@ -4,7 +4,9 @@ package = epd
 
 ; Modules
 dependencies[] = features
+dependencies[] = date_popup
 
 ; Features
 dependencies[] = epd_blog
 dependencies[] = epd_files
+dependencies[] = epd_news
