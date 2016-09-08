@@ -4,6 +4,7 @@
 
 .contenthero-wrapper{
 	height: 100%;
+  position:relative;
 }
 
 .container {
@@ -49,7 +50,7 @@ body {
 	list-style-image:none;
 }
 
-.w-nav-menu li.active-trail .navlink, 
+.w-nav-menu li.active-trail .navlink,
 .w-nav-menu li.active .navlink {
     border-bottom-width: 12px;
 }
@@ -63,7 +64,7 @@ body {
 }
 
 .logged-in.front .maincontentwrapper.alternative {
-    margin-top: 0px;	
+    margin-top: 0px;
 }
 
 
@@ -98,7 +99,7 @@ body:before {
 	background-size: 100% 100%;
 	background-repeat:no-repeat;
 	max-height:125px;
-	height:125px;	
+	height:125px;
 }
 
 .front h1.title {
@@ -154,7 +155,7 @@ body:before {
 }
 
 .keyword-links .field-item {
-    display: inline-block;	
+    display: inline-block;
 }
 
 .views-field-field-keywords a:hover,
@@ -189,11 +190,11 @@ body:before {
     font-family: Lato, sans-serif;
     font-size: 14px;
     line-height: 30px;
-    font-weight: 700;	
+    font-weight: 700;
 }
 
 .node-type-project .herotextwrapper .field-item {
-	display:inline-block; 
+	display:inline-block;
 	margin-right:1em;
 	font-size:1.4em;
 }
@@ -201,11 +202,11 @@ body:before {
 .node-type-project .herotextwrapper .field-item a {
     color: #0082f3;
     font-weight: 400;
-    text-decoration: none;	
+    text-decoration: none;
 }
 
 .node-type-project .herotextwrapper .field-item a:hover {
-    text-decoration: underline;	
+    text-decoration: underline;
 }
 
 #views-exposed-form-search-page .views-exposed-form label {
@@ -247,7 +248,7 @@ body:before {
     line-height: 16px;
     font-weight: bold;
     text-decoration: none;
-    background-image:none;	
+    background-image:none;
 }
 
 
@@ -285,7 +286,7 @@ body:before {
     background-image: url(../IDS-ITEE_files/55eee0088c3a43fa48d6385b_location-pin.svg);
     background-position: 50% 50%;
     background-size: cover;
-    background-repeat: no-repeat; 
+    background-repeat: no-repeat;
     line-height:1.5em;
 }
 
@@ -298,7 +299,7 @@ body:before {
     color: transparent;
     background-position: 50% 50%;
     background-size: cover;
-    background-repeat: no-repeat;   
+    background-repeat: no-repeat;
 }
 .view-conference-news-and-views .views-row,
 #quicktabs-search .view-display-id-page_1 .views-row, .w-tab-pane .field-name-field-publications .field-item, article.node-project, .view-news-and-views-archive .views-row {
@@ -365,7 +366,7 @@ body:before {
 
 .node-type-resource .herotextwrapper,
 .node-type-blog .herotextwrapper {
-    width:100%;	
+    width:100%;
 }
 
 
@@ -391,7 +392,7 @@ body:before {
 
 /*SC*/
 h1.heroh1 {float:none;}
-.block.block-122 {    
+.block.block-122 {
 	width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -400,7 +401,7 @@ h1.heroh1 {float:none;}
     border-radius: 4px;
     background-color: #fafafa;
 	font-size:12px;}
-	
+
 div#navigation-region,.soc-med {
     display: inline-block;
 }
@@ -415,7 +416,7 @@ div#navigation-region,.soc-med {
 	margin-right:0;
 	}
 
-.filtertitle {background-image: url('../images/chevron.png');}	
+.filtertitle {background-image: url('../images/chevron.png');}
 input#edit-title, input#edit-keys {width:100%;}
 
 @media (max-width: 1220px) {
@@ -471,11 +472,11 @@ input#edit-title, input#edit-keys {width:100%;}
 /* IE stuff */
 .ie9 .contenthero,
 .lteie8 .contenthero,
-.lteie8 .featuredphoto, 
-.ie9 .landinghero, 
+.lteie8 .featuredphoto,
+.ie9 .landinghero,
 .lteie8 .landinghero {
 	background-size: cover;
-	-ms-behavior: url(/backgroundsize.min.htc);		
+	-ms-behavior: url(/backgroundsize.min.htc);
 }
 .ie9 .contenthero .contenthero-wrapper,
 .lteie8 .contenthero .contenthero-wrapper {
@@ -507,7 +508,7 @@ input#edit-title, input#edit-keys {width:100%;}
 .lteie8 #quicktabs-search .view-display-id-page_1 .views-row .views-field-field-keywords .field-content a,
 .lteie8 .views-field-field-keywords a,
 .lteie8 .keyword-links a {
-	background-color:#7dbef6;	
+	background-color:#7dbef6;
 }
 .lteie8 #quicktabs-search .view-display-id-page_1 .views-row .views-field-field-keywords .field-content a:hover,
 .lteie8 .views-field-field-keywords a:hover,
@@ -516,7 +517,7 @@ input#edit-title, input#edit-keys {width:100%;}
 }
 
 .lteie8 #views-exposed-form-search-page .form-submit {
-	background-color:#0082f3;	
+	background-color:#0082f3;
 }
 
 .lteie8 .herotextwrapper {
@@ -555,6 +556,21 @@ h2.h2featured a:hover {
 	margin-bottom:0.75em;
 }
 
+.image-attribution {
+  float: right;
+  color: #0082f3;
+}
+
+.homeherocontent .image-attribution {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.reasearch-partners-wrapper {
+  float: left;
+}
+
 /* Special presentation of Videos on TopTips blog post */
 .page-node-1024 h3 { clear: left; }
 .page-node-1024 .media-element-container.media-default {max-width: 32%; width: 32%; float: left; padding: 1%; background-color: #eee; margin-bottom: 20px;}
@@ -566,7 +582,7 @@ h2.h2featured a:hover {
 .view-export-publications .view-grouping { padding: 4px; border: 1px solid #aaa; border-radius: 4px; margin-bottom: 20px;}
 .view-export-publications .views-exposed-widgets { padding: 10px; background-color: #f3f3f3; }
 .view-export-publications td, .view-export-publications th  { font-size: 0.9em;text-align: left; vertical-align: top;  border-right: 1px solid #fff;  padding: 4px; }
-.view-export-publications th {vertical-align: bottom; color: #777;} 
+.view-export-publications th {vertical-align: bottom; color: #777;}
 .view-export-publications .views-exposed-widget { display: inline-block; }
 .view-export-publications .views-exposed-form .views-exposed-widget { width: auto !important; }
 .view-export-publications table .views-field-field-grant-reference { display: none; }
@@ -574,4 +590,4 @@ h2.h2featured a:hover {
 .view-export-publications table caption { text-align: left; font-weight: bold; padding: 2px 0; }
 .view-export-publications .view-grouping-header { padding-top: 10px; }
 
-input.form-submit { padding: 4px 8px; background-color: rgba(0,130,243,1); color: #fff; } 
+input.form-submit { padding: 4px 8px; background-color: rgba(0,130,243,1); color: #fff; }

@@ -127,11 +127,11 @@ function basic_preprocess_page(&$vars, $hook) {
 		$vars['theme_hook_suggestions'][] = 'page__' . $vars['node']->type;
 		$vars['theme_hook_suggestions'][] = "page__node__" . $vars['node']->nid;
 	}
-	
+
 	/*
 	 * EPD stuff
 	 */
-	
+
 	/*
 	 * Pass back header vars for theme pages
 	 */
@@ -145,7 +145,7 @@ function basic_preprocess_page(&$vars, $hook) {
 			}
 		}
 	}
-	
+
 	$vars['wrap_content'] = TRUE;
 	if (isset($vars['node']->type)){
 		if ($vars['node']->type == 'project' || $vars['node']->type == 'home'){
@@ -414,13 +414,31 @@ function basic_epd_get_field_image_path($field_name, $entity, $delta = 0) {
 	return basic_epd_default_field_image_path($field_name);
 }
 
+function basic_epd_get_field_image_attribution($field_name, $entity, $delta = 0) {
+  if (property_exists($entity, 'tid')) {
+    $entity_type = 'taxonomy_term';
+  }
+  else {
+    $entity_type = 'node';
+  }
+
+  $entityWrapper = entity_metadata_wrapper($entity_type, $entity);
+
+  if ($entityWrapper->{$field_name}->value()['field_file_image_attribution'] != null) {
+    return $entityWrapper->{$field_name}->value()['field_file_image_attribution'][LANGUAGE_NONE][0]['value'];
+  }
+	else {
+    return null;
+  }
+}
+
 function basic_epd_get_field_image_uri($field_name, $entity, $delta = 0) {
 	$uri = isset($entity->{$field_name}[LANGUAGE_NONE][$delta]['uri']) ? $entity->{$field_name}[LANGUAGE_NONE][$delta]['uri']:'';
 	return $uri;
 }
 
 /*
- * return the full node form a referenced entity field 
+ * return the full node form a referenced entity field
  */
 function basic_epd_get_referenced_entity($entity_reference){
     $referenced_entity = FALSE;

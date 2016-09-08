@@ -27,12 +27,12 @@
 		<div class="w-nav-overlay" data-wf-ignore=""></div>
 	</div>
 	<?php
-	/* 
+	/*
 	 * Page headers
 	 */
 	if(drupal_is_front_page()):
 	$image_path = basic_epd_get_field_image_path('field_supporting_image', $node);
-	$home_bg_style = "url('$image_path')"; 
+	$home_bg_style = "url('$image_path')";
 	?>
 	<div class="w-section contenthero home">
 		<div class="w-section-wrapper contenthero-wrapper">
@@ -43,12 +43,15 @@
 							<?php print $title; ?>
 							</h1>
 							<?php endif; ?></div>
-						<!-- 
+						<!--
 						<img class="herologo"
 							src="<?php print(base_path() . path_to_theme()); ?>/IDS-ITEE_files/55f6dbb2a2e0bc3b340d7aee_logo CHOSEN LONG PATHS WHITE.svg">  -->
 						<span class="openingp alternative"> <?php print($node->body[LANGUAGE_NONE][0]['safe_value']); ?>
 						</span>
-					</div> 
+					</div>
+          <small class="image-attribution">
+            <?php print basic_epd_get_field_image_attribution('field_supporting_image', $node); ?>
+          </small>
 				</div>
 		</div>
 	</div>
@@ -61,9 +64,9 @@
 	endif;
 	if($hero_theme_term):
 	$image_path = basic_epd_get_field_image_path('field_theme_image', $hero_theme_term);
-	$hero_theme_bg_style = "background-image:url($image_path);"; 
+	$hero_theme_bg_style = "background-image:url($image_path);";
 	$project_theme_color = 'aaaaaa';
-	$project_theme_color = epdmod_get_theme_color($hero_theme_term->tid); 
+	$project_theme_color = epdmod_get_theme_color($hero_theme_term->tid);
 	?>
 	<div class="w-section contenthero">
 	   <div class="landinghero" style="border-bottom: 5px solid #<?php print $project_theme_color; ?>; <?php print $hero_theme_bg_style; ?>">
@@ -72,6 +75,9 @@
 	            <h1 class="landingheroh1"><?php print $hero_theme_term->name; ?></h1>
 	            <div class="herodescription"><?php print $hero_theme_term->description; ?></div>
 	         </div>
+           <small class="image-attribution">
+              <?php print basic_epd_get_field_image_attribution('field_theme_image', $hero_theme_term); ?>
+            </small>
 	      </div>
 	   </div>
 	</div>
@@ -80,34 +86,39 @@
 	if(isset($node)):
 		if($node->type == 'project'):
 		$image_path = basic_epd_get_field_image_path('field_supporting_image', $node);
-		$hero_project_bg_style = "background-image:url($image_path);"; 
+		$hero_project_bg_style = "background-image:url($image_path);";
 		$project_theme_color = 'aaaaaa';
-		if(isset($node->field_primary_theme[LANGUAGE_NONE][0]['tid'])){ 
-			$project_theme_color = epdmod_get_theme_color($node->field_primary_theme[LANGUAGE_NONE][0]['tid']); 
+		if(isset($node->field_primary_theme[LANGUAGE_NONE][0]['tid'])){
+			$project_theme_color = epdmod_get_theme_color($node->field_primary_theme[LANGUAGE_NONE][0]['tid']);
 		}
-		?>	
-		
+		?>
+
 	      <div class="w-section w-clearfix contenthero" style="background-color:#<?php print $project_theme_color; ?>; border-bottom: 5px solid #<?php print $project_theme_color; ?>;">
 	         <div class="herocolumn main" style="<?php print $hero_project_bg_style; ?>">
 	            <div class="w-clearfix herotextwrapper">
 	               <h1 class="heroh1"><?php print $title; ?></h1>
-	               <h2 class="heroh2">Research Partners:</h2>
-	               <?php 
-	                $instances = _field_invoke_get_instances('node', $node->type, array('default' => TRUE, 'deleted' => FALSE));
-	               	$display = field_get_display($instances['field_organisations'], 'full', $node);
-	                $render_obj= field_view_field('node', $node, 'field_organisations', $display); 
-	               	if($render_obj):
-						print render($render_obj);  
-					endif;
-	               ?>
+                 <div class="reasearch-partners-wrapper">
+  	               <h2 class="heroh2">Research Partners:</h2>
+  	               <?php
+  	                $instances = _field_invoke_get_instances('node', $node->type, array('default' => TRUE, 'deleted' => FALSE));
+  	               	$display = field_get_display($instances['field_organisations'], 'full', $node);
+  	                $render_obj= field_view_field('node', $node, 'field_organisations', $display);
+  	               	if($render_obj):
+  						print render($render_obj);
+  					endif;
+  	               ?>
+                 </div>
+                 <small class="image-attribution">
+                   <?php print basic_epd_get_field_image_attribution('field_supporting_image', $node); ?>
+                 </small>
 	            </div>
 	            <a class="w-button showmap" href="#" data-ix="showmap">Show map</a>
 	         </div>
 	         <div class="herocolumn map">
-	            <!-- 
+	            <!--
 	            <div class="w-widget w-widget-map googlemap" data-widget-latlng="12.565679,104.990963" data-widget-style="hybrid" data-widget-zoom="5" data-disable-scroll="1"></div>
 	             -->
-	             <?php 
+	             <?php
 	             print views_embed_view('search','block_1', $node->nid);
 	             ?>
 	         </div>
@@ -117,17 +128,21 @@
 		endif;
 		if($node->type == 'blog' || $node->type == 'resource'):
 		$image_path = basic_epd_get_field_image_path('field_supporting_image', $node);
-		$hero_project_bg_style = "background-image:url($image_path);"; 
+		$hero_project_bg_style = "background-image:url($image_path);";
 		$project_theme_color = 'aaaaaa';
-		if(isset($node->field_primary_theme[LANGUAGE_NONE][0]['tid'])){ 
-			$project_theme_color = epdmod_get_theme_color($node->field_primary_theme[LANGUAGE_NONE][0]['tid']); 
+    basic_epd_get_field_image_attribution('field_supporting_image', $node);
+		if(isset($node->field_primary_theme[LANGUAGE_NONE][0]['tid'])){
+			$project_theme_color = epdmod_get_theme_color($node->field_primary_theme[LANGUAGE_NONE][0]['tid']);
 		}
-		?>	
-		
+		?>
+
 	      <div class="w-section w-clearfix contenthero" style="border-bottom: 5px solid #<?php print $project_theme_color; ?>;">
 	         <div class="herocolumn main" style="<?php print $hero_project_bg_style; ?>">
 	            <div class="w-clearfix herotextwrapper">
 	               <h1 class="heroh1"><?php print $title; ?></h1>
+                 <small class="image-attribution">
+                   <?php print basic_epd_get_field_image_attribution('field_supporting_image', $node); ?>
+                 </small>
 	            </div>
 	         </div>
 	      </div>
@@ -135,17 +150,17 @@
 		$title = '';
 		endif;
 	endif;
-	/* 
+	/*
 	 * Page headers END
 	 */
 	?>
 			<!-- ______________________ MAIN _______________________ -->
-	<?php 
+	<?php
 	if($wrap_content):
 	?>
 	<div class="w-section maincontent">
 		<div class="maincontentwrapper">
-	<?php 
+	<?php
 	endif;
 	?>
 			<div id="main">
@@ -162,19 +177,19 @@
 						<?php print render($page['highlighted']) ?>
 						</div>
 						<?php endif; ?>
-						
+
 						<?php if(!drupal_is_front_page()): ?>
 							<?php print render($title_prefix); ?>
-	
+
 							<?php if ($title): ?>
 							<h1 class="title">
 							<?php print $title; ?>
 							</h1>
 							<?php endif; ?>
-	
+
 							<?php print render($title_suffix); ?>
 						<?php endif; ?>
-						
+
 						<?php print $messages; ?>
 						<?php print render($page['help']); ?>
 
@@ -218,12 +233,12 @@
 				</div>
 			</div>
 			<!-- /main -->
-	<?php 
+	<?php
 	if($wrap_content):
 	?>
 		</div>
 	</div>
-	<?php 
+	<?php
 	endif;
 	?>
     <footer class="w-section footer">
@@ -233,7 +248,7 @@
 		  <div class="soc-med"><a class="w-inline-block footerlink" href="https://twitter.com/The_Impact_Init"><img src="<?php print(base_path() . path_to_theme()); ?>/IDS-ITEE_files/twitter.png"></a></div>
 		  <div class="soc-med"><a class="w-inline-block footerlink" title="View our photos on Flickr" href="https://www.flickr.com/photos/139208357@N08/"><img src="<?php print(base_path() . path_to_theme()); ?>/IDS-ITEE_files/flickr.png"></a></div>
 <div class="soc-med"><a class="w-inline-block footerlink" href="https://www.facebook.com/idsuk/"><img src="<?php print(base_path() . path_to_theme()); ?>/IDS-ITEE_files/facebook.png"></a></div>
-		  
+
           <?php if ($page['footer_left']): ?>
 				<div id="navigation-region">
 				<?php print render($page['footer_left']); ?>
