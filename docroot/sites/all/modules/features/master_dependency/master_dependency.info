@@ -1,0 +1,8 @@
+name = Master Dependency
+core = 7.x
+package = epd
+
+; Modules
+dependencies[] = features
+
+; Features
