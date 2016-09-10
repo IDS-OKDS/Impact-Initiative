@@ -365,7 +365,7 @@ body:before {
 }
 
 .node-type-resource .herotextwrapper,
-.node-type-blog, .node-type-news .herotextwrapper {
+.node-type-blog .herotextwrapper, .node-type-news .herotextwrapper {
     width:100%;
 }
 
