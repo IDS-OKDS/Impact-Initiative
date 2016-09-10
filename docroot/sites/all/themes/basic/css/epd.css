@@ -360,7 +360,7 @@ body:before {
 
 
 .node-type-resource .herocolumn.main,
-.node-type-blog, .node-type-news .herocolumn.main {
+.node-type-blog .herocolumn.main, .node-type-news .herocolumn.main {
     width:100%;
 }
 

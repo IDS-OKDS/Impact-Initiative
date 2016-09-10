@@ -4,6 +4,7 @@ package = Features
 dependencies[] = date
 dependencies[] = epd_blog
 dependencies[] = features
+dependencies[] = media
 dependencies[] = node
 dependencies[] = text
 features[features_api][] = api:2
