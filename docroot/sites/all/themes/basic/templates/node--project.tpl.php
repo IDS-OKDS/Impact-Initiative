@@ -1,4 +1,4 @@
-<?php if ($page): 
+<?php if ($page):
 ?>
 <article class="<?php print $classes; ?>" data-nid="<?php print $node->nid; ?>" >
 
@@ -36,6 +36,11 @@
                            <div>Assets</div>
                         </a>
                         <?php endif; ?>
+                        <?php if(isset($content['field_project_partners'])): ?>
+                        <a class="w-tab-link w-inline-block tab" data-w-tab="partners">
+                           <div>Partners</div>
+                        </a>
+                        <?php endif; ?>
                         <!--  <a class="backtoresults" href="#">« Back to results</a> -->
                      </div>
                      <div class="w-tab-content">
@@ -50,7 +55,7 @@
                         </div>
                         <?php if(isset($content['field_organisations'])): ?>
                         <div class="w-tab-pane w-clearfix tabpane" data-w-tab="organisations">
-                           <!--  
+                           <!--
                            <div class="w-clearfix inlineblock hidden">
                               <div class="organisationlogowrapper"><img class="organisationlogoimg" src="http://uploads.webflow.com/55e5bc07c26b4d57457c3da7/55e707eccf9b89126fe2a9c0_330075_152308104854062_7779827_o.jpg"></div>
                               <div class="organisationtext"><a class="organisationlink" href="#">Western University</a></div>
@@ -85,7 +90,7 @@
                         <?php endif; ?>
                         <?php if(isset($content['field_people'])): ?>
                         <div class="w-tab-pane tabpane" data-w-tab="people">
-                        <!--  
+                        <!--
                            <div class="inlineblock">
                               <div class="organisationlogowrapper"><img class="organisationlogoimg _50" src="http://uploads.webflow.com/55e5bc07c26b4d57457c3da7/55e70af2dd5145120d31f7c0_noun_22383_cc.svg"></div>
                               <div class="organisationtext"><a class="organisationlink" href="#"><span class="scholarbutton">F</span>Margaret McMillan <br>(Principal Investigator)</a></div>
@@ -121,6 +126,11 @@
                         	<?php print render($content['field_assets']); ?>
                         </div>
                         <?php endif; ?>
+                        <?php if(isset($content['field_project_partners'])): ?>
+                        <div class="w-tab-pane" data-w-tab="partners">
+                        	<?php print render($content['field_project_partners']); ?>
+                        </div>
+                        <?php endif; ?>
                      </div>
                   </div>
                </div>
@@ -128,9 +138,9 @@
                   <div class="w-clearfix sidebarbuttonwrapper">
 
                      <div class="metawrapper">
-                      
-						<?php print render($content); ?>                     
-                     
+
+						<?php print render($content); ?>
+
                      </div>
                   </div>
                </div>
