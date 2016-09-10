@@ -418,7 +418,7 @@ function epd_blog_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_projects',
-    'label' => 'Projects',
+    'label' => 'Related Projects',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -970,8 +970,8 @@ function epd_blog_field_default_field_instances() {
   t('Photo');
   t('Please format citations: Last, Initial. (Year) Organization.');
   t('Primary theme');
-  t('Projects');
   t('References');
+  t('Related Projects');
   t('Related links');
   t('Short Title');
   t('Supporting Image');
