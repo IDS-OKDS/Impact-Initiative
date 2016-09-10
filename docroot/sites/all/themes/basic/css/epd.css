@@ -571,6 +571,16 @@ h2.h2featured a:hover {
   float: left;
 }
 
+.field-name-field-names-organisations p {
+  display: inline;
+}
+
+.field + .field-name-field-blog-type, .field + .field-name-field-blog-date, .field + .field-name-field-names-organisations {
+  border-left: 1px solid black;
+  margin-left: 0.5em;
+  padding-left: 0.5em;
+}
+
 /* Special presentation of Videos on TopTips blog post */
 .page-node-1024 h3 { clear: left; }
 .page-node-1024 .media-element-container.media-default {max-width: 32%; width: 32%; float: left; padding: 1%; background-color: #eee; margin-bottom: 20px;}
