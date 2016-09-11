@@ -1,0 +1,13 @@
+<?php
+
+function epd_styles_view_handler_views_data_alter(&$data) {
+  $data['taxonomy_term_data']['description_with_styles'] = array(
+    'title' => t('Description field with option to add styles'),
+    'real field' => 'description',
+    'field' => array(
+      'handler' => 'epd_styles_view_handler',
+      'click sortable' => TRUE,
+      'help' => t('Show the timestamp a node was last accessed by user.'),
+    ),
+  );
+}

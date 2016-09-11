@@ -3,8 +3,12 @@ core = 7.x
 package = epd
 
 ; Modules
+dependencies[] = context
 dependencies[] = features
 dependencies[] = date_popup
+
+; Custom
+dependencies[] = epd_styles_view_handler
 
 ; Features
 dependencies[] = epd_blog

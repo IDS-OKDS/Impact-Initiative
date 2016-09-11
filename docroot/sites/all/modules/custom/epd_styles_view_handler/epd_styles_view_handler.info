@@ -1,0 +1,8 @@
+name = EPD Styles View Handler
+description = Add a custom views handler with option to apply styles to an element.
+core = 7.x
+package = IDS
+version = "7.x-1.0"
+core = "7.x"
+
+files[] = includes/epd_styles_view_handler.inc

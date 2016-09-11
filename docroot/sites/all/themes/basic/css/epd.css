@@ -601,3 +601,39 @@ h2.h2featured a:hover {
 .view-export-publications .view-grouping-header { padding-top: 10px; }
 
 input.form-submit { padding: 4px 8px; background-color: rgba(0,130,243,1); color: #fff; }
+
+/* Themes Page */
+.view-themes .views-row {
+  float: left;
+}
+
+.view-themes .views-field-field-theme-image {
+  margin-bottom: 10px;
+}
+
+.view-themes .views-field-field-theme-image img {
+  width: 100%;
+  height: auto;
+}
+
+.view-themes .views-field-description-with-styles {
+  padding-top: 10px;
+}
+
+@media (min-width: 450px) {
+  .view-themes .views-row {
+    width: 48%;
+    margin: 1%;
+  }
+}
+
+@media (min-width: 700px) {
+  .view-themes .views-row {
+    width: 22%;
+    margin: 1.5%;
+  }
+
+  .view-themes .views-row:nth-child(5) {
+    clear: left;
+  }
+}
