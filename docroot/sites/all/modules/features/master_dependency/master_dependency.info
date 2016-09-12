@@ -15,3 +15,4 @@ dependencies[] = epd_styles_view_handler
 dependencies[] = epd_blog
 dependencies[] = epd_files
 dependencies[] = epd_news
+dependencies[] = epd_search
