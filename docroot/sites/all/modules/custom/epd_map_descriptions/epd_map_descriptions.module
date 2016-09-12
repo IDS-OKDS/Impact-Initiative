@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Module to add blocks containing map descriptions.
+ */
+
+module_load_include('inc', 'epd_map_descriptions', 'epd_map_descriptions.block');
+
+/**
+ * Implements hook_menu().
+ */
+function epd_map_descriptions_menu() {
+  $items['admin/config/epd/map_descriptions'] = array(
+    'title' => 'Map Descriptions',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('epd_map_descriptions_settings_form'),
+    'access arguments' => array('administer epd map descriptions'),
+    'file' => 'epd_map_descriptions.admin.inc',
+  );
+
+  return $items;
+}

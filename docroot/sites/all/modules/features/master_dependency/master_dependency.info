@@ -8,6 +8,7 @@ dependencies[] = features
 dependencies[] = date_popup
 
 ; Custom
+dependencies[] = epd_map_descriptions
 dependencies[] = epd_styles_view_handler
 
 ; Features
