@@ -637,3 +637,13 @@ input.form-submit { padding: 4px 8px; background-color: rgba(0,130,243,1); color
     clear: left;
   }
 }
+
+/* Map Marker Clusters */
+.marker-cluster-small,
+.marker-cluster-medium,
+.marker-cluster-large,
+.marker-cluster-small div,
+.marker-cluster-medium div,
+.marker-cluster-large div {
+  background-color: rgba(110, 204, 57, 0.6);
+}
