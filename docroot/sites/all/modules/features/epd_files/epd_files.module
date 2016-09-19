@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the epd_files feature.
+ */
+
+include_once 'epd_files.features.inc';

@@ -1,0 +1,13 @@
+name = epd_search
+core = 7.x
+package = Features
+dependencies[] = context
+dependencies[] = ctools
+dependencies[] = epd_map_descriptions
+dependencies[] = quicktabs
+features[context][] = epd_search_default
+features[context][] = epd_search_null
+features[context][] = epd_search_organisations
+features[context][] = epd_search_themes
+features[ctools][] = context:context:3
+features[features_api][] = api:2

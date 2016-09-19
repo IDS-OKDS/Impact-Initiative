@@ -1,0 +1,9 @@
+name = EPD Module 
+description = Module for bespoke EPD customisations
+core = 7.x
+package = IDS
+version = "7.x-1.0"
+core = "7.x"
+project = "epdmod"
+configure = admin/config/epd
+

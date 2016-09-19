@@ -1,0 +1,377 @@
+<?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+/**
+ * Demonstration module.
+ *
+ * - Provide form for upload of a CSV file.
+ * - On submission, trigger a batch task which iterates through each row in the file.
+ */
+
+/**
+ * Implement hook_menu()
+ */
+function epdmod_menu() {
+	$items['admin/config/epd'] = array(
+    'title' => 'Evidence Policy Directorate',
+    'description' => 'Settings related to EPD.',
+    'position' => 'left',
+    'weight' => -15,
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access administration pages'),
+    'file' => 'system.admin.inc',
+	);
+	$items['admin/config/epd/import'] = array(
+    'title' => 'Import CSV',
+    'description' => 'Import project content from a <abbr title="Comma Separated Values">CSV</abbr> file.',
+	// 'access callback' => 'user_access',
+    'access arguments' => array('administer site configuration'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('epdmod_form'),
+	//  'file' => 'epdmod.admin.inc',
+	);
+	return $items ;
+}
+
+/**
+ * Build a form to upload CSV to.
+ */
+function epdmod_form() {
+	$form['#attributes'] = array(
+    'enctype' => 'multipart/form-data'
+    );
+    $form['grant_reference_column'] = array(
+    '#title' => t('Grant reference column'),
+    '#type'  => 'textfield',
+    '#default_value'  => 5,
+    '#size' => 2,
+    '#description' => t('The column in the spreadsheet that has the grant reference value.'),    
+    );
+    $form['csvfile'] = array(
+    '#title' => t('CSV File'),
+    '#type'  => 'file',
+    '#description' => ($max_size = parse_size(ini_get('upload_max_filesize'))) ? t('Due to server restrictions, the <strong>maximum upload file size is !max_size</strong>. Files that exceed this size will be disregarded.', array('!max_size' => format_size($max_size))) : '',    
+    );
+    $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Commence Import'),
+    );
+    $form['#validate'] = array(
+    'epdmod_validate_fileupload',
+    'epdmod_form_validate',
+    );
+    return $form ;
+}
+
+/**
+ * Validate the file upload. It must be a CSV, and we must
+ * successfully save it to our import directory.
+ */
+function epdmod_validate_fileupload(&$form, &$form_state) {
+	$validators = array(
+    'file_validate_extensions' => array( 'csv CSV' ),
+	) ;
+	if ( $file = file_save_upload('csvfile', $validators, 'temporary://') ) {
+		// The file was saved using file_save_upload() and was added to
+		// the files table as a temporary file. We'll make a copy and let
+		// the garbage collector delete the original upload.
+		$csv_dir = 'temporary://csvfile';
+		$directory_exists = file_prepare_directory($csv_dir, FILE_CREATE_DIRECTORY);
+		if ($directory_exists) {
+			$destination = $csv_dir .'/' . $file->filename;
+			if (file_copy($file, $destination, FILE_EXISTS_REPLACE)) {
+				$form_state['values']['csvupload'] = $destination;
+			}
+			else {
+				form_set_error('epdmod', t('Unable to copy upload file to !dest', array('!dest' => $destination)));
+			}
+		}
+	}
+}
+
+/**
+ * Validate the upload. Ensure that the CSV looks something like we
+ * expect it to.
+ */
+function epdmod_form_validate(&$form, &$form_state) {
+	if ( isset( $form_state['values']['csvupload'] ) ) {
+		if ( $handle = fopen($form_state['values']['csvupload'], 'r') ) {
+			$line_count = 1 ;
+			$first = TRUE ;
+			if ( $line = fgetcsv($handle, 4096) ) {
+				/**
+				 * Validate the uploaded CSV here.
+				 *
+				 * The example CSV happens to have cell A1 ($line[0]) as
+				 * below; we validate it only.
+				 *
+				 * You'll probably want to check several headers, eg:
+				 *   if ( $line[0] == 'Index' || $line[1] != 'Supplier' || $line[2] != 'Title' )
+				 */
+				// if ( $line[0] != 'Example CSV for epdmod.module - http://github.com/xurizaemon/csvimport' ) {
+				//   form_set_error('csvfile', t('Sorry, this file does not match the expected format.')) ;
+				// }
+			}
+			fclose($handle);
+		}
+		else {
+			form_set_error('csvfile', t('Unable to read uploaded file !filepath', array('!filepath' => $form_state['values']['csvupload'])));
+		}
+	}
+}
+
+/**
+ * Handle form submission. Read the CSV into a set of batch operations
+ * and fire them off.
+ */
+function epdmod_form_submit(&$form, &$form_state) {
+	$batch = array(
+    'title' => t('Importing CSV ...'),
+    'operations' => array(),
+    'init_message' => t('Commencing'),
+    'progress_message' => t('Processed @current out of @total.'),
+    'error_message' => t('An error occurred during processing'),
+    'finished' => 'epdmod_import_finished',
+	) ;
+	$grant_reference_arr = array();
+	if ( isset( $form_state['values']['csvupload'] ) ) {
+		if ( $handle = fopen($form_state['values']['csvupload'], 'r') ) {
+			$line_count = 1 ;
+			$first = TRUE ;
+			$line = fgetcsv($handle, 4096);
+			while ( $line = fgetcsv($handle, 4096) ) {
+				/**
+				 * we use base64_encode to ensure we don't overload the batch
+				 * processor by stuffing complex objects into it
+				 */
+
+				$grant_reference_column = $form_state['values']['grant_reference_column'] - 1;
+
+				$grant_reference_column_value = $line[$grant_reference_column];
+
+
+				$pos = strpos($grant_reference_column_value, 'ES/');
+				if ($pos !== false) {
+					// to filter out ES/E021654/1 then RES-167-25-0251-A
+					$temp_arr = explode(' ', $grant_reference_column_value);
+					$grant_reference = $temp_arr[0];
+					$grant_reference = trim($grant_reference);
+					$grant_reference_arr[] = $grant_reference;
+					//$project = new stdClass();
+					//$project->grant_reference = $line[4];
+					//$project->title = $line[5];
+					//$batch['operations'][] = array('_epdmod_import_project', array($project));
+				}
+					
+			}
+			fclose($handle);
+		} // we caught this in csvimport_form_validate()
+	} // we caught this in csvimport_form_validate()
+
+	$chunk_size = 100;
+	$projects_endpoint = "http://gtr.rcuk.ac.uk/gtr/api/projects/";
+	$grant_reference_arr_chunk = array_chunk($grant_reference_arr, $chunk_size);
+	$projects_arr = array();
+	foreach($grant_reference_arr_chunk as $chunk){
+		$projects_endpoint_query = 'f=pro.gr&s=' . $chunk_size . '&q=';
+		foreach($chunk as $grant_reference){
+			$projects_endpoint_query .= '%22' . $grant_reference . '%22';
+			if(end($chunk)!= $grant_reference){
+				$projects_endpoint_query .= '%20OR%20';
+			}
+		}
+		$projects_endpoint_full_url = $projects_endpoint . '?' . $projects_endpoint_query;
+		$projects_json_obj = _epdmod_curl_request($projects_endpoint_full_url);
+		foreach($projects_json_obj->project as $project_obj){
+			$project = serialize($project_obj);
+			$projects_arr[] = $project;
+		}
+	}
+	foreach($projects_arr as $project){
+		$batch['operations'][] = array('_epdmod_import_project', array($project));
+	}
+
+	batch_set($batch);
+}
+
+/**
+ * Handle batch completion.
+ */
+function epdmod_import_finished($success, $results, $operations) {
+	if ( !empty($results['failed_rows']) ) {
+		$dir = 'public://epdmod' ;
+		if (file_prepare_directory( $dir, FILE_CREATE_DIRECTORY ) ) {
+			$csv_filename = 'failed_rows-'. basename($results['uploaded_filename']); // we validated extension on upload
+			$csv_filepath = $dir .'/'. $csv_filename;
+			$targs = array(
+        '!csv_url' => l(check_plain($csv_filename), file_create_url($csv_filepath)),
+        '%csv_filename' => $csv_filename,
+        '%csv_filepath' => $csv_filepath,
+			) ;
+			if ( $handle = fopen($csv_filepath, 'w+') ) {
+				foreach( $results['failed_rows'] as $failed_row ) {
+					fputcsv($handle, $failed_row);
+				}
+				fclose($handle);
+				drupal_set_message(t('Some rows failed to import. You may download a CSV of these rows: !csv_url', $targs), 'error');
+			}
+			else {
+				drupal_set_message(t('Some rows failed to import, but unable to write error CSV to %csv_filepath', $targs), 'error');
+			}
+		}
+		else {
+			drupal_set_message(t('Some rows failed to import, but unable to create directory for error CSV at %csv_directory', $targs), 'error');
+		}
+	}
+	return t('The CSV import has completed.');
+}
+
+/**
+ * Process a single project
+ */
+function _epdmod_import_project($project, &$context) {
+	$project = unserialize($project);
+
+	$context['results']['projects_imported']++;
+	/**
+	 * Simply show the import row count.
+	 */
+	$context['message'] = t('Importing rowff !c', array( '!c' => $context['results']['projects_imported'] ));
+
+	/**
+	 * Alternatively, our example CSV happens to have the title in the
+	 * third column, so we can uncomment this line to display "Importing
+	 * Blahblah" as each row is parsed.
+	 *
+	 * You can comment out the line above if you uncomment this one.
+	 */
+	$context['message'] = t('Importing %title', array('%title' => $project->title . ':' . $project->identifiers->identifier[0]->value));
+
+	_epdmod_create_project_node($project);
+
+	/**
+	 * In order to slow importing and debug better, we can uncomment
+	 * this line to make each import slightly slower.
+	 */
+	//usleep(12500);
+}
+
+
+
+function _epdmod_create_project_node($project) {
+	global $user;
+
+	$bundle = 'project';
+
+	$node = _epdmod_load_node_from_field('grant_reference', $project->identifiers->identifier[0]->value, $bundle);
+
+	if(!$node){
+		/* creating new node */
+		$node = new stdClass();
+		$node->title = $project->title;
+		$node->type = $bundle;
+		node_object_prepare($node); // Sets some defaults. Invokes hook_prepare() and hook_node_prepare().
+		$node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
+		$node->uid = $user->uid;
+		$node->status = 1; //(1 or 0): published or not
+		$node->promote = 1; //(1 or 0): promoted to front page
+		$node->comment = 1; // 0 = comments disabled, 1 = read only, 2 = read/write
+	}
+
+	$node->body[$node->language][0]['format'] = 'full_html';
+	$node->body[$node->language][0]['value'] = $project->abstractText;
+
+	if(isset($project->potentialImpact)){
+		$node->field_potential_impact[$node->language][0]['format'] = 'full_html';
+		$node->field_potential_impact[$node->language][0]['value'] = $project->potentialImpact;
+	}
+
+	_epdmod_apply_node_fields($node, 'grant_reference', $project->identifiers->identifier, 'value');
+	_epdmod_apply_node_fields($node, 'project_status', $project->status, NULL, 'tid');
+	_epdmod_apply_node_fields($node, 'grant_category', $project->grantCategory, NULL, 'tid');
+	_epdmod_apply_node_fields($node, 'lead_organisation_departme', $project->leadOrganisationDepartment, NULL, 'tid');
+
+	$node = node_submit($node); // Prepare node for saving
+	node_save($node);
+	//drupal_set_message( "Node with nid " . $node->nid . " saved!\n");
+
+}
+
+function _epdmod_apply_node_fields(&$node, $field_id, $value_obj, $value_attribute = NULL, $field_attribute = 'value') {
+	$node->{'field_' . $field_id}[$node->language] = array(); /* empty array */
+	if(is_array($value_obj)){
+		foreach($value_obj as $vo){
+			$value = ($value_attribute) ? $vo->{$value_attribute}:$vo;
+			if($field_attribute == 'tid'){
+				$value = _epdmod_retrieve_tid($value, $field_id);
+			}
+			$node->{'field_' . $field_id}[$node->language][][$field_attribute] = $value;
+		}
+	} else {
+		$value = ($value_attribute) ? $value_obj->{$value_attribute}:$value_obj;
+		if($field_attribute == 'tid'){
+			$value = _epdmod_retrieve_tid($value, $field_id);
+		}
+		$node->{'field_' . $field_id}[$node->language][][$field_attribute] = $value;
+	}
+}
+
+function _epdmod_retrieve_tid($value, $field_id){
+	$termArr = taxonomy_get_term_by_name($value, $field_id);
+	if (empty($termArr)) {
+		/* Term name not found - needs to be created */
+		$vocab = taxonomy_vocabulary_machine_name_load($field_id);
+		$term = (object) array(
+		   'name' => $value,
+		   'description' => '',
+		   'vid' => $vocab->vid,
+		);
+		taxonomy_term_save($term);
+		$tid = $term->tid;
+	} else {
+		/* Term name exists so send back tid*/
+		$tid = array_pop($termArr)->tid;
+	}
+	return $tid;
+}
+
+function _epdmod_curl_request($endpoint){
+	//  Initiate curl
+	$ch = curl_init();
+	// Set The Response Format to Json
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json'));
+	// Disable SSL verification
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	// Will return the response, if false it print the response
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	// Set the url
+	curl_setopt($ch, CURLOPT_URL, $endpoint);
+	// Execute
+	$result=curl_exec($ch);
+	// Closing
+	curl_close($ch);
+	$json_obj = json_decode($result);
+	return $json_obj;
+}
+
+
+function _epdmod_load_node_from_field($field_id, $value, $bundle){
+	$query = new EntityFieldQuery();
+	$query->entityCondition('entity_type', 'node')
+	->entityCondition('bundle', $bundle)
+	->propertyCondition('status', NODE_PUBLISHED)
+	->fieldCondition('field_' .$field_id, 'value', $value, '=')
+	->range(0, 1)
+	->addMetaData('account', user_load(1)); // Run the query as user 1.
+
+	$result = $query->execute();
+
+	$node = FALSE;
+
+	if (isset($result['node'])) {
+		$news_items_nids = array_keys($result['node']);
+		$nid = $news_items_nids[0];
+		$node = node_load($nid);
+	}
+	return $node;
+}

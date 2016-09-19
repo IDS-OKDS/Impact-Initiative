@@ -1,0 +1,4 @@
+name = EPD View Modes
+core = 7.x
+package = IDS
+core = "7.x"

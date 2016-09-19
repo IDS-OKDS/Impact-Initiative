@@ -1,0 +1,20 @@
+<?php
+/**
+ * @file
+ * Code for the epd_view_modes module.
+ */
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function epd_view_modes_entity_info_alter(&$entity_info) {
+  $entity_info['node']['view modes']['image_teaser'] = array(
+    'label' => t('Image Teaser'),
+    'custom settings' => TRUE,
+  );
+
+  $entity_info['node']['view modes']['text_teaser'] = array(
+    'label' => t('Text Only Teaser'),
+    'custom settings' => TRUE,
+  );
+}

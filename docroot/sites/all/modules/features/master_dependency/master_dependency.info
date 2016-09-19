@@ -1,0 +1,27 @@
+name = Master Dependency
+core = 7.x
+package = epd
+
+; Modules
+dependencies[] = context
+dependencies[] = date_views
+dependencies[] = features
+dependencies[] = field_group
+dependencies[] = date_popup
+dependencies[] = sheild
+dependencies[] = strongarm
+
+; Custom
+dependencies[] = epd_map_descriptions
+dependencies[] = epd_styles_view_handler
+
+; Features
+dependencies[] = epd_blog
+dependencies[] = epd_events
+dependencies[] = epd_files
+dependencies[] = epd_news
+dependencies[] = epd_project
+dependencies[] = epd_search
+dependencies[] = epd_settings
+dependencies[] = epd_themes
+dependencies[] = epd_tokens

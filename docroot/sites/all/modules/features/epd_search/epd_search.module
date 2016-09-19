@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the epd_search feature.
+ */
+
+include_once 'epd_search.features.inc';

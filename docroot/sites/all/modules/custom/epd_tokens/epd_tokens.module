@@ -1,0 +1,49 @@
+<?php
+/**
+ * @file
+ * Code for the epd_tokens module.
+ */
+
+/**
+ * Implements hook_token_info().
+ */
+function epd_tokens_token_info() {
+
+  $info['tokens']['file']['size_mb'] = array(
+    'name' => t('Size in MB'),
+    'description' => t('The size of the file.'),
+  );
+
+  $info['tokens']['file']['download_link'] = array(
+    'name' => t('Download Link'),
+    'description' => t('Link to download the file.'),
+  );
+
+   return $info;
+ }
+
+ /**
+  * Implements hook_tokens().
+  */
+function epd_tokens_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+
+  // File tokens.
+  if ($type == 'file' && !empty($data['file'])) {
+    $file = $data['file'];
+
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'size_mb':
+          $replacements[$original] = round(($file->filesize / 1024) / 1024, 2) . "mb";
+          break;
+        case 'download_link':
+          $uri = file_entity_download_uri($file);
+          $replacements[$original] = l('Download', $uri['path'], $uri['options']);
+          break;
+      }
+  }
+}
+
+   return $replacements;
+ }

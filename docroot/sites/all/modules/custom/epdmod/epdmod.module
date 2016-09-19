@@ -1,0 +1,1093 @@
+<?php
+/**
+ * EPD module.
+ *
+ * - Customisations for EPD
+ * - Provide form for upload of a CSV file.
+ * - On submission, trigger a batch task which iterates through each row in the file.
+ */
+
+define('EPD_RC_API', 'http://gtr.rcuk.ac.uk/gtr/api/');
+
+/**
+ * Implement hook_menu()
+ */
+function epdmod_menu() {
+	$items['admin/config/epd'] = array(
+    'title' => 'Evidence Policy Directorate',
+    'description' => 'Settings related to EPD.',
+    'position' => 'left',
+    'weight' => -15,
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access administration pages'),
+    'file' => 'system.admin.inc',
+	);
+	$items['admin/config/epd/import'] = array(
+    'title' => 'Import CSV',
+    'description' => 'Import project content from a <abbr title="Comma Separated Values">CSV</abbr> file . Used to call external API',
+	// 'access callback' => 'user_access',
+    'access arguments' => array('administer site configuration'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('epdmod_form'),
+	//  'file' => 'epdmod.admin.inc',
+	);
+	$items['admin/config/epd/ids-import'] = array(
+    'title' => 'Import IDS Additional data CSV',
+    'description' => 'Import additional data from IDS into imported content',
+	// 'access callback' => 'user_access',
+    'access arguments' => array('administer site configuration'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('epdmod_idsinternal_form'),
+	//  'file' => 'epdmod.admin.inc',
+	);
+	$items['admin/config/epd/locations'] = array(
+    'title' => 'Populate locations',
+    'description' => 'Populate the Project location fields based on the Open Calais data.',
+	// 'access callback' => 'user_access',
+    'access arguments' => array('administer site configuration'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('epdmod_location_form'),
+	//  'file' => 'epdmod.admin.inc',
+	);
+	return $items ;
+}
+
+/**
+ * Build a form to upload CSV to.
+ */
+function epdmod_form() {
+	$form['#attributes'] = array(
+    'enctype' => 'multipart/form-data'
+    );
+    $form['grant_reference_column'] = array(
+    '#title' => t('Grant reference column'),
+    '#type'  => 'textfield',
+    '#default_value'  => 5,
+    '#size' => 2,
+    '#description' => t('The column in the spreadsheet that has the grant reference value.'),    
+    );
+    $form['csvfile'] = array(
+    '#title' => t('CSV File'),
+    '#type'  => 'file',
+    '#description' => ($max_size = parse_size(ini_get('upload_max_filesize'))) ? t('Due to server restrictions, the <strong>maximum upload file size is !max_size</strong>. Files that exceed this size will be disregarded.', array('!max_size' => format_size($max_size))) : '',    
+    );
+    $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Commence Import'),
+    );
+    $form['#validate'] = array(
+    'epdmod_validate_fileupload',
+    'epdmod_form_validate',
+    );
+    return $form ;
+}
+
+
+/**
+ * Build a form to upload CSV to.
+ */
+function epdmod_idsinternal_form() {
+	$form['#attributes'] = array(
+    'enctype' => 'multipart/form-data'
+    );
+     $form['fund_column'] = array(
+    '#title' => t('Fund column'),
+    '#type'  => 'textfield',
+    '#default_value'  => 1,
+    '#size' => 2,
+    '#description' => t('The column in the spreadsheet that has the fund value.'),    
+    );
+     $form['fund_call_id_column'] = array(
+    '#title' => t('Fund column'),
+    '#type'  => 'textfield',
+    '#default_value'  => 2,
+    '#size' => 2,
+    '#description' => t('The column in the spreadsheet that has the fund call id value.'),    
+    );
+    $form['grant_reference_column'] = array(
+    '#title' => t('Grant reference column'),
+    '#type'  => 'textfield',
+    '#default_value'  => 3,
+    '#size' => 2,
+    '#description' => t('The column in the spreadsheet that has the grant reference value.'),    
+    );
+    $form['keywords_column'] = array(
+    '#title' => t('Thematic Keywords column'),
+    '#type'  => 'textfield',
+    '#default_value'  => 5,
+    '#size' => 2,
+    '#description' => t('The column in the spreadsheet that has the keywords value.'),    
+    );
+    $form['primary_theme_column'] = array(
+    '#title' => t('Primary Theme column'),
+    '#type'  => 'textfield',
+    '#default_value'  => 6,
+    '#size' => 2,
+    '#description' => t('The column in the spreadsheet that has the primary theme value.'),    
+    );
+    $form['secondary_theme_column'] = array(
+    '#title' => t('Secondary Theme column'),
+    '#type'  => 'textfield',
+    '#default_value'  => 7,
+    '#size' => 2,
+    '#description' => t('The column in the spreadsheet that has the secondary theme value.'),    
+    );
+    $form['data_type_column'] = array(
+    '#title' => t('Secondary Theme column'),
+    '#type'  => 'textfield',
+    '#default_value'  => 10,
+    '#size' => 2,
+    '#description' => t('The column in the spreadsheet that has the data type value.'),    
+    );
+    $form['csvfile'] = array(
+    '#title' => t('CSV File'),
+    '#type'  => 'file',
+    '#description' => ($max_size = parse_size(ini_get('upload_max_filesize'))) ? t('Due to server restrictions, the <strong>maximum upload file size is !max_size</strong>. Files that exceed this size will be disregarded.', array('!max_size' => format_size($max_size))) : '',    
+    );
+    $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Commence Import'),
+    );
+    $form['#validate'] = array(
+    'epdmod_validate_fileupload',
+    'epdmod_form_validate',
+    );
+    return $form ;
+}
+
+
+/**
+ * Build a simple form to start location 
+ */
+function epdmod_location_form() {
+    $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Populate locations'),
+    );
+    return $form ;
+}
+
+/**
+ * Validate the file upload. It must be a CSV, and we must
+ * successfully save it to our import directory.
+ */
+function epdmod_validate_fileupload(&$form, &$form_state) {
+	$validators = array(
+    'file_validate_extensions' => array( 'csv CSV' ),
+	) ;
+	if ( $file = file_save_upload('csvfile', $validators, 'temporary://') ) {
+		// The file was saved using file_save_upload() and was added to
+		// the files table as a temporary file. We'll make a copy and let
+		// the garbage collector delete the original upload.
+		$csv_dir = 'temporary://csvfile';
+		$directory_exists = file_prepare_directory($csv_dir, FILE_CREATE_DIRECTORY);
+		if ($directory_exists) {
+			$destination = $csv_dir .'/' . $file->filename;
+			if (file_copy($file, $destination, FILE_EXISTS_REPLACE)) {
+				$form_state['values']['csvupload'] = $destination;
+			}
+			else {
+				form_set_error('epdmod', t('Unable to copy upload file to !dest', array('!dest' => $destination)));
+			}
+		}
+	}
+}
+
+/**
+ * Validate the upload. Ensure that the CSV looks something like we
+ * expect it to.
+ */
+function epdmod_form_validate(&$form, &$form_state) {
+	if ( isset( $form_state['values']['csvupload'] ) ) {
+		if ( $handle = fopen($form_state['values']['csvupload'], 'r') ) {
+			$line_count = 1 ;
+			$first = TRUE ;
+			if ( $line = fgetcsv($handle, 4096) ) {
+				/**
+				 * Validate the uploaded CSV here.
+				 *
+				 * The example CSV happens to have cell A1 ($line[0]) as
+				 * below; we validate it only.
+				 *
+				 * You'll probably want to check several headers, eg:
+				 *   if ( $line[0] == 'Index' || $line[1] != 'Supplier' || $line[2] != 'Title' )
+				 */
+				// if ( $line[0] != 'Example CSV for epdmod.module - http://github.com/xurizaemon/csvimport' ) {
+				//   form_set_error('csvfile', t('Sorry, this file does not match the expected format.')) ;
+				// }
+			}
+			fclose($handle);
+		}
+		else {
+			form_set_error('csvfile', t('Unable to read uploaded file !filepath', array('!filepath' => $form_state['values']['csvupload'])));
+		}
+	}
+}
+
+/**
+ * Handle form submission. Read the CSV into a set of batch operations
+ * and fire them off.
+ */
+function epdmod_form_submit(&$form, &$form_state) {
+	$batch = array(
+    'title' => t('Importing CSV ...'),
+    'operations' => array(),
+    'init_message' => t('Commencing'),
+    'progress_message' => t('Processed @current out of @total.'),
+    'error_message' => t('An error occurred during processing'),
+    'finished' => 'epdmod_import_finished',
+	) ;
+	$grant_reference_arr = array();
+	if ( isset( $form_state['values']['csvupload'] ) ) {
+		if ( $handle = fopen($form_state['values']['csvupload'], 'r') ) {
+			$line_count = 1 ;
+			$first = TRUE ;
+			$line = fgetcsv($handle, 4096);
+			while ( $line = fgetcsv($handle, 4096) ) {
+				/**
+				 * we use base64_encode to ensure we don't overload the batch
+				 * processor by stuffing complex objects into it
+				 */
+
+				$grant_reference_column = $form_state['values']['grant_reference_column'] - 1;
+
+				$grant_reference_column_value = $line[$grant_reference_column];
+
+
+				$pos = strpos($grant_reference_column_value, 'ES/');
+				if ($pos !== false) {
+					// to filter out ES/E021654/1 then RES-167-25-0251-A
+					$temp_arr = explode(' ', $grant_reference_column_value);
+					$grant_reference = $temp_arr[0];
+					$grant_reference = trim($grant_reference);
+					$grant_reference_arr[] = $grant_reference;
+				}
+					
+			}
+			fclose($handle);
+		} // we caught this in csvimport_form_validate()
+	} // we caught this in csvimport_form_validate()
+
+	$chunk_size = 100;
+	$projects_endpoint = EPD_RC_API . "projects/";
+	$grant_reference_arr_chunk = array_chunk($grant_reference_arr, $chunk_size);
+	$projects_arr = array();
+	foreach($grant_reference_arr_chunk as $chunk){
+		$projects_endpoint_query = 'f=pro.gr&s=' . $chunk_size . '&q=';
+		foreach($chunk as $grant_reference){
+			$projects_endpoint_query .= '%22' . $grant_reference . '%22';
+			if(end($chunk)!= $grant_reference){
+				$projects_endpoint_query .= '%20OR%20';
+			}
+		}
+		$projects_endpoint_full_url = $projects_endpoint . '?' . $projects_endpoint_query;
+		$projects_json_obj = _epdmod_curl_request($projects_endpoint_full_url);
+		foreach($projects_json_obj->project as $project_obj){
+			$project = serialize($project_obj);
+			$projects_arr[] = $project;
+		}
+	}
+	foreach($projects_arr as $project){
+		$batch['operations'][] = array('_epdmod_import_project', array($project));
+	}
+	/* empty stored api object ids */
+	variable_set('epdmod_api_object_ids', '');
+
+	batch_set($batch);
+}
+
+
+/**
+ * This is for the IDS internal import data
+ */
+function epdmod_idsinternal_form_submit(&$form, &$form_state) {
+	$ids_internal_data = array();
+	$batch = array(
+    'title' => t('Importing CSV ...'),
+    'operations' => array(),
+    'init_message' => t('Commencing'),
+    'progress_message' => t('Processed @current out of @total.'),
+    'error_message' => t('An error occurred during processing'),
+    'finished' => 'epdmod_import_finished',
+	) ;
+	$grant_reference_arr = array();
+	if ( isset( $form_state['values']['csvupload'] ) ) {
+		if ( $handle = fopen($form_state['values']['csvupload'], 'r') ) {
+			$line_count = 1 ;
+			$first = TRUE ;
+			$line = fgetcsv($handle, 4096);
+			while ( $line = fgetcsv($handle, 4096) ) {
+				/**
+				 * we use base64_encode to ensure we don't overload the batch
+				 * processor by stuffing complex objects into it
+				 */
+
+				$grant_reference_column = $form_state['values']['grant_reference_column'] - 1;
+				$fund_column = $form_state['values']['fund_column'] - 1;
+				$fund_call_id_column = $form_state['values']['fund_call_id_column'] - 1;
+				$keywords_column = $form_state['values']['keywords_column'] - 1;
+				$primary_theme_column = $form_state['values']['primary_theme_column'] - 1;
+				$secondary_theme_column = $form_state['values']['secondary_theme_column'] - 1;
+				$data_type_column = $form_state['values']['data_type_column'] - 1;
+
+				$grant_reference_column_value = $line[$grant_reference_column];
+				
+				$ids_internal_data['fund'] = epd_clean_dirty_csv_chars($line[$fund_column]);
+				$ids_internal_data['fund_call_id'] = epd_clean_dirty_csv_chars($line[$fund_call_id_column]);
+				$ids_internal_data['keywords'] = epd_clean_dirty_csv_chars($line[$keywords_column]);
+				$ids_internal_data['primary_theme'] = epd_clean_dirty_csv_chars($line[$primary_theme_column]);
+				$ids_internal_data['secondary_theme'] = epd_clean_dirty_csv_chars($line[$secondary_theme_column]);
+				$ids_internal_data['data_type'] = epd_clean_dirty_csv_chars($line[$data_type_column]);
+
+				$pos = strpos($grant_reference_column_value, 'ES/');
+				if ($pos !== false) {
+					// to filter out ES/E021654/1 then RES-167-25-0251-A
+					$temp_arr = explode(' ', $grant_reference_column_value);
+					$grant_reference = $temp_arr[0];
+					$grant_reference = trim($grant_reference);
+					$grant_reference_arr[$grant_reference] = $ids_internal_data;
+				}
+					
+			}
+			fclose($handle);
+		} // we caught this in csvimport_form_validate()
+	} // we caught this in csvimport_form_validate()
+
+	foreach($grant_reference_arr as $grant_reference => $ids_data){
+		$ids_data = serialize($ids_data);
+		$batch['operations'][] = array('_epdmod_import_ids_additional', array($grant_reference, $ids_data));
+	}
+	batch_set($batch);
+}
+
+
+function epd_clean_dirty_csv_chars($string) {
+   $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+   return preg_replace('/[^A-Za-z0-9\-\|\/\&]/', '', $string); // Removes special chars.
+}
+
+
+/**
+ * Handle location form submission. Add all the Project nodes into a set of batch operations
+ * and fire them off.
+ */
+function epdmod_location_form_submit(&$form, &$form_state) {
+	$batch = array(
+    'title' => t('Populating locations ...'),
+    'operations' => array(),
+    'init_message' => t('Commencing'),
+    'progress_message' => t('Processed @current out of @total.'),
+    'error_message' => t('An error occurred during processing'),
+    'finished' => 'epdmod_location_import_finished',
+	) ;
+
+	$query = new EntityFieldQuery();
+	
+	$query->entityCondition('entity_type', 'node')
+	  ->entityCondition('bundle', 'project')
+	  ->propertyCondition('status', 1);
+	
+	$result = $query->execute();
+	
+	if (!empty($result['node'])) {
+	  $nids = array_keys($result['node']);
+	
+	 foreach ($nids as $nid) {
+	    $batch['operations'][] = array('_epdmod_update_project_location', array($nid));
+	  }
+	}	
+
+	batch_set($batch);
+}
+
+/**
+ * Handle batch completion.
+ */
+function epdmod_import_finished($success, $results, $operations) {
+	if ( !empty($results['failed_rows']) ) {
+		$dir = 'public://epdmod' ;
+		if (file_prepare_directory( $dir, FILE_CREATE_DIRECTORY ) ) {
+			$csv_filename = 'failed_rows-'. basename($results['uploaded_filename']); // we validated extension on upload
+			$csv_filepath = $dir .'/'. $csv_filename;
+			$targs = array(
+        '!csv_url' => l(check_plain($csv_filename), file_create_url($csv_filepath)),
+        '%csv_filename' => $csv_filename,
+        '%csv_filepath' => $csv_filepath,
+			) ;
+			if ( $handle = fopen($csv_filepath, 'w+') ) {
+				foreach( $results['failed_rows'] as $failed_row ) {
+					fputcsv($handle, $failed_row);
+				}
+				fclose($handle);
+				drupal_set_message(t('Some rows failed to import. You may download a CSV of these rows: !csv_url', $targs), 'error');
+			}
+			else {
+				drupal_set_message(t('Some rows failed to import, but unable to write error CSV to %csv_filepath', $targs), 'error');
+			}
+		}
+		else {
+			drupal_set_message(t('Some rows failed to import, but unable to create directory for error CSV at %csv_directory', $targs), 'error');
+		}
+	}
+	return t('The CSV import has completed.');
+}
+
+/**
+ * Handle location batch completion.
+ */
+function epdmod_location_import_finished($success, $results, $operations) {
+	if (!empty($results['failed_rows']) ) {
+		drupal_set_message(t('Some Project nodes locations were not updated', 'error'));
+	}
+	return t('The Project location update has completed.');
+}
+
+
+
+/**
+ * Process a location update on single project
+ */
+function _epdmod_update_project_location($nid, &$context) {
+	$project = node_load($nid);
+
+	$location_tid_raw_arr = NULL;
+
+/*	if(isset($project->opencalais_continent_tags[LANGUAGE_NONE])){
+		$location_tid_raw_arr = $project->opencalais_continent_tags[LANGUAGE_NONE];
+	}*/
+	if(isset($project->opencalais_country_tags[LANGUAGE_NONE])){
+		$location_tid_raw_arr = $project->opencalais_country_tags[LANGUAGE_NONE];
+	}
+/*	if(isset($project->opencalais_region_tags[LANGUAGE_NONE])){
+		$location_tid_raw_arr = $project->opencalais_region_tags[LANGUAGE_NONE];
+	}
+	if(isset($project->opencalais_provinceorstate_tags[LANGUAGE_NONE])){
+		$location_tid_raw_arr = $project->opencalais_provinceorstate_tags[LANGUAGE_NONE];
+	}
+	if(isset($project->opencalais_city_tags[LANGUAGE_NONE])){
+		$location_tid_raw_arr = $project->opencalais_city_tags[LANGUAGE_NONE];
+	}*/
+	
+	$location_tid_arr = array(); 
+	foreach($location_tid_raw_arr as $term_item){
+		$location_tid_arr[] = $term_item['tid'];
+	}
+	
+	$longlat = NULL;
+
+	$project->field_project_latitude = array();
+	$project->field_project_longitude = array();
+	
+	$project->field_project_latitude[LANGUAGE_NONE][0]['value'] = 1;
+	$project->field_project_longitude[LANGUAGE_NONE][0]['value'] = 1;
+	
+	$project->field_coords = array();
+	
+	if(count($location_tid_arr)){
+		$location_term_obj_arr = taxonomy_term_load_multiple($location_tid_arr);
+		$cnt = 0;
+		$targs = array();
+		$targs['%project_title'] = $project->title;
+		foreach($location_term_obj_arr as $location_term_obj){
+			$longlat = $location_term_obj->latitude[LANGUAGE_NONE][0]['value'] . '/' .$location_term_obj->longitude[LANGUAGE_NONE][0]['value'];
+			if($longlat == '/'){
+				$targs['%term_title'] = $location_term_obj->name;
+				drupal_set_message(t('Open Calais term "%term_title" has no location data set', $targs), 'error');
+			} else {
+				$project->field_project_latitude[LANGUAGE_NONE][$cnt]['value'] = $location_term_obj->latitude[LANGUAGE_NONE][0]['value'];
+				$project->field_project_longitude[LANGUAGE_NONE][$cnt]['value'] = $location_term_obj->longitude[LANGUAGE_NONE][0]['value'];
+				$lat = $location_term_obj->latitude[LANGUAGE_NONE][0]['value'];
+				$long = $location_term_obj->longitude[LANGUAGE_NONE][0]['value'];
+				$project->field_coords[LANGUAGE_NONE][$cnt] = array(
+                            'geom' => "POINT ($long $lat)",
+                            'geo_type' => 'point',
+                            'lat' => $lat,
+                            'lon' => $long,
+                            'left' => $long,
+                            'top' => $lat,
+                            'right' => $long,
+                            'bottom' => $lat
+				);
+				
+				$cnt++;
+			}
+		}
+		if(!$cnt){
+			drupal_set_message(t('Project "%project_title" has no location data set.', $targs), 'error');
+		}
+	}
+	
+	$context['message'] = t('Updating project location for %title : %longlat', array('%title' => $project->title, '%longlat' => $longlat));
+
+	_epdmod_correct_duplicate_oc_terms($project);
+	
+	//print_r($project);
+	
+	//usleep(12500);
+
+	//die();	
+	
+	node_save($project);
+	
+	/**
+	 * In order to slow importing and debug better, we can uncomment
+	 * this line to make each import slightly slower.
+	 */
+}
+
+/*
+ * weirdly by saving nodes in the location batch process it seems to duplicate the references to the open calais term data
+ * this function strips the duplicates
+ */
+function _epdmod_correct_duplicate_oc_terms(&$node){
+	$oc_term_fields_arr = array('opencalais_continent_tags', 'opencalais_country_tags', 'opencalais_region_tags', 'opencalais_provinceorstate_tags', 'opencalais_city_tags');
+	foreach($oc_term_fields_arr as $oc_field_id){
+	$node->{$oc_field_id} = NULL;
+	/*	if(isset($node->{$oc_field_id}[LANGUAGE_NONE])){
+			$rationed_tids = array();
+			foreach($node->{$oc_field_id}[LANGUAGE_NONE] as $tid_data){
+				$rationed_tids[$tid_data['tid']] = $tid_data['tid'];
+			}
+			$cnt = 0;
+			foreach($rationed_tids as $tid){
+				if(!$cnt){
+					$node->{$oc_field_id}[LANGUAGE_NONE] = array();
+				}
+				$node->{$oc_field_id}[LANGUAGE_NONE][$cnt] = array();
+				$node->{$oc_field_id}[LANGUAGE_NONE][$cnt]['tid'] = $tid;
+				$cnt++;
+			}
+		}*/
+	}
+}
+
+
+/**
+ * Process a single project
+ */
+function _epdmod_import_project($project, &$context) {
+	$project = unserialize($project);
+
+	$context['results']['projects_imported']++;
+	/**
+	 * Simply show the import row count.
+	 */
+	$context['message'] = t('Importing rowff !c', array( '!c' => $context['results']['projects_imported'] ));
+
+	/**
+	 * Alternatively, our example CSV happens to have the title in the
+	 * third column, so we can uncomment this line to display "Importing
+	 * Blahblah" as each row is parsed.
+	 *
+	 * You can comment out the line above if you uncomment this one.
+	 */
+	$context['message'] = t('Importing %title', array('%title' => $project->title . ' : ' . $project->identifiers->identifier[0]->value));
+
+	_epdmod_create_project_node($project);
+
+	/**
+	 * In order to slow importing and debug better, we can uncomment
+	 * this line to make each import slightly slower.
+	 */
+	//usleep(12500);
+}
+
+
+/**
+ * Process additional ids import data
+ */
+function _epdmod_import_ids_additional($grant_reference, $ids_data, &$context) {
+	$ids_data = unserialize($ids_data);
+
+	/* load node form grant ref */
+	$query = new EntityFieldQuery();
+	
+	$query->entityCondition('entity_type', 'node')
+	  ->entityCondition('bundle', 'project')
+	  ->propertyCondition('status', NODE_PUBLISHED)
+	  ->fieldCondition('field_grant_reference', 'value', $grant_reference, '=')
+	  ->addMetaData('account', user_load(1)); // Run the query as user 1.
+	
+	$result = $query->execute();
+	$project_node = FALSE;
+	if (isset($result['node'])) {
+	  $project_nids = array_keys($result['node']);
+	  $project_node = node_load('node', $project_nids);
+	}
+	if($project_node){
+		/* do the updates */
+		$primary_theme = array_filter(explode('|', $ids_data['primary_theme']));
+		$secondary_theme = array_filter(explode('|', $ids_data['secondary_theme']));
+		$all_themes = array_merge($primary_theme, $secondary_theme);
+		_epdmod_apply_node_fields($project_node, 'fund', $ids_data['fund'], NULL, 'tid');
+		_epdmod_apply_node_fields($project_node, 'fund_call_id', $ids_data['fund_call_id'], NULL, 'tid');
+		_epdmod_apply_node_fields($project_node, 'keywords', array_filter(explode('|', $ids_data['keywords'])), NULL, 'tid');
+		_epdmod_apply_node_fields($project_node, 'primary_theme', $primary_theme , NULL, 'tid');
+		_epdmod_apply_node_fields($project_node, 'themes', $all_themes , NULL, 'tid');
+		_epdmod_apply_node_fields($project_node, 'data_type', array_filter(explode('|', $ids_data['data_type'])) , NULL, 'tid');
+		/* save node */
+		node_save($project_node);
+		/* set message for batch */
+		$context['message'] = t('Updating %title with IDS extra data', array('%title' => $project->title));
+	}
+
+	/**
+	 * In order to slow importing and debug better, we can uncomment
+	 * this line to make each import slightly slower.
+	 */
+	//usleep(12500);
+}
+
+
+
+
+function _epdmod_create_project_node($project) {
+	$bundle = 'project';
+	$node = _epdmod_load_node_from_field('grant_reference', $project->identifiers->identifier[0]->value, $bundle);
+
+	if(!$node){
+		$node = _epdmod_node_init($project->title, $bundle, 1, 1);
+	}
+
+	$node->body[$node->language][0]['format'] = 'full_html';
+	$node->body[$node->language][0]['value'] = $project->abstractText;
+
+	if(isset($project->potentialImpact)){
+		$node->field_potential_impact[$node->language][0]['format'] = 'full_html';
+		$node->field_potential_impact[$node->language][0]['value'] = $project->potentialImpact;
+	}
+
+	_epdmod_process_project_links($node, $project->links->link);
+
+	_epdmod_process_project_outcomes($node, $project->id);
+
+	_epdmod_apply_node_fields($node, 'grant_reference', $project->identifiers->identifier, 'value');
+	_epdmod_apply_node_fields($node, 'project_status', $project->status, NULL, 'tid');
+	_epdmod_apply_node_fields($node, 'grant_category', $project->grantCategory, NULL, 'tid');
+	_epdmod_apply_node_fields($node, 'lead_organisation_departme', $project->leadOrganisationDepartment, NULL, 'tid');
+	_epdmod_node_save($node);
+}
+
+function _epdmod_node_init($title, $bundle, $status = 1, $promote = 0, $comment = 0) {
+	global $user;
+	/* creating new node */
+	$node = new stdClass();
+	$node->title = $title;
+	$node->type = $bundle;
+	node_object_prepare($node); // Sets some defaults. Invokes hook_prepare() and hook_node_prepare().
+	$node->language = LANGUAGE_NONE; // Or e.g. 'en' if locale is enabled
+	$node->uid = $user->uid;
+	$node->status = $status; //(1 or 0): published or not
+	$node->promote = $promote; //(1 or 0): promoted to front page
+	$node->comment = $comment; // 0 = comments disabled, 1 = read only, 2 = read/write
+	return $node;
+}
+
+function _epdmod_node_save(&$node){
+	$node = node_submit($node); // Prepare node for saving
+	node_save($node);
+	return $node->nid;
+	//drupal_set_message( "Node with nid " . $node->nid . " saved!\n");
+}
+
+function _epdmod_process_project_outcomes(&$node, $project_id) {
+	//$project_id = "FE0A725B-DF5E-47F7-BB84-768E38CE440B";
+	$endpoint = EPD_RC_API . "projects/" . $project_id . "/outcomes";
+
+	$outcomes_obj = _epdmod_curl_request($endpoint);
+	//	print_r($outcomes_obj);
+	//	usleep(12500);
+	//	die();
+	/* Get publications and save to nodes and/or retrive nodes */
+	if(count($outcomes_obj->publication)) { $node->field_publications[$node->language] = array(); }
+	$cnt = 0;
+	foreach($outcomes_obj->publication as $publication){
+		$bundle = 'publication';
+		$publication_node = _epdmod_load_node_from_field('publication_url', $publication->publicationUrl, $bundle);
+		if(!$publication_node){
+			$publication_node = _epdmod_node_init($publication->title, $bundle);
+		}
+		if(isset($publication->publicationUrl)){
+			_epdmod_apply_node_fields($publication_node, 'publication_url', $publication->publicationUrl);
+		}
+		if(isset($publication->type)){
+			_epdmod_apply_node_fields($publication_node, 'publication_type', $publication->type, NULL, 'tid');
+		}
+		if(isset($publication->author)){
+			_epdmod_apply_node_fields($publication_node, 'author', $publication->author, NULL, 'tid');
+		}
+		if(isset($publication->volumeTitle)){
+			_epdmod_apply_node_fields($publication_node, 'volume_title', $publication->volumeTitle);
+		}
+		if(isset($publication->journalTitle)){
+			_epdmod_apply_node_fields($publication_node, 'journal_title', $publication->journalTitle);
+		}
+		if(isset($publication->issue)){
+			_epdmod_apply_node_fields($publication_node, 'issue', $publication->issue);
+		}
+		if(isset($publication->datePublished) && $publication->datePublished > 0){
+			_epdmod_apply_node_fields($publication_node, 'published_date', _epdmod_format_date_for_field($publication->datePublished));
+		}
+		$publication_nid = _epdmod_node_save($publication_node);
+		if($publication_nid){
+			if(!_epdmod_has_entityid_in_field($node->field_publications[$node->language], $publication_nid)){
+				$node->field_publications[$node->language][$cnt]['target_id'] = $publication_nid;
+				$node->field_publications[$node->language][$cnt]['entity'] = $publication_node;
+				$cnt++;
+			}
+		}
+	}
+	/* Save those nodes to project node reference field */
+}
+
+function _epdmod_has_entityid_in_field($field, $entityid){
+	foreach($field as $item){
+		if($entityid == $item['target_id']){
+			return TRUE;
+		}
+	}
+	return FALSE;
+}
+
+function _epdmod_process_project_links(&$node, $links) {
+	$people_container = new stdClass();
+	$people_container->ids = array();
+	$people_container->fields = array();
+	$organisations_container = new stdClass();
+	$organisations_container->ids = array();
+	$organisations_container->fields = array();
+	foreach($links as $link){
+		switch ($link->rel) {
+			case "PI_PER":
+			case "COI_PER":
+				/* Process People */
+				$person_obj = _epdmod_curl_request($link->href);
+				if(!epdmod_is_api_object_saved($person_obj->id)){
+					$full_name = $person_obj->firstName;
+					if(isset($person_obj->otherNames)){
+						$full_name .= ' ' . $person_obj->otherNames;
+					}
+					$full_name .= ' ' . $person_obj->surname;
+					$people_container->ids[] = $full_name;
+				}
+				break;
+			case "LEAD_ORG":
+			case "COFUND_ORG":
+				/* Process Organisations */
+				$organisation_obj = _epdmod_curl_request($link->href);
+				if(!epdmod_is_api_object_saved($organisation_obj->id)){
+					$organisation_name = $organisation_obj->name;
+					$organisations_container->ids[] = $organisation_name;
+					foreach($organisation_obj->addresses->address as $address){
+						if($address->type == 'MAIN_ADDRESS'){
+							$field_arr = array(
+							'line1' => 'line_1',
+							'line2' => 'line_2',
+							'line3' => 'line_3',
+							'line4' => 'line_4',
+							'postCode' => 'post_code',
+							'region' => 'region',
+							'country' => 'country');
+							foreach($field_arr as $field_key_api => $field_key_drupal){
+								if(isset($address->{$field_key_api})){
+									$organisations_container->fields[$field_key_drupal] = $address->{$field_key_api};
+								}
+							}
+						}
+					}
+				}
+				break;
+			case "FUND":
+				/* Process Fund -- think there is only ever one */
+				$fund_obj = _epdmod_curl_request($link->href);
+				_epdmod_apply_node_fields($node, 'fund_start_date', _epdmod_format_date_for_field($fund_obj->start));
+				_epdmod_apply_node_fields($node, 'fund_end_date', _epdmod_format_date_for_field($fund_obj->end));
+				if(isset($fund_obj->valuePounds)){
+					_epdmod_apply_node_fields($node, 'fund_value', $fund_obj->valuePounds->amount);
+					_epdmod_apply_node_fields($node, 'fund_currency_code', $fund_obj->valuePounds->currencyCode);
+				}
+
+				break;
+			default:
+				/* Process Outcomes */
+				/* DO NOTHING - proccess this seperatly with one API call */
+		}
+	}
+	if(count($people_container->ids)){
+		_epdmod_apply_node_fields($node, 'people', $people_container->ids, NULL, 'tid');
+	}
+	if(count($organisations_container->ids)){
+		_epdmod_apply_node_fields($node, 'organisations', $organisations_container->ids, NULL, 'tid', $organisations_container->fields);
+	}
+}
+
+
+function _epdmod_format_date_for_field($raw_date){
+	$unix_date = $raw_date / 1000;
+	$format_date = date('Y-m-d H:i:s', $unix_date);
+	return $format_date;
+}
+
+function epdmod_is_api_object_saved($id){
+	$epdmod_api_object_ids = variable_get('epdmod_api_object_ids', '');
+	$epdmod_api_object_ids_arr = explode(',', $epdmod_api_object_ids);
+	if(in_array($id, $epdmod_api_object_ids_arr)){
+		return TRUE;
+	} else {
+		/* lets add it because we will save the item after check */
+		$epdmod_api_object_ids_arr[] = $id;
+		$epdmod_api_object_ids = implode(',', $epdmod_api_object_ids_arr);
+		variable_get('epdmod_api_object_ids', $epdmod_api_object_ids);
+		return FALSE;
+	}
+}
+
+function _epdmod_apply_node_fields(&$node, $field_id, $value_obj, $value_attribute = NULL, $field_attribute = 'value', $fields_arr = array()) {
+	$node->{'field_' . $field_id}[$node->language] = array(); /* empty array */
+	if(is_array($value_obj)){
+		foreach($value_obj as $vo){
+			$value = ($value_attribute) ? $vo->{$value_attribute}:$vo;
+			if($field_attribute == 'tid'){
+				$value = _epdmod_retrieve_tid($value, $field_id, $fields_arr);
+			}
+			$node->{'field_' . $field_id}[$node->language][][$field_attribute] = $value;
+		}
+	} else {
+		$value = ($value_attribute) ? $value_obj->{$value_attribute}:$value_obj;
+		if($field_attribute == 'tid'){
+			$value = _epdmod_retrieve_tid($value, $field_id, $fields_arr);
+		}
+		$node->{'field_' . $field_id}[$node->language][][$field_attribute] = $value;
+	}
+}
+
+function _epdmod_apply_term_fields(&$term, $fields_arr = array()) {
+	foreach($fields_arr as $field_id => $field_value){
+		$term->{'field_' . $field_id}[LANGUAGE_NONE] = array();
+		$term->{'field_' . $field_id}[LANGUAGE_NONE][]['value'] = $field_value;
+	}
+}
+
+function _epdmod_retrieve_tid($value, $field_id, $fields_arr){
+	if($field_id == 'primary_theme' || $field_id == 'themes'){$field_id = 'theme';}
+	$termArr = taxonomy_get_term_by_name($value, $field_id);
+	if (empty($termArr)) {
+		/* Term name not found - needs to be created */
+		$vocab = taxonomy_vocabulary_machine_name_load($field_id);
+		$term = (object) array(
+		   'name' => $value,
+		   'description' => '',
+		   'vid' => $vocab->vid,
+		);
+		_epdmod_apply_term_fields($term, $fields_arr);
+		taxonomy_term_save($term);
+		$tid = $term->tid;
+	} else {
+		/* Term name exists so send back tid*/
+		$tid = array_pop($termArr)->tid;
+	}
+	return $tid;
+}
+
+function _epdmod_curl_request($endpoint){
+	//  Initiate curl
+	$ch = curl_init();
+	// Set The Response Format to Json
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Accept: application/json'));
+	// Disable SSL verification
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	// Will return the response, if false it print the response
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	// Set the url
+	curl_setopt($ch, CURLOPT_URL, $endpoint);
+	// Execute
+	$result=curl_exec($ch);
+	// Closing
+	curl_close($ch);
+	$json_obj = json_decode($result);
+	return $json_obj;
+}
+
+
+function _epdmod_load_node_from_field($field_id, $value, $bundle){
+	$query = new EntityFieldQuery();
+	$query->entityCondition('entity_type', 'node')
+	->entityCondition('bundle', $bundle)
+	->propertyCondition('status', NODE_PUBLISHED)
+	->fieldCondition('field_' .$field_id, 'value', $value, '=')
+	->range(0, 1)
+	->addMetaData('account', user_load(1)); // Run the query as user 1.
+
+	$result = $query->execute();
+
+	$node = FALSE;
+
+	if (isset($result['node'])) {
+		$news_items_nids = array_keys($result['node']);
+		$nid = $news_items_nids[0];
+		$node = node_load($nid);
+	}
+	return $node;
+}
+
+
+/**
+ * Implement hook_node_presave()
+ */
+function epdmod_node_presave($node) {
+	/* get all child nodes of project load them and apply same themes to them as project node */
+	$child_nids = array();
+	/*	if(isset($node->field_assets[LANGUAGE_NONE])){
+	 foreach($node->field_assets[LANGUAGE_NONE] as $node_ref){
+	 if(isset($node_ref['target_id'])){
+	 $child_nids[] = $node_ref['target_id'];
+	 }
+	 }
+	 }*/
+	if(isset($node->field_publications[LANGUAGE_NONE])){
+		foreach($node->field_publications[LANGUAGE_NONE] as $node_ref){
+			if(isset($node_ref['target_id'])){
+				$child_nids[] = $node_ref['target_id'];
+			}
+		}
+	}
+	foreach($child_nids as $child_nid){
+		$updated = _epdmod_apply_themes_to_child_node($child_nid, $node);
+		if(!$updated){
+			/* as long as one child node has the same terms applied we can assume they all do */
+			break;
+		}
+	}
+
+}
+
+
+function _epdmod_apply_themes_to_child_node($child_nid, $parent_node){
+	$theme_tids = (isset($parent_node->field_themes[LANGUAGE_NONE])) ? $parent_node->field_themes[LANGUAGE_NONE] : array();
+	$keyword_tids = (isset($parent_node->field_keywords[LANGUAGE_NONE])) ? $parent_node->field_keywords[LANGUAGE_NONE] : array();
+
+	$child_node = node_load($child_nid);
+
+	if(_epdmod_terms_array_match($parent_node->field_themes, $child_node->field_themes) &&
+	_epdmod_terms_array_match($parent_node->field_keywords, $child_node->field_keywords)){
+		drupal_set_message(t('Keywords and Themes not upated so child nodes remain unchanged'));
+		return FALSE;
+	}
+	drupal_set_message(t('Updated themes/keywords in child publication node "' . $child_node->title . '"'));
+	$child_node->field_themes[LANGUAGE_NONE] = array();
+	$child_node->field_keywords[LANGUAGE_NONE] = array();
+	foreach($theme_tids as $theme_tid){
+		$child_node->field_themes[LANGUAGE_NONE][]['tid'] = $theme_tid['tid'];
+	}
+	foreach($keyword_tids as $keyword_tid){
+		$child_node->field_keywords[LANGUAGE_NONE][]['tid'] = $keyword_tid['tid'];
+	}
+	node_save($child_node);
+	return TRUE;
+}
+
+
+function _epdmod_terms_array_match($arr1, $arr2){
+	if($arr1 == $arr2){
+		return TRUE;
+	}
+	if(isset($arr1[LANGUAGE_NONE])){
+		/* bug in drupal doesn't clear 'und' part of array sometimes, but the array are both empty so they match */
+		if(!count($arr1[LANGUAGE_NONE]) && !count($arr2)){
+			return TRUE;
+		}
+	}
+	/*
+	 * the parent node can have the same tids but the array is formed differently,
+	 * this means it's not a direct == match, but if it has matching tids then
+	 * it is a match for us
+	 */
+	if(isset($arr1[LANGUAGE_NONE]) && isset($arr2[LANGUAGE_NONE])){
+		$arr1 = $arr1[LANGUAGE_NONE];
+		$arr2 = $arr2[LANGUAGE_NONE];
+		$arr1_tids = array();
+		$arr2_tids = array();
+		foreach($arr1 as $a1){
+			if(isset($a1['tid'])){
+				$arr1_tids[] = $a1['tid'];
+			}
+		}
+		foreach($arr2 as $a2){
+			if(isset($a2['tid'])){
+				$arr2_tids[] = $a2['tid'];
+			}
+		}
+		if(count($arr1_tids) != count($arr2_tids)){
+			return FALSE;
+		}
+		foreach($arr1_tids as $tid){
+			if(!in_array($tid, $arr2_tids)){
+				return FALSE;
+			}
+		}
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
+
+/**
+ * Implement hook_init()
+ */
+function epdmod_init(){
+	drupal_add_css(drupal_get_path('module', 'epdmod') . '/css/epdmod.css');
+	drupal_add_js(drupal_get_path('module', 'epdmod') . '/js/epdmod.js');
+}
+/*
+function epdmod_gmap($op, &$map)
+{
+    if($op == 'pre_theme_map')
+    {
+    	 $marker_text = array();
+    	 $marker_groups = array();
+        foreach($map['markers'] as $marker)
+        {            
+            $key = $marker['latitude']."|".$marker['longitude'];
+           
+            if(!isset($marker_text[$key])){ $marker_text[$key] = ''; }
+            $marker_text[$key] .= '<div>' . l($marker['opts']['title'], $marker['link']) . '</div>';
+            $marker_groups[$key] = $marker;
+            $marker_groups[$key]['text'] = $marker_text[$key];
+        }
+            
+        $map['markers'] = array_values($marker_groups);    
+    }
+}*/
+
+/*
+function epdmod_form_alter(&$form, $form_state, $form_id) {
+	if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'search') {
+		$form['field_organisations_tid'] = array(
+			'#type' => 'autocomplete_deluxe',
+			'#autocomplete_deluxe_path' => url('autocomplete_deluxe/taxonomy/field_organisations', array('absolute' => TRUE)),
+			'#multiple' => TRUE,
+			'#autocomplete_min_length' => 0,
+			'#autocomplete_multiple_delimiter' => ',',
+		);
+	};
+}*/
+
+
+function epdmod_form_alter(&$form, $form_state, $form_id) {
+	if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'search') {
+		/*$form['field_organisations_tid'] = array(
+			'#type' => 'autocomplete_deluxe',
+			'#autocomplete_deluxe_path' => url('autocomplete_deluxe/taxonomy/field_organisations', array('absolute' => TRUE)),
+			'#multiple' => TRUE,
+			'#autocomplete_min_length' => 0,
+			'#autocomplete_multiple_delimiter' => ',',
+		);*/
+	 	$form['#action'] = url('search');
+	};
+}
+
+function epdmod_get_theme_color($tid){
+	$term = taxonomy_term_load($tid);
+	return $term->field_theme_colour[LANGUAGE_NONE][0]['safe_value'];
+}

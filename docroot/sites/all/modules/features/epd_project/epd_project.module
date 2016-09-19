@@ -1,0 +1,41 @@
+<?php
+/**
+ * @file
+ * Code for the epd_project feature.
+ */
+
+include_once 'epd_project.features.inc';
+
+/**
+ * Implements hook_token_info(). This hook will register tow token lname and fname.
+ */
+function epd_project_token_info() {
+  $info['tokens']['entity']['epd_search_url'] = array(
+    'name' => t('EPD Entity Search URL'),
+    'description' => t('EPD Search URL for entity'),
+  );
+  return $info;
+}
+
+function epd_project_tokens($type, $tokens, array $data = array(), array $options = array()) {
+  $replacements = array();
+
+  foreach ($tokens as $name => $original) {
+      // Find our custom tokens by name.
+      switch ($name) {
+        case 'epd_search_url':
+
+          if ($data['entity']->vocabulary_machine_name == 'people') {
+            $value = 'search?field_people_tid[0]=' . $data['entity']->tid;
+          }
+          else {
+            $value = 'search?field_organisations_tid[0]=' . $data['entity']->tid;
+          }
+
+          $replacements[$original] = $value;
+          break;
+      }
+  }
+
+  return $replacements;
+}

@@ -1,0 +1,16 @@
+name = epd_settings
+core = 7.x
+package = Features
+dependencies[] = ctools
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:2
+features[variable][] = shield_allow_cli
+features[variable][] = shield_enabled
+features[variable][] = shield_ignored_addresses
+features[variable][] = shield_method
+features[variable][] = shield_pass
+features[variable][] = shield_paths
+features[variable][] = shield_print
+features[variable][] = shield_remote_address
+features[variable][] = shield_user
