@@ -19,7 +19,7 @@ function epd_themes_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'theme' => 'theme',
+        'theme' => 'themes',
       ),
     ),
   );
