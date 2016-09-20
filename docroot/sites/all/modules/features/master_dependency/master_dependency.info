@@ -20,6 +20,7 @@ dependencies[] = epd_events
 dependencies[] = epd_files
 dependencies[] = epd_news
 dependencies[] = epd_project
+dependencies[] = epd_resource
 dependencies[] = epd_search
 dependencies[] = epd_settings
 dependencies[] = epd_themes
