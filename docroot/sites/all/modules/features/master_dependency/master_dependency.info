@@ -13,6 +13,7 @@ dependencies[] = strongarm
 ; Custom
 dependencies[] = epd_map_descriptions
 dependencies[] = epd_styles_view_handler
+dependencies[] = epd_view_modes
 
 ; Features
 dependencies[] = epd_blog
