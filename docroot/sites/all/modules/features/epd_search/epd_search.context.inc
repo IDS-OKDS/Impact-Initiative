@@ -107,17 +107,23 @@ function epd_search_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'epd_map_descriptions-organisation' => array(
+        'epd_map_descriptions-organisation_map_desc' => array(
           'module' => 'epd_map_descriptions',
-          'delta' => 'organisation',
+          'delta' => 'organisation_map_desc',
           'region' => 'content',
           'weight' => '-10',
+        ),
+        'epd_map_descriptions-organisation_term_desc' => array(
+          'module' => 'epd_map_descriptions',
+          'delta' => 'organisation_term_desc',
+          'region' => 'content',
+          'weight' => '-9',
         ),
         'quicktabs-search' => array(
           'module' => 'quicktabs',
           'delta' => 'search',
           'region' => 'content',
-          'weight' => '-9',
+          'weight' => '-8',
         ),
       ),
     ),
