@@ -750,6 +750,7 @@ input.form-submit { padding: 4px 8px; background-color: rgba(0,130,243,1); color
 .field-name-field-event-related-blogs .field-name-field-partners .field-item,
 .field-name-field-event-related-projects .field-name-field-people .field-item {
   display: inline;
+  font-size: 0.8em;
 }
 
 .field-name-field-event-related-blogs .field-name-field-people .field-item:after,
