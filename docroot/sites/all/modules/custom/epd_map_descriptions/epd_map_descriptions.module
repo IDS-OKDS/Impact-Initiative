@@ -21,3 +21,12 @@ function epd_map_descriptions_menu() {
 
   return $items;
 }
+
+function epd_map_descriptions_permission() {
+  return array(
+    'administer epd map descriptions' => array(
+      'title' => t('Administer EPD map descriptions'),
+      'description' => t('Perform administration tasks for EPD map descriptions.'),
+    ),
+  );
+}

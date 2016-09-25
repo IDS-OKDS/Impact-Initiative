@@ -620,6 +620,10 @@ input.form-submit { padding: 4px 8px; background-color: rgba(0,130,243,1); color
   padding-top: 10px;
 }
 
+.block-views-themes-block .title {
+  display: none;
+}
+
 @media (min-width: 450px) {
   .view-themes .views-row {
     width: 48%;
