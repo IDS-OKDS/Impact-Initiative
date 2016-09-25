@@ -21,6 +21,30 @@ function epd_blog_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_image_default_styles().
+ */
+function epd_blog_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: 216_x_145.
+  $styles['216_x_145'] = array(
+    'label' => '216 x 145',
+    'effects' => array(
+      1 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 216,
+          'height' => 145,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  return $styles;
+}
+
+/**
  * Implements hook_node_info().
  */
 function epd_blog_node_info() {

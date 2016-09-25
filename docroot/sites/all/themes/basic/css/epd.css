@@ -691,6 +691,14 @@ input.form-submit { padding: 4px 8px; background-color: rgba(0,130,243,1); color
   margin-right: 3%;
 }
 
+.field-name-field-event-related-blogs .field-item:nth-child(3n+1) .blog-image-teaser {
+  clear: left;
+}
+
+.field-name-field-event-related-blogs .blog-image-teaser .field-name-field-file-image-attribution {
+  display: none;
+}
+
 .field-name-field-event-related-blogs .node {
   clear: none;
 }

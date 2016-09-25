@@ -607,11 +607,12 @@ function epd_blog_field_default_field_instances() {
       ),
       'image_teaser' => array(
         'label' => 'hidden',
-        'module' => 'file_entity',
+        'module' => 'image',
         'settings' => array(
-          'file_view_mode' => 'default',
+          'image_link' => 'content',
+          'image_style' => '216_x_145',
         ),
-        'type' => 'file_rendered',
+        'type' => 'image',
         'weight' => 0,
       ),
       'teaser' => array(
