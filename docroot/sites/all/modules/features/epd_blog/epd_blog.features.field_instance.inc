@@ -233,7 +233,7 @@ function epd_blog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 13,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -276,10 +276,9 @@ function epd_blog_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 8,
+        'type' => 'hidden',
+        'weight' => 6,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -421,7 +420,7 @@ function epd_blog_field_default_field_instances() {
         'label' => 'inline',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 10,
       ),
       'image_teaser' => array(
         'label' => 'hidden',
@@ -465,10 +464,9 @@ function epd_blog_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 6,
+        'type' => 'hidden',
+        'weight' => 8,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -561,7 +559,7 @@ function epd_blog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 11,
+        'weight' => 12,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -605,7 +603,7 @@ function epd_blog_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 10,
+        'weight' => 11,
       ),
       'image_teaser' => array(
         'label' => 'hidden',
@@ -673,9 +671,8 @@ function epd_blog_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'inline',
-        'module' => 'taxonomy',
         'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
+        'type' => 'hidden',
         'weight' => 7,
       ),
       'image_teaser' => array(
