@@ -790,6 +790,11 @@ input.form-submit { padding: 4px 8px; background-color: rgba(0,130,243,1); color
   margin-top: 2em;
 }
 
+.field-name-field-event-resources .field-item {
+  margin: 0.5em 0;
+  overflow: auto;
+}
+
 .field-name-field-event-resources .resource-title,
 .field-name-field-event-resources .field-name-field-attached-file {
   float: left;
