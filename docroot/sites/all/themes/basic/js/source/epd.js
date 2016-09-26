@@ -1,7 +1,7 @@
 (function ($) {
   Drupal.behaviors.epd = {
     attach: function (context, settings) {
-      if ($('#events-buttons').length < 1 && $('.block-views-events-block').length > 1) {
+      if ($('#events-buttons').length < 1 && $('.block-views-events-block').length > 0) {
         $upcomingButton = $("<div/>", {id: 'upcoming', class: 'event-button active', role: 'button', text: 'Upcoming'});
         $previousButton = $("<div/>", {id: 'previous', class: 'event-button', role: 'button', text: 'Previous'});
         $buttonWrapper = $("<div/>", {id: 'events-buttons', role: 'button'});
