@@ -46,7 +46,7 @@ class epd_styles_view_handler extends views_handler_field {
    */
   function render($values) {
 
-    $styles = $this->tokenize_value($this->options['styles_to_add']);
+    $styles = $this->tokenize_value($this->options['styles_to_add'], $this->view->row_index);
 
     return theme('html_tag', array(
       'element' => array(

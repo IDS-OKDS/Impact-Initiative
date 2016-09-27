@@ -14,8 +14,12 @@ function epd_map_descriptions_block_info() {
     'info' => t('Map Description: Default Description'),
   );
 
-  $blocks['organisation'] = array(
-    'info' => t('Map Description: Organisation'),
+  $blocks['organisation_map_desc'] = array(
+    'info' => t('Map Description: Organisation Map Description'),
+  );
+
+  $blocks['organisation_term_desc'] = array(
+    'info' => t('Map Description: Organisation Term Description'),
   );
 
   return $blocks;
@@ -33,7 +37,12 @@ function epd_map_descriptions_block_view($delta = '') {
       $block['content'] = variable_get('map_desc_default', array('value' => ''))['value'];
       break;
 
-    case 'organisation':
+    case 'organisation_map_desc':
+      $block['subject'] = '';
+      $block['content'] = variable_get('map_desc_organisation', array('value' => ''))['value'];
+      break;
+
+    case 'organisation_term_desc':
       $block['subject'] = '';
       $block['content'] = _load_term_desc();
       break;

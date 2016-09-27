@@ -5,7 +5,7 @@
         <?php print render($content['field_supporting_image']) ?>
       <?php endif; ?>
 
-      <?php if ($content['field_blog_date']): ?>
+      <?php if (!empty($content['field_blog_date'])): ?>
         <?php print render($content['field_blog_date']) ?>
       <?php endif; ?>
     </div>

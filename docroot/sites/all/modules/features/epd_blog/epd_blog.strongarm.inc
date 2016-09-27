@@ -1,68 +1,68 @@
 <?php
 /**
  * @file
- * epd_events.strongarm.inc
+ * epd_blog.strongarm.inc
  */
 
 /**
  * Implements hook_strongarm().
  */
-function epd_events_strongarm() {
+function epd_blog_strongarm() {
   $export = array();
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_anonymous_event';
+  $strongarm->name = 'comment_anonymous_blog';
   $strongarm->value = 0;
-  $export['comment_anonymous_event'] = $strongarm;
+  $export['comment_anonymous_blog'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_default_mode_event';
+  $strongarm->name = 'comment_blog';
+  $strongarm->value = '2';
+  $export['comment_blog'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'comment_default_mode_blog';
   $strongarm->value = 1;
-  $export['comment_default_mode_event'] = $strongarm;
+  $export['comment_default_mode_blog'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_default_per_page_event';
+  $strongarm->name = 'comment_default_per_page_blog';
   $strongarm->value = '50';
-  $export['comment_default_per_page_event'] = $strongarm;
+  $export['comment_default_per_page_blog'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_event';
-  $strongarm->value = '0';
-  $export['comment_event'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'comment_form_location_event';
+  $strongarm->name = 'comment_form_location_blog';
   $strongarm->value = 1;
-  $export['comment_form_location_event'] = $strongarm;
+  $export['comment_form_location_blog'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_preview_event';
+  $strongarm->name = 'comment_preview_blog';
   $strongarm->value = '1';
-  $export['comment_preview_event'] = $strongarm;
+  $export['comment_preview_blog'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'comment_subject_field_event';
+  $strongarm->name = 'comment_subject_field_blog';
   $strongarm->value = 1;
-  $export['comment_subject_field_event'] = $strongarm;
+  $export['comment_subject_field_blog'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'field_bundle_settings_node__event';
+  $strongarm->name = 'field_bundle_settings_node__blog';
   $strongarm->value = array(
     'view_modes' => array(
       'teaser' => array(
@@ -80,14 +80,14 @@ function epd_events_strongarm() {
       'search_result' => array(
         'custom_settings' => FALSE,
       ),
-      'diff_standard' => array(
-        'custom_settings' => FALSE,
-      ),
       'token' => array(
         'custom_settings' => FALSE,
       ),
-      'image_teaser' => array(
+      'diff_standard' => array(
         'custom_settings' => FALSE,
+      ),
+      'image_teaser' => array(
+        'custom_settings' => TRUE,
       ),
       'text_teaser' => array(
         'custom_settings' => FALSE,
@@ -96,62 +96,53 @@ function epd_events_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '1',
+          'weight' => '0',
         ),
         'path' => array(
-          'weight' => '10',
+          'weight' => '13',
         ),
       ),
       'display' => array(),
     ),
   );
-  $export['field_bundle_settings_node__event'] = $strongarm;
+  $export['field_bundle_settings_node__blog'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'menu_options_event';
-  $strongarm->value = array(
-    0 => 'main-menu',
-  );
-  $export['menu_options_event'] = $strongarm;
+  $strongarm->name = 'menu_options_blog';
+  $strongarm->value = array();
+  $export['menu_options_blog'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'menu_parent_event';
+  $strongarm->name = 'menu_parent_blog';
   $strongarm->value = 'main-menu:0';
-  $export['menu_parent_event'] = $strongarm;
+  $export['menu_parent_blog'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_options_event';
+  $strongarm->name = 'node_options_blog';
   $strongarm->value = array(
     0 => 'status',
   );
-  $export['node_options_event'] = $strongarm;
+  $export['node_options_blog'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_preview_event';
+  $strongarm->name = 'node_preview_blog';
   $strongarm->value = '1';
-  $export['node_preview_event'] = $strongarm;
+  $export['node_preview_blog'] = $strongarm;
 
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
-  $strongarm->name = 'node_submitted_event';
+  $strongarm->name = 'node_submitted_blog';
   $strongarm->value = 0;
-  $export['node_submitted_event'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'pathauto_node_event_pattern';
-  $strongarm->value = 'event/[node:title]';
-  $export['pathauto_node_event_pattern'] = $strongarm;
+  $export['node_submitted_blog'] = $strongarm;
 
   return $export;
 }
