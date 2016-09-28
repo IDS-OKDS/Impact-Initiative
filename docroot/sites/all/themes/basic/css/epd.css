@@ -883,3 +883,15 @@ input.form-submit { padding: 4px 8px; background-color: rgba(0,130,243,1); color
 .view-events .pager {
   margin-top: 2em;
 }
+
+.soc-med {
+  float: left;
+}
+
+.footer #navigation-region {
+  width:380px;
+}
+
+.footer .block-64 {
+  margin-top: 1em;
+}
