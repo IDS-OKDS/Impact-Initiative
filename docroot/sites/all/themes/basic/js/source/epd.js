@@ -10,8 +10,6 @@
 
         $('.block-views-events-block').before($buttonWrapper);
 
-        $('.block-views-events-block_1').hide();
-
         $upcomingButton.click( function() {
           $upcomingButton.addClass('active');
           $previousButton.removeClass('active');

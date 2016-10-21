@@ -9,6 +9,7 @@ dependencies[] = features
 dependencies[] = field_group
 dependencies[] = date_popup
 dependencies[] = strongarm
+dependencies[] = views_fieldsets
 
 ; Custom
 dependencies[] = epd_map_descriptions
