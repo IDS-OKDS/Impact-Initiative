@@ -7,6 +7,7 @@ dependencies[] = context
 dependencies[] = date_views
 dependencies[] = features
 dependencies[] = field_group
+dependencies[] = inline_entity_form
 dependencies[] = date_popup
 dependencies[] = strongarm
 dependencies[] = views_fieldsets
