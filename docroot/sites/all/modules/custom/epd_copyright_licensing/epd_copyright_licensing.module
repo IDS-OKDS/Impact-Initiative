@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Module to add blocks containing map descriptions.
+ */
+
+module_load_include('inc', 'epd_copyright_licensing', 'epd_map_descriptions.block');
+
+/**
+ * Implements hook_menu().
+ */
+function epd_copyright_licensing_menu() {
+  $items['admin/config/epd/copyright_licensing'] = array(
+    'title' => 'Copyright and Licensing Information',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('epd_copyright_licensing_settings_form'),
+    'access arguments' => array('administer epd copyright and licensing'),
+    'file' => 'epd_copyright_licensing.admin.inc',
+  );
+
+  return $items;
+}
+
+function epd_copyright_licensing_permission() {
+  return array(
+    'administer epd copyright and licensing' => array(
+      'title' => t('Administer EPD Copyright Licensing'),
+      'description' => t('Perform administration tasks for EPD map descriptions.'),
+    ),
+  );
+}

@@ -13,6 +13,7 @@ dependencies[] = strongarm
 dependencies[] = views_fieldsets
 
 ; Custom
+dependencies[] = epd_copyright_licensing
 dependencies[] = epd_map_descriptions
 dependencies[] = epd_styles_view_handler
 dependencies[] = epd_view_modes
