@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the epd_top_tips feature.
+ */
+
+include_once 'epd_top_tips.features.inc';

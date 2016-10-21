@@ -27,4 +27,5 @@ dependencies[] = epd_resource
 dependencies[] = epd_search
 dependencies[] = epd_settings
 dependencies[] = epd_themes
+dependencies[] = epd_top_tip
 dependencies[] = epd_tokens
