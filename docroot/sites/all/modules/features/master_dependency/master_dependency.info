@@ -19,6 +19,7 @@ dependencies[] = epd_view_modes
 
 ; Features
 dependencies[] = epd_blog
+dependencies[] = epd_case_study
 dependencies[] = epd_events
 dependencies[] = epd_files
 dependencies[] = epd_news
@@ -27,5 +28,5 @@ dependencies[] = epd_resource
 dependencies[] = epd_search
 dependencies[] = epd_settings
 dependencies[] = epd_themes
-dependencies[] = epd_top_tip
+dependencies[] = epd_top_tips
 dependencies[] = epd_tokens

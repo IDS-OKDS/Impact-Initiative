@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the epd_case_study feature.
+ */
+
+include_once 'epd_case_study.features.inc';
