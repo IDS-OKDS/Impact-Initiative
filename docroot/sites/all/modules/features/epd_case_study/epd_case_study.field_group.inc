@@ -106,7 +106,7 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = 'group_intro';
   $field_group->data = array(
     'label' => 'Intro Images',
-    'weight' => '5',
+    'weight' => '6',
     'children' => array(
       0 => 'field_intro_images',
     ),
@@ -139,8 +139,9 @@ function epd_case_study_field_group_info() {
       0 => 'field_main_image',
       1 => 'field_author',
       2 => 'field_introduction',
-      3 => 'title',
-      4 => 'group_intro_images',
+      3 => 'field_description',
+      4 => 'title',
+      5 => 'group_intro_images',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -164,22 +165,50 @@ function epd_case_study_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Project references',
+    'label' => 'Project spotlight',
     'weight' => '4',
     'children' => array(
       0 => 'field_project_link',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
+      'label' => 'Project spotlight',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'classes' => 'group-project-references field-group-tab',
+        'description' => '',
+      ),
+      'formatter' => 'closed',
+    ),
+  );
+  $field_groups['group_project_references|node|case_study|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_pub|node|case_study|form';
+  $field_group->group_name = 'group_pub';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'case_study';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Publishing options',
+    'weight' => '5',
+    'children' => array(
+      0 => 'field_published_date',
+    ),
+    'format_type' => 'tab',
+    'format_settings' => array(
       'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-project-references field-group-tab',
+        'classes' => 'group-pub field-group-tab',
         'required_fields' => 1,
       ),
     ),
   );
-  $field_groups['group_project_references|node|case_study|form'] = $field_group;
+  $field_groups['group_pub|node|case_study|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -274,7 +303,8 @@ function epd_case_study_field_group_info() {
   t('Donors Images');
   t('Intro');
   t('Intro Images');
-  t('Project references');
+  t('Project spotlight');
+  t('Publishing options');
   t('Recommendations for donors');
   t('Recommendations for researchers');
   t('Researchers Images');

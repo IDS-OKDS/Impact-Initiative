@@ -24,6 +24,7 @@ dependencies[] = epd_case_study
 dependencies[] = epd_events
 dependencies[] = epd_files
 dependencies[] = epd_news
+dependencies[] = epd_perms
 dependencies[] = epd_project
 dependencies[] = epd_resource
 dependencies[] = epd_search

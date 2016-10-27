@@ -120,7 +120,7 @@ function epd_case_study_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -198,6 +198,63 @@ function epd_case_study_field_default_field_instances() {
       ),
       'type' => 'media_generic',
       'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-case_study-field_description'.
+  $field_instances['node-case_study-field_description'] = array(
+    'bundle' => 'case_study',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 15,
+      ),
+      'image_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'text_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_description',
+    'label' => 'Description',
+    'required' => 0,
+    'settings' => array(
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 3,
     ),
   );
 
@@ -584,7 +641,7 @@ function epd_case_study_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -778,7 +835,7 @@ function epd_case_study_field_default_field_instances() {
         'type_settings' => array(
           'allow_clone' => 0,
           'allow_existing' => 1,
-          'allow_new' => 1,
+          'allow_new' => 0,
           'delete_references' => 0,
           'label_plural' => 'nodes',
           'label_singular' => 'node',
@@ -788,6 +845,71 @@ function epd_case_study_field_default_field_instances() {
       ),
       'type' => 'inline_entity_form',
       'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance: 'node-case_study-field_published_date'.
+  $field_instances['node-case_study-field_published_date'] = array(
+    'bundle' => 'case_study',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+        ),
+        'type' => 'date_default',
+        'weight' => 14,
+      ),
+      'image_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'text_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_published_date',
+    'label' => 'Published Date',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'd/m/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_text',
+      'weight' => 6,
     ),
   );
 
@@ -934,6 +1056,7 @@ function epd_case_study_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Author');
   t('Conclusion Images');
+  t('Description');
   t('Donors Images');
   t('Intro');
   t('Intro Images');
@@ -941,6 +1064,7 @@ function epd_case_study_field_default_field_instances() {
   t('Main Image');
   t('PDF Download');
   t('Project Link');
+  t('Published Date');
   t('Researchers Images');
   t('Text box with Summary');
   t('Top Tips');
