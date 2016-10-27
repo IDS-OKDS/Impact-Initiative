@@ -182,7 +182,11 @@
 							<?php print render($title_prefix); ?>
 
 							<?php if ($title): ?>
-							<h1 class="title">
+								<?php if ($node->type = "case_study"): ?>
+									<h1 class="homepage-titles larger w-clearfix">
+								<?php else: ?>
+									<h1 class="title">
+								<?php endif; ?>
 							<?php print $title; ?>
 							</h1>
 							<?php endif; ?>
