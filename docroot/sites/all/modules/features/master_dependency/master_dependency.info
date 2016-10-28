@@ -17,6 +17,7 @@ dependencies[] = epd_copyright_licensing
 dependencies[] = epd_map_descriptions
 dependencies[] = epd_styles_view_handler
 dependencies[] = epd_view_modes
+dependencies[] = wysiwyg_customisations
 
 ; Features
 dependencies[] = epd_blog

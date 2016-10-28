@@ -25,15 +25,19 @@ function epd_case_study_field_group_info() {
     'children' => array(
       0 => 'field_conclusion_images',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Conclusion Images',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-conclusion-images field-group-fieldset',
-        'required_fields' => 1,
         'id' => '',
+        'classes' => 'related-wrapper',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_conclusion_images|node|case_study|default'] = $field_group;
@@ -77,23 +81,22 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Conclusion',
-    'weight' => '5',
+    'weight' => '4',
     'children' => array(
       0 => 'body',
       1 => 'field_pdf_download',
       2 => 'group_conclusion_images',
     ),
-    'format_type' => 'div',
+    'format_type' => 'html-element',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Conclusion',
       'instance_settings' => array(
-        'description' => '',
-        'show_label' => 1,
-        'label_element' => 'h3',
-        'effect' => 'none',
-        'speed' => 'fast',
+        'id' => 'conclusion',
         'classes' => '',
-        'id' => '',
+        'element' => 'div',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'attributes' => '',
       ),
     ),
   );
@@ -143,15 +146,19 @@ function epd_case_study_field_group_info() {
     'children' => array(
       0 => 'field_donors_images',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Donors Images',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-donors-images field-group-fieldset',
-        'required_fields' => 1,
         'id' => '',
+        'classes' => 'related-wrapper',
+        'description' => '',
+        'show_label' => '1',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_donors_images|node|case_study|default'] = $field_group;
@@ -199,15 +206,19 @@ function epd_case_study_field_group_info() {
     'children' => array(
       0 => 'field_intro_images',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Intro Images',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-intro-images field-group-fieldset',
-        'required_fields' => 1,
         'id' => '',
+        'classes' => 'related-wrapper',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_intro_images|node|case_study|default'] = $field_group;
@@ -251,7 +262,7 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Introduction',
-    'weight' => '2',
+    'weight' => '1',
     'children' => array(
       0 => 'field_main_image',
       1 => 'field_introduction',
@@ -306,6 +317,36 @@ function epd_case_study_field_group_info() {
     ),
   );
   $field_groups['group_intro|node|case_study|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_project_references|node|case_study|default';
+  $field_group->group_name = 'group_project_references';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'case_study';
+  $field_group->mode = 'default';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Project spotlight',
+    'weight' => '5',
+    'children' => array(
+      0 => 'field_project_link',
+    ),
+    'format_type' => 'html-element',
+    'format_settings' => array(
+      'label' => 'Project spotlight',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => '',
+        'element' => 'div',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'attributes' => '',
+      ),
+    ),
+  );
+  $field_groups['group_project_references|node|case_study|default'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -406,24 +447,23 @@ function epd_case_study_field_group_info() {
   $field_group->mode = 'default';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Recommendations for donors',
-    'weight' => '4',
+    'label' => 'Top tips for donors',
+    'weight' => '3',
     'children' => array(
       0 => 'field_intro_donors',
       1 => 'field_donors_top_tips',
       2 => 'group_donors_images',
     ),
-    'format_type' => 'div',
+    'format_type' => 'html-element',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Top tips for donors',
       'instance_settings' => array(
-        'description' => '',
-        'show_label' => 1,
-        'label_element' => 'h3',
-        'effect' => 'none',
-        'speed' => 'fast',
+        'id' => 'donors',
         'classes' => '',
-        'id' => '',
+        'element' => 'div',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'attributes' => '',
       ),
     ),
   );
@@ -468,24 +508,23 @@ function epd_case_study_field_group_info() {
   $field_group->mode = 'default';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Recommendations for researchers',
-    'weight' => '3',
+    'label' => 'Top tips for researchers',
+    'weight' => '2',
     'children' => array(
       0 => 'field_intro',
       1 => 'field_researchers_top_tips',
       2 => 'group_researchers_images',
     ),
-    'format_type' => 'div',
+    'format_type' => 'html-element',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Top tips for researchers',
       'instance_settings' => array(
-        'description' => '',
-        'show_label' => 1,
-        'label_element' => 'h3',
-        'effect' => 'none',
-        'speed' => 'fast',
+        'id' => 'research',
         'classes' => '',
-        'id' => '',
+        'element' => 'div',
+        'show_label' => '1',
+        'label_element' => 'h2',
+        'attributes' => '',
       ),
     ),
   );
@@ -535,15 +574,19 @@ function epd_case_study_field_group_info() {
     'children' => array(
       0 => 'field_researchers_images',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'div',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Researchers Images',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-researchers-images field-group-fieldset',
-        'required_fields' => 1,
         'id' => '',
+        'classes' => 'related-wrapper',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'fast',
       ),
+      'formatter' => 'open',
     ),
   );
   $field_groups['group_researchers_images|node|case_study|default'] = $field_group;
@@ -590,6 +633,8 @@ function epd_case_study_field_group_info() {
   t('Recommendations for donors');
   t('Recommendations for researchers');
   t('Researchers Images');
+  t('Top tips for donors');
+  t('Top tips for researchers');
 
   return $field_groups;
 }

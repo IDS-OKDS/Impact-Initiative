@@ -145,13 +145,12 @@ function epd_case_study_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'image',
+        'label' => 'hidden',
+        'module' => 'file_entity',
         'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
+          'file_view_mode' => 'image_related',
         ),
-        'type' => 'image',
+        'type' => 'file_rendered',
         'weight' => 9,
       ),
       'full' => array(
@@ -236,7 +235,7 @@ function epd_case_study_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 9,
+        'weight' => 15,
       ),
       'full' => array(
         'label' => 'above',
@@ -295,13 +294,12 @@ function epd_case_study_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'image',
+        'label' => 'hidden',
+        'module' => 'file_entity',
         'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
+          'file_view_mode' => 'image_related',
         ),
-        'type' => 'image',
+        'type' => 'file_rendered',
         'weight' => 13,
       ),
       'full' => array(
@@ -385,9 +383,10 @@ function epd_case_study_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
-          'link' => FALSE,
+          'links' => 1,
+          'view_mode' => 'default',
         ),
-        'type' => 'entityreference_label',
+        'type' => 'entityreference_entity_view',
         'weight' => 16,
       ),
       'full' => array(
@@ -581,13 +580,12 @@ function epd_case_study_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'image',
+        'label' => 'hidden',
+        'module' => 'file_entity',
         'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
+          'file_view_mode' => 'image_related',
         ),
-        'type' => 'image',
+        'type' => 'file_rendered',
         'weight' => 15,
       ),
       'full' => array(
@@ -733,12 +731,11 @@ function epd_case_study_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'hidden',
-        'module' => 'image',
+        'module' => 'file_entity',
         'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
+          'file_view_mode' => 'image_with_caption',
         ),
-        'type' => 'image',
+        'type' => 'file_rendered',
         'weight' => 12,
       ),
       'full' => array(
@@ -1041,13 +1038,12 @@ function epd_case_study_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
-        'module' => 'image',
+        'label' => 'hidden',
+        'module' => 'file_entity',
         'settings' => array(
-          'image_link' => '',
-          'image_style' => '',
+          'file_view_mode' => 'image_related',
         ),
-        'type' => 'image',
+        'type' => 'file_rendered',
         'weight' => 30,
       ),
       'full' => array(
