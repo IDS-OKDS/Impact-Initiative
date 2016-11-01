@@ -28,6 +28,7 @@ features[variable][] = comment_form_location_top_tip
 features[variable][] = comment_preview_top_tip
 features[variable][] = comment_subject_field_top_tip
 features[variable][] = comment_top_tip
+features[variable][] = ds_extras_view_modes_top_tip
 features[variable][] = field_bundle_settings_node__top_tip
 features[variable][] = menu_options_top_tip
 features[variable][] = menu_parent_top_tip
