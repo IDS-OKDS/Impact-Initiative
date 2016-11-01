@@ -69,8 +69,18 @@ function epd_files_ds_layout_settings_info() {
   $ds_layout->entity_type = 'file';
   $ds_layout->bundle = 'image';
   $ds_layout->view_mode = 'image_related';
-  $ds_layout->layout = 'ds_1col';
+  $ds_layout->layout = 'ds_reset';
   $ds_layout->settings = array(
+    'classes' => array(),
+    'wrappers' => array(
+      'ds_content' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+    'layout_disable_css' => FALSE,
     'regions' => array(
       'ds_content' => array(
         0 => 'group_image_related',
@@ -83,15 +93,6 @@ function epd_files_ds_layout_settings_info() {
       'field_file_caption' => 'ds_content',
       'file' => 'ds_content',
     ),
-    'classes' => array(),
-    'wrappers' => array(
-      'ds_content' => 'div',
-    ),
-    'layout_wrapper' => 'div',
-    'layout_attributes' => '',
-    'layout_attributes_merge' => 1,
-    'layout_link_attribute' => '',
-    'layout_link_custom' => '',
   );
   $export['file|image|image_related'] = $ds_layout;
 
@@ -101,8 +102,18 @@ function epd_files_ds_layout_settings_info() {
   $ds_layout->entity_type = 'file';
   $ds_layout->bundle = 'image';
   $ds_layout->view_mode = 'image_with_caption';
-  $ds_layout->layout = 'ds_1col';
+  $ds_layout->layout = 'ds_reset';
   $ds_layout->settings = array(
+    'classes' => array(),
+    'wrappers' => array(
+      'ds_content' => 'div',
+    ),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => 1,
+    'layout_link_attribute' => '',
+    'layout_link_custom' => '',
+    'layout_disable_css' => FALSE,
     'regions' => array(
       'ds_content' => array(
         0 => 'group_lab_image',
@@ -115,15 +126,6 @@ function epd_files_ds_layout_settings_info() {
       'file' => 'ds_content',
       'field_file_caption' => 'ds_content',
     ),
-    'classes' => array(),
-    'wrappers' => array(
-      'ds_content' => 'div',
-    ),
-    'layout_wrapper' => 'div',
-    'layout_attributes' => '',
-    'layout_attributes_merge' => 1,
-    'layout_link_attribute' => '',
-    'layout_link_custom' => '',
   );
   $export['file|image|image_with_caption'] = $ds_layout;
 

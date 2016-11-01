@@ -13,6 +13,38 @@ function epd_case_study_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_author_wrapper|node|case_study|default';
+  $field_group->group_name = 'group_author_wrapper';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'case_study';
+  $field_group->mode = 'default';
+  $field_group->parent_name = 'group_intro';
+  $field_group->data = array(
+    'label' => 'Author Wrapper',
+    'weight' => '13',
+    'children' => array(
+      0 => 'group_pub',
+    ),
+    'format_type' => 'div',
+    'format_settings' => array(
+      'label' => 'Author Wrapper',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'related-wrapper',
+        'description' => '',
+        'show_label' => '0',
+        'label_element' => 'h3',
+        'effect' => 'none',
+        'speed' => 'fast',
+      ),
+      'formatter' => 'open',
+    ),
+  );
+  $field_groups['group_author_wrapper|node|case_study|default'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_conclusion_images|node|case_study|default';
   $field_group->group_name = 'group_conclusion_images';
   $field_group->entity_type = 'node';
@@ -84,18 +116,17 @@ function epd_case_study_field_group_info() {
     'weight' => '4',
     'children' => array(
       0 => 'body',
-      1 => 'field_pdf_download',
-      2 => 'group_conclusion_images',
+      1 => 'group_conclusion_images',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(
       'label' => 'Conclusion',
       'instance_settings' => array(
         'id' => 'conclusion',
-        'classes' => '',
+        'classes' => 'case-study-section w-clearfix',
         'element' => 'div',
         'show_label' => '1',
-        'label_element' => 'h2',
+        'label_element' => 'h2 class="case-study-h2"',
         'attributes' => '',
       ),
     ),
@@ -153,7 +184,7 @@ function epd_case_study_field_group_info() {
         'id' => '',
         'classes' => 'related-wrapper',
         'description' => '',
-        'show_label' => '1',
+        'show_label' => '0',
         'label_element' => 'h3',
         'effect' => 'none',
         'speed' => 'fast',
@@ -202,7 +233,7 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = 'group_intro';
   $field_group->data = array(
     'label' => 'Intro Images',
-    'weight' => '15',
+    'weight' => '16',
     'children' => array(
       0 => 'field_intro_images',
     ),
@@ -267,7 +298,7 @@ function epd_case_study_field_group_info() {
       0 => 'field_main_image',
       1 => 'field_introduction',
       2 => 'group_intro_images',
-      3 => 'group_pub',
+      3 => 'group_author_wrapper',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(
@@ -277,12 +308,9 @@ function epd_case_study_field_group_info() {
         'classes' => 'case-study-section w-clearfix',
         'element' => 'div',
         'show_label' => '1',
-        'label_element' => 'h2',
+        'label_element' => 'h2 class="case-study-h2"',
         'attributes' => '',
-        'wrapper' => '',
-        'required_fields' => 1,
       ),
-      'formatter' => '',
     ),
   );
   $field_groups['group_intro|node|case_study|default'] = $field_group;
@@ -384,27 +412,25 @@ function epd_case_study_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'case_study';
   $field_group->mode = 'default';
-  $field_group->parent_name = 'group_intro';
+  $field_group->parent_name = 'group_author_wrapper';
   $field_group->data = array(
     'label' => 'About this case study',
-    'weight' => '13',
+    'weight' => '14',
     'children' => array(
       0 => 'field_author',
       1 => 'field_published_date',
     ),
-    'format_type' => 'div',
+    'format_type' => 'html-element',
     'format_settings' => array(
       'label' => 'About this case study',
       'instance_settings' => array(
-        'classes' => 'related-link-block top-info',
-        'description' => '',
-        'show_label' => 1,
-        'label_element' => 'h3',
-        'effect' => 'none',
-        'speed' => 'fast',
         'id' => '',
+        'classes' => 'related-link-block top-info',
+        'element' => 'div',
+        'show_label' => '1',
+        'label_element' => 'h3 class="about-impact"',
+        'attributes' => '',
       ),
-      'formatter' => 'open',
     ),
   );
   $field_groups['group_pub|node|case_study|default'] = $field_group;
@@ -420,7 +446,7 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Publishing options',
-    'weight' => '5',
+    'weight' => '6',
     'children' => array(
       0 => 'field_author',
       1 => 'field_published_date',
@@ -459,10 +485,10 @@ function epd_case_study_field_group_info() {
       'label' => 'Top tips for donors',
       'instance_settings' => array(
         'id' => 'donors',
-        'classes' => '',
+        'classes' => 'case-study-section w-clearfix',
         'element' => 'div',
         'show_label' => '1',
-        'label_element' => 'h2',
+        'label_element' => 'h2 class="case-study-h2"',
         'attributes' => '',
       ),
     ),
@@ -520,10 +546,10 @@ function epd_case_study_field_group_info() {
       'label' => 'Top tips for researchers',
       'instance_settings' => array(
         'id' => 'research',
-        'classes' => '',
+        'classes' => 'case-study-section w-clearfix',
         'element' => 'div',
         'show_label' => '1',
-        'label_element' => 'h2',
+        'label_element' => 'h2 class="case-study-h2"',
         'attributes' => '',
       ),
     ),
@@ -558,6 +584,63 @@ function epd_case_study_field_group_info() {
     ),
   );
   $field_groups['group_recs_for_researchers|node|case_study|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_references|node|case_study|default';
+  $field_group->group_name = 'group_references';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'case_study';
+  $field_group->mode = 'default';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'References',
+    'weight' => '7',
+    'children' => array(
+      0 => 'field_references',
+    ),
+    'format_type' => 'html-element',
+    'format_settings' => array(
+      'label' => 'References',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'case-study-section w-clearfix',
+        'element' => 'div',
+        'show_label' => '1',
+        'label_element' => 'h2 class="case-study-h2"',
+        'attributes' => '',
+      ),
+    ),
+  );
+  $field_groups['group_references|node|case_study|default'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_references|node|case_study|form';
+  $field_group->group_name = 'group_references';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'case_study';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'References',
+    'weight' => '5',
+    'children' => array(
+      0 => 'field_references',
+    ),
+    'format_type' => 'tab',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-references field-group-tab',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $field_groups['group_references|node|case_study|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -622,6 +705,7 @@ function epd_case_study_field_group_info() {
   // Translatables
   // Included for use with string extractors like potx.
   t('About this case study');
+  t('Author Wrapper');
   t('Conclusion');
   t('Conclusion Images');
   t('Donors Images');
@@ -632,6 +716,7 @@ function epd_case_study_field_group_info() {
   t('Publishing options');
   t('Recommendations for donors');
   t('Recommendations for researchers');
+  t('References');
   t('Researchers Images');
   t('Top tips for donors');
   t('Top tips for researchers');

@@ -235,7 +235,7 @@ function epd_case_study_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 16,
       ),
       'full' => array(
         'label' => 'above',
@@ -380,7 +380,7 @@ function epd_case_study_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'entityreference',
         'settings' => array(
           'links' => 1,
@@ -453,7 +453,7 @@ function epd_case_study_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -517,7 +517,7 @@ function epd_case_study_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -667,11 +667,11 @@ function epd_case_study_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 14,
+        'weight' => 15,
       ),
       'full' => array(
         'label' => 'above',
@@ -817,13 +817,13 @@ function epd_case_study_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'inline',
         'module' => 'entityreference',
         'settings' => array(
-          'link' => FALSE,
+          'link' => 1,
         ),
         'type' => 'entityreference_label',
-        'weight' => 24,
+        'weight' => 6,
       ),
       'full' => array(
         'label' => 'above',
@@ -892,7 +892,7 @@ function epd_case_study_field_default_field_instances() {
         'label' => 'above',
         'module' => 'entityreference',
         'settings' => array(
-          'link' => FALSE,
+          'link' => 1,
         ),
         'type' => 'entityreference_label',
         'weight' => 6,
@@ -1031,6 +1031,64 @@ function epd_case_study_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-case_study-field_references'.
+  $field_instances['node-case_study-field_references'] = array(
+    'bundle' => 'case_study',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 32,
+      ),
+      'image_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'text_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_references',
+    'label' => 'References',
+    'required' => 0,
+    'settings' => array(
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 8,
+    ),
+  );
+
   // Exported field_instance: 'node-case_study-field_researchers_images'.
   $field_instances['node-case_study-field_researchers_images'] = array(
     'bundle' => 'case_study',
@@ -1124,13 +1182,14 @@ function epd_case_study_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'entityreference',
         'settings' => array(
-          'link' => FALSE,
+          'links' => 1,
+          'view_mode' => 'default',
         ),
-        'type' => 'entityreference_label',
-        'weight' => 30,
+        'type' => 'entityreference_entity_view',
+        'weight' => 31,
       ),
       'full' => array(
         'label' => 'above',
@@ -1201,6 +1260,7 @@ function epd_case_study_field_default_field_instances() {
   t('PDF Download');
   t('Project Link');
   t('Published Date');
+  t('References');
   t('Researchers Images');
   t('Text box with Summary');
   t('Top Tips');

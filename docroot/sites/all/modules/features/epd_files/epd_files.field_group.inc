@@ -64,7 +64,7 @@ function epd_files_field_group_info() {
       'label' => 'Lab image',
       'instance_settings' => array(
         'id' => '',
-        'classes' => 'lab-image',
+        'classes' => 'case-study lab-image',
         'description' => '',
         'show_label' => '0',
         'label_element' => 'h3',

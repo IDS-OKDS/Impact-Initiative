@@ -12,7 +12,7 @@ function wysiwyg_customisations_wysiwyg_editor_settings_alter( &$settings, $cont
       array(
         'title'   => 'Callout Box',
         'block'   => 'div',
-        'classes' => 'callout-box w-clearfix',
+        'classes' => 'callout-box w-clearfix w-col w-col-12',
         'wrapper' => TRUE
       ),
     );
@@ -25,7 +25,7 @@ function wysiwyg_customisations_wysiwyg_plugin( $editor, $version ) {
   if($editor == 'tinymce' && version_compare($version, '3.4.1', '>=')) {
     return array(
       'visualblocks' => array(
-        'path'                    => $editor['library path'] . 'plugins/visualblocks',
+        'path'                    => 'plugins/visualblocks',
         'buttons'                 => array('visualblocks' => t('Visual Blocks')),
         'extensions'              => array('visualblocks' => t('Visual Blocks')),
         'url'                     => 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/visualblocks',

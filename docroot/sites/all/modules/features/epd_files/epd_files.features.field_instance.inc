@@ -109,14 +109,16 @@ function epd_files_field_default_field_instances() {
       ),
       'image_related' => array(
         'label' => 'above',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 1,
       ),
       'image_with_caption' => array(
         'label' => 'above',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 4,
       ),
       'media_responsive' => array(
@@ -179,14 +181,16 @@ function epd_files_field_default_field_instances() {
       ),
       'image_related' => array(
         'label' => 'above',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 2,
       ),
       'image_with_caption' => array(
         'label' => 'above',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 3,
       ),
       'media_responsive' => array(
@@ -260,14 +264,16 @@ function epd_files_field_default_field_instances() {
       ),
       'image_related' => array(
         'label' => 'above',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 3,
       ),
       'image_with_caption' => array(
         'label' => 'above',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 5,
       ),
       'media_responsive' => array(
