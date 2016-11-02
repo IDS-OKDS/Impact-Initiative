@@ -451,3 +451,23 @@ function basic_epd_get_referenced_entity($entity_reference){
     }
     return $referenced_entity;
 }
+
+
+/*
+ * Remove ul from sticky menu on case study
+ */
+
+function basic_menu_tree__menu_case_study_anchors($variables) {
+  return '<div class="tabs w-clearfix">' . $variables['tree'] . '</div>';
+}
+
+function basic_menu_link__menu_case_study_anchors(array $variables) {
+  $element = $variables['element'];
+  $sub_menu = '';
+
+  if ($element['#below']) {
+    $sub_menu = drupal_render($element['#below']);
+  }
+  $output = l('<div class="tab-text">' . $element['#title'] . '</div>', $element['#href'], array('html' => TRUE, 'attributes' => array('class' => 'case-study tab w-inline-block')));
+  return $output . $sub_menu;
+}
