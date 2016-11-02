@@ -450,6 +450,7 @@ function epd_case_study_field_group_info() {
     'children' => array(
       0 => 'field_author',
       1 => 'field_published_date',
+      2 => 'field_people',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
