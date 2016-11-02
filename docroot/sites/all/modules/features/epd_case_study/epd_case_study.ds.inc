@@ -17,6 +17,19 @@ function epd_case_study_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'case_study';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
+    'addthis' => array(
+      'weight' => '0',
+      'label' => 'above',
+      'format' => 'default',
+      'formatter_settings' => array(
+        'ft' => array(
+          'lb' => 'Share this page',
+          'lbw' => 1,
+          'lbw-el' => 'div',
+          'lbw-cl' => 'sharetext sidebarsocial',
+        ),
+      ),
+    ),
     'case_study_menu' => array(
       'weight' => '0',
       'label' => 'hidden',
@@ -34,28 +47,6 @@ function epd_case_study_ds_field_settings_info() {
           'fis-cl' => 'contentp flex w-clearfix',
           'fis-at' => '',
           'fis-def-at' => FALSE,
-        ),
-      ),
-    ),
-    'field_author' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'lbw' => 1,
-          'lbw-el' => 'div',
-          'lbw-cl' => 'meta1',
-          'ow' => TRUE,
-          'ow-el' => 'div',
-          'ow-cl' => 'metaentry w-clearfix',
-          'ow-def-cl' => FALSE,
-          'ow-at' => '',
-          'ow-def-at' => FALSE,
-          'fi' => TRUE,
-          'fi-el' => 'div',
-          'fi-cl' => 'meta2',
-          'fi-at' => '',
-          'fi-def-at' => FALSE,
-          'fi-odd-even' => FALSE,
-          'fi-first-last' => FALSE,
         ),
       ),
     ),
@@ -184,6 +175,26 @@ function epd_case_study_ds_field_settings_info() {
         ),
       ),
     ),
+    'field_people' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'lbw' => 1,
+          'lbw-el' => 'div',
+          'lbw-cl' => 'meta1',
+          'ow' => TRUE,
+          'ow-el' => 'div',
+          'ow-cl' => 'metaentry w-clearfix',
+          'ow-def-cl' => FALSE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+          'fis' => TRUE,
+          'fis-el' => 'div',
+          'fis-cl' => 'meta2',
+          'fis-at' => '',
+          'fis-def-at' => FALSE,
+        ),
+      ),
+    ),
   );
   $export['node|case_study|default'] = $ds_fieldsetting;
 
@@ -198,6 +209,21 @@ function epd_case_study_ds_custom_fields_info() {
 
   $ds_field = new stdClass();
   $ds_field->api_version = 1;
+  $ds_field->field = 'addthis';
+  $ds_field->label = 'AddThis';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = '';
+  $ds_field->properties = array(
+    'block' => 'addthis|addthis_block',
+    'block_render' => '1',
+  );
+  $export['addthis'] = $ds_field;
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
   $ds_field->field = 'case_study_menu';
   $ds_field->label = 'Case Study Menu';
   $ds_field->field_type = 6;
@@ -207,7 +233,7 @@ function epd_case_study_ds_custom_fields_info() {
   $ds_field->ui_limit = 'case_study|*';
   $ds_field->properties = array(
     'block' => 'menu|menu-case-study-anchors',
-    'block_render' => '1',
+    'block_render' => '3',
   );
   $export['case_study_menu'] = $ds_field;
 
@@ -231,58 +257,55 @@ function epd_case_study_ds_layout_settings_info() {
     'regions' => array(
       'ds_content' => array(
         0 => 'case_study_menu',
-        1 => 'group_intro',
-        2 => 'group_recs_for_researchers',
-        3 => 'group_recs_for_donors',
-        4 => 'group_conclusion',
-        5 => 'group_project_references',
-        6 => 'field_project_link',
-        7 => 'field_pdf_download',
-        8 => 'group_references',
-        9 => 'field_conclusion_images',
-        10 => 'field_main_image',
-        11 => 'group_author_wrapper',
+        1 => 'addthis',
+        2 => 'group_intro',
+        3 => 'group_pub',
+        4 => 'group_recs_for_researchers',
+        5 => 'group_recs_for_donors',
+        6 => 'group_conclusion',
+        7 => 'group_project_references',
+        8 => 'field_pdf_download',
+        9 => 'field_project_link',
+        10 => 'group_references',
+        11 => 'field_conclusion_images',
         12 => 'field_donors_images',
         13 => 'field_intro_donors',
-        14 => 'group_pub',
-        15 => 'field_author',
-        16 => 'field_introduction',
-        17 => 'field_intro_images',
-        18 => 'group_donors_images',
-        19 => 'field_published_date',
-        20 => 'group_intro_images',
-        21 => 'field_donors_top_tips',
-        22 => 'body',
-        23 => 'group_conclusion_images',
-        24 => 'field_intro',
-        25 => 'group_researchers_images',
-        26 => 'field_researchers_images',
-        27 => 'field_researchers_top_tips',
-        28 => 'field_references',
+        14 => 'field_intro_images',
+        15 => 'group_donors_images',
+        16 => 'field_donors_top_tips',
+        17 => 'body',
+        18 => 'group_conclusion_images',
+        19 => 'field_intro',
+        20 => 'group_researchers_images',
+        21 => 'field_researchers_images',
+        22 => 'field_researchers_top_tips',
+        23 => 'field_references',
+        24 => 'field_people',
+        25 => 'field_published_date',
+        26 => 'group_social_wrapper',
+        27 => 'field_main_image',
+        28 => 'group_author_wrapper',
+        29 => 'field_introduction',
+        30 => 'group_intro_images',
       ),
     ),
     'fields' => array(
       'case_study_menu' => 'ds_content',
+      'addthis' => 'ds_content',
       'group_intro' => 'ds_content',
+      'group_pub' => 'ds_content',
       'group_recs_for_researchers' => 'ds_content',
       'group_recs_for_donors' => 'ds_content',
       'group_conclusion' => 'ds_content',
       'group_project_references' => 'ds_content',
-      'field_project_link' => 'ds_content',
       'field_pdf_download' => 'ds_content',
+      'field_project_link' => 'ds_content',
       'group_references' => 'ds_content',
       'field_conclusion_images' => 'ds_content',
-      'field_main_image' => 'ds_content',
-      'group_author_wrapper' => 'ds_content',
       'field_donors_images' => 'ds_content',
       'field_intro_donors' => 'ds_content',
-      'group_pub' => 'ds_content',
-      'field_author' => 'ds_content',
-      'field_introduction' => 'ds_content',
       'field_intro_images' => 'ds_content',
       'group_donors_images' => 'ds_content',
-      'field_published_date' => 'ds_content',
-      'group_intro_images' => 'ds_content',
       'field_donors_top_tips' => 'ds_content',
       'body' => 'ds_content',
       'group_conclusion_images' => 'ds_content',
@@ -291,6 +314,13 @@ function epd_case_study_ds_layout_settings_info() {
       'field_researchers_images' => 'ds_content',
       'field_researchers_top_tips' => 'ds_content',
       'field_references' => 'ds_content',
+      'field_people' => 'ds_content',
+      'field_published_date' => 'ds_content',
+      'group_social_wrapper' => 'ds_content',
+      'field_main_image' => 'ds_content',
+      'group_author_wrapper' => 'ds_content',
+      'field_introduction' => 'ds_content',
+      'group_intro_images' => 'ds_content',
     ),
     'classes' => array(),
     'wrappers' => array(

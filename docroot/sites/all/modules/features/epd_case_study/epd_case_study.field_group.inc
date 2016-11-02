@@ -21,7 +21,7 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = 'group_intro';
   $field_group->data = array(
     'label' => 'Author Wrapper',
-    'weight' => '13',
+    'weight' => '38',
     'children' => array(
       0 => 'group_pub',
     ),
@@ -233,7 +233,7 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = 'group_intro';
   $field_group->data = array(
     'label' => 'Intro Images',
-    'weight' => '16',
+    'weight' => '40',
     'children' => array(
       0 => 'field_intro_images',
     ),
@@ -299,6 +299,7 @@ function epd_case_study_field_group_info() {
       1 => 'field_introduction',
       2 => 'group_intro_images',
       3 => 'group_author_wrapper',
+      4 => 'group_social_wrapper',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(
@@ -365,7 +366,7 @@ function epd_case_study_field_group_info() {
     'format_settings' => array(
       'label' => 'Project spotlight',
       'instance_settings' => array(
-        'id' => '',
+        'id' => 'spotlight',
         'classes' => '',
         'element' => 'div',
         'show_label' => '1',
@@ -415,10 +416,10 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = 'group_author_wrapper';
   $field_group->data = array(
     'label' => 'About this case study',
-    'weight' => '14',
+    'weight' => '1',
     'children' => array(
-      0 => 'field_author',
-      1 => 'field_published_date',
+      0 => 'field_published_date',
+      1 => 'field_people',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(
@@ -605,7 +606,7 @@ function epd_case_study_field_group_info() {
     'format_settings' => array(
       'label' => 'References',
       'instance_settings' => array(
-        'id' => '',
+        'id' => 'references',
         'classes' => 'case-study-section w-clearfix',
         'element' => 'div',
         'show_label' => '1',
@@ -703,6 +704,36 @@ function epd_case_study_field_group_info() {
   );
   $field_groups['group_researchers_images|node|case_study|form'] = $field_group;
 
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_social_wrapper|node|case_study|default';
+  $field_group->group_name = 'group_social_wrapper';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'case_study';
+  $field_group->mode = 'default';
+  $field_group->parent_name = 'group_intro';
+  $field_group->data = array(
+    'label' => 'Social Wrapper',
+    'weight' => '36',
+    'children' => array(
+      0 => 'addthis',
+    ),
+    'format_type' => 'html-element',
+    'format_settings' => array(
+      'label' => 'Social Wrapper',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'related-wrapper top',
+        'element' => 'div',
+        'show_label' => '0',
+        'label_element' => 'div',
+        'attributes' => '',
+      ),
+    ),
+  );
+  $field_groups['group_social_wrapper|node|case_study|default'] = $field_group;
+
   // Translatables
   // Included for use with string extractors like potx.
   t('About this case study');
@@ -719,6 +750,7 @@ function epd_case_study_field_group_info() {
   t('Recommendations for researchers');
   t('References');
   t('Researchers Images');
+  t('Social Wrapper');
   t('Top tips for donors');
   t('Top tips for researchers');
 
