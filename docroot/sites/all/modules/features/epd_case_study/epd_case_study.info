@@ -27,6 +27,7 @@ features[ds_fields][] = addthis
 features[ds_fields][] = breadcrumbs
 features[ds_fields][] = case_study_menu
 features[ds_fields][] = download_button_2
+features[ds_fields][] = menu_fixed
 features[ds_layout_settings][] = node|case_study|default
 features[features_api][] = api:2
 features[field_base][] = field_conclusion_images
