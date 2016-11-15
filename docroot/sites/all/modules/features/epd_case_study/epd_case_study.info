@@ -1,7 +1,7 @@
 name = epd_case_study
 core = 7.x
 package = Features
-version = 7.x-1.6
+version = 7.x-1.7
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = ds
@@ -48,6 +48,7 @@ features[field_group][] = group_conclusion_images|node|case_study|default
 features[field_group][] = group_conclusion_images|node|case_study|form
 features[field_group][] = group_conclusion|node|case_study|default
 features[field_group][] = group_conclusion|node|case_study|form
+features[field_group][] = group_content_wrapper|node|case_study|default
 features[field_group][] = group_donors_images|node|case_study|default
 features[field_group][] = group_donors_images|node|case_study|form
 features[field_group][] = group_intro_images|node|case_study|default

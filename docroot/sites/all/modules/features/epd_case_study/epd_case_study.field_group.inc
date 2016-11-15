@@ -110,7 +110,7 @@ function epd_case_study_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'case_study';
   $field_group->mode = 'default';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_content_wrapper';
   $field_group->data = array(
     'label' => 'Conclusion',
     'weight' => '7',
@@ -162,6 +162,43 @@ function epd_case_study_field_group_info() {
     ),
   );
   $field_groups['group_conclusion|node|case_study|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_content_wrapper|node|case_study|default';
+  $field_group->group_name = 'group_content_wrapper';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'case_study';
+  $field_group->mode = 'default';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Main content wrapper',
+    'weight' => '1',
+    'children' => array(
+      0 => 'case_study_menu',
+      1 => 'group_intro',
+      2 => 'group_recs_for_researchers',
+      3 => 'group_recs_for_donors',
+      4 => 'group_project_references',
+      5 => 'group_conclusion',
+      6 => 'group_references',
+      7 => 'group_title_wrapper',
+    ),
+    'format_type' => 'html-element',
+    'format_settings' => array(
+      'label' => 'Main content wrapper',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'maincontentwrapper content-wrapper featured',
+        'element' => 'div',
+        'show_label' => '0',
+        'label_element' => 'div',
+        'attributes' => '',
+      ),
+    ),
+  );
+  $field_groups['group_content_wrapper|node|case_study|default'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -291,7 +328,7 @@ function epd_case_study_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'case_study';
   $field_group->mode = 'default';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_content_wrapper';
   $field_group->data = array(
     'label' => 'Introduction',
     'weight' => '4',
@@ -356,7 +393,7 @@ function epd_case_study_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'case_study';
   $field_group->mode = 'default';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_content_wrapper';
   $field_group->data = array(
     'label' => 'Project spotlight',
     'weight' => '8',
@@ -474,7 +511,7 @@ function epd_case_study_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'case_study';
   $field_group->mode = 'default';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_content_wrapper';
   $field_group->data = array(
     'label' => 'Top tips for donors',
     'weight' => '6',
@@ -535,7 +572,7 @@ function epd_case_study_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'case_study';
   $field_group->mode = 'default';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_content_wrapper';
   $field_group->data = array(
     'label' => 'Top tips for researchers',
     'weight' => '5',
@@ -548,7 +585,7 @@ function epd_case_study_field_group_info() {
     'format_settings' => array(
       'label' => 'Top tips for researchers',
       'instance_settings' => array(
-        'id' => 'research',
+        'id' => 'researchers',
         'classes' => 'case-study-section w-clearfix',
         'element' => 'div',
         'show_label' => '1',
@@ -596,7 +633,7 @@ function epd_case_study_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'case_study';
   $field_group->mode = 'default';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_content_wrapper';
   $field_group->data = array(
     'label' => 'References',
     'weight' => '9',
@@ -743,10 +780,10 @@ function epd_case_study_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'case_study';
   $field_group->mode = 'default';
-  $field_group->parent_name = '';
+  $field_group->parent_name = 'group_content_wrapper';
   $field_group->data = array(
     'label' => 'Title Wrapper',
-    'weight' => '0',
+    'weight' => '2',
     'children' => array(
       0 => 'field_pdf_download',
       1 => 'title',
@@ -760,7 +797,7 @@ function epd_case_study_field_group_info() {
         'element' => 'h2',
         'show_label' => '0',
         'label_element' => 'div',
-        'attributes' => '',
+        'attributes' => 'data-ix="fix-case-study-tabs"',
       ),
     ),
   );
@@ -776,6 +813,7 @@ function epd_case_study_field_group_info() {
   t('Intro');
   t('Intro Images');
   t('Introduction');
+  t('Main content wrapper');
   t('Project spotlight');
   t('Publishing options');
   t('Recommendations for donors');

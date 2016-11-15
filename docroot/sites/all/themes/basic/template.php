@@ -468,7 +468,9 @@ function basic_menu_link__menu_case_study_anchors(array $variables) {
   if ($element['#below']) {
     $sub_menu = drupal_render($element['#below']);
   }
-  $output = l('<div class="tab-text">' . $element['#title'] . '</div>', $element['#href'], array('html' => TRUE, 'attributes' => array('class' => 'case-study tab w-inline-block')));
+  $link = str_replace('[current-page:url]', '', $element['#original_link']['options']['menu_token_link_path']);
+
+  $output = '<a href="' . $link .'" class="case-study tab w-inline-block"><div class="tab-text">' . $element['#title'] . '</div></a>';
   return $output . $sub_menu;
 }
 
