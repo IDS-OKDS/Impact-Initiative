@@ -63,7 +63,7 @@ function epd_case_study_ds_field_settings_info() {
           'fis' => TRUE,
           'fis-el' => 'div',
           'fis-cl' => 'fixed-tabs',
-          'fis-at' => 'style="display: hidden;"',
+          'fis-at' => 'style="display: none;"',
           'fis-def-at' => FALSE,
         ),
       ),
