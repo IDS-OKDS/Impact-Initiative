@@ -31,10 +31,33 @@ function epd_case_study_ds_field_settings_info() {
       ),
     ),
     'case_study_menu' => array(
-      'weight' => '0',
+      'weight' => '3',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
+        'ft' => array(),
+      ),
+    ),
+    'download_button_2' => array(
+      'weight' => '23',
+      'label' => 'hidden',
+      'format' => 'default',
+      'formatter_settings' => array(
+        'show_title' => 0,
+        'title_wrapper' => '',
+        'ctools' => 'a:3:{s:4:"conf";a:10:{s:5:"label";s:6:"hidden";s:9:"formatter";s:21:"entityreference_label";s:11:"delta_limit";i:0;s:12:"delta_offset";s:1:"0";s:14:"delta_reversed";b:0;s:18:"formatter_settings";a:1:{s:4:"link";i:1;}s:7:"context";s:25:"argument_entity_id:node_1";s:14:"override_title";i:0;s:19:"override_title_text";s:0:"";s:22:"override_title_heading";s:2:"h2";}s:4:"type";s:12:"entity_field";s:7:"subtype";s:23:"node:field_pdf_download";}',
+        'load_terms' => 0,
+        'ft' => array(),
+      ),
+    ),
+    'title' => array(
+      'weight' => '1',
+      'label' => 'hidden',
+      'format' => 'default',
+      'formatter_settings' => array(
+        'link' => '0',
+        'wrapper' => '',
+        'class' => '',
         'ft' => array(),
       ),
     ),
@@ -86,21 +109,7 @@ function epd_case_study_ds_field_settings_info() {
     'field_pdf_download' => array(
       'formatter_settings' => array(
         'ft' => array(
-          'lb' => 'download PDF',
           'lb-col' => TRUE,
-          'ow' => TRUE,
-          'ow-el' => 'span',
-          'ow-cl' => 'download-pdf-button top',
-          'ow-def-cl' => FALSE,
-          'ow-at' => '',
-          'ow-def-at' => FALSE,
-          'fi' => TRUE,
-          'fi-el' => 'div',
-          'fi-cl' => 'hidden',
-          'fi-at' => '',
-          'fi-def-at' => FALSE,
-          'fi-odd-even' => FALSE,
-          'fi-first-last' => FALSE,
         ),
       ),
     ),
@@ -224,6 +233,21 @@ function epd_case_study_ds_custom_fields_info() {
 
   $ds_field = new stdClass();
   $ds_field->api_version = 1;
+  $ds_field->field = 'breadcrumbs';
+  $ds_field->label = 'Breadcrumbs';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = '';
+  $ds_field->properties = array(
+    'block' => 'easy_breadcrumb|easy_breadcrumb',
+    'block_render' => '1',
+  );
+  $export['breadcrumbs'] = $ds_field;
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
   $ds_field->field = 'case_study_menu';
   $ds_field->label = 'Case Study Menu';
   $ds_field->field_type = 6;
@@ -236,6 +260,32 @@ function epd_case_study_ds_custom_fields_info() {
     'block_render' => '3',
   );
   $export['case_study_menu'] = $ds_field;
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
+  $ds_field->field = 'download_button_2';
+  $ds_field->label = 'Download Button 2';
+  $ds_field->field_type = 7;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = 'case_study|default';
+  $ds_field->properties = array(
+    'default' => array(),
+    'settings' => array(
+      'show_title' => array(
+        'type' => 'checkbox',
+      ),
+      'title_wrapper' => array(
+        'type' => 'textfield',
+        'description' => 'Eg: h1, h2, p',
+      ),
+      'ctools' => array(
+        'type' => 'ctools',
+      ),
+    ),
+  );
+  $export['download_button_2'] = $ds_field;
 
   return $export;
 }
@@ -256,58 +306,64 @@ function epd_case_study_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'ds_content' => array(
-        0 => 'case_study_menu',
+        0 => 'group_title_wrapper',
         1 => 'addthis',
-        2 => 'group_intro',
-        3 => 'group_pub',
-        4 => 'group_recs_for_researchers',
-        5 => 'group_recs_for_donors',
-        6 => 'group_conclusion',
-        7 => 'group_project_references',
-        8 => 'field_pdf_download',
+        2 => 'group_pub',
+        3 => 'title',
+        4 => 'field_pdf_download',
+        5 => 'case_study_menu',
+        6 => 'group_intro',
+        7 => 'group_recs_for_researchers',
+        8 => 'group_recs_for_donors',
         9 => 'field_project_link',
-        10 => 'group_references',
-        11 => 'field_conclusion_images',
-        12 => 'field_donors_images',
-        13 => 'field_intro_donors',
-        14 => 'field_intro_images',
-        15 => 'group_donors_images',
-        16 => 'field_donors_top_tips',
-        17 => 'body',
-        18 => 'group_conclusion_images',
-        19 => 'field_intro',
-        20 => 'group_researchers_images',
-        21 => 'field_researchers_images',
-        22 => 'field_researchers_top_tips',
-        23 => 'field_references',
-        24 => 'field_people',
-        25 => 'field_published_date',
-        26 => 'group_social_wrapper',
-        27 => 'field_main_image',
-        28 => 'group_author_wrapper',
-        29 => 'field_introduction',
-        30 => 'group_intro_images',
+        10 => 'group_conclusion',
+        11 => 'group_project_references',
+        12 => 'field_conclusion_images',
+        13 => 'group_references',
+        14 => 'field_donors_images',
+        15 => 'field_intro_donors',
+        16 => 'field_intro_images',
+        17 => 'group_donors_images',
+        18 => 'field_donors_top_tips',
+        19 => 'body',
+        20 => 'download_button_2',
+        21 => 'group_conclusion_images',
+        22 => 'field_intro',
+        23 => 'group_researchers_images',
+        24 => 'field_researchers_images',
+        25 => 'field_researchers_top_tips',
+        26 => 'field_references',
+        27 => 'field_people',
+        28 => 'field_published_date',
+        29 => 'group_social_wrapper',
+        30 => 'field_main_image',
+        31 => 'group_author_wrapper',
+        32 => 'field_introduction',
+        33 => 'group_intro_images',
       ),
     ),
     'fields' => array(
-      'case_study_menu' => 'ds_content',
+      'group_title_wrapper' => 'ds_content',
       'addthis' => 'ds_content',
-      'group_intro' => 'ds_content',
       'group_pub' => 'ds_content',
+      'title' => 'ds_content',
+      'field_pdf_download' => 'ds_content',
+      'case_study_menu' => 'ds_content',
+      'group_intro' => 'ds_content',
       'group_recs_for_researchers' => 'ds_content',
       'group_recs_for_donors' => 'ds_content',
+      'field_project_link' => 'ds_content',
       'group_conclusion' => 'ds_content',
       'group_project_references' => 'ds_content',
-      'field_pdf_download' => 'ds_content',
-      'field_project_link' => 'ds_content',
-      'group_references' => 'ds_content',
       'field_conclusion_images' => 'ds_content',
+      'group_references' => 'ds_content',
       'field_donors_images' => 'ds_content',
       'field_intro_donors' => 'ds_content',
       'field_intro_images' => 'ds_content',
       'group_donors_images' => 'ds_content',
       'field_donors_top_tips' => 'ds_content',
       'body' => 'ds_content',
+      'download_button_2' => 'ds_content',
       'group_conclusion_images' => 'ds_content',
       'field_intro' => 'ds_content',
       'group_researchers_images' => 'ds_content',

@@ -181,14 +181,10 @@
 						<?php if(!drupal_is_front_page()): ?>
 							<?php print render($title_prefix); ?>
 
-							<?php if ($title): ?>
-								<?php if (isset($node->type) && $node->type == "case_study"): ?>
-									<h1 class="homepage-titles larger w-clearfix">
-								<?php else: ?>
-									<h1 class="title">
-								<?php endif; ?>
-							<?php print $title; ?>
-							</h1>
+							<?php if ($title && isset($node->type) && $node->type != "case_study"): ?>
+								<h1 class="title">
+									<?php print $title; ?>
+								</h1>
 							<?php endif; ?>
 
 							<?php print render($title_suffix); ?>

@@ -53,7 +53,7 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = 'group_conclusion';
   $field_group->data = array(
     'label' => 'Conclusion Images',
-    'weight' => '23',
+    'weight' => '24',
     'children' => array(
       0 => 'field_conclusion_images',
     ),
@@ -113,10 +113,11 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Conclusion',
-    'weight' => '4',
+    'weight' => '7',
     'children' => array(
       0 => 'body',
-      1 => 'group_conclusion_images',
+      1 => 'download_button_2',
+      2 => 'group_conclusion_images',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(
@@ -293,7 +294,7 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Introduction',
-    'weight' => '1',
+    'weight' => '4',
     'children' => array(
       0 => 'field_main_image',
       1 => 'field_introduction',
@@ -358,7 +359,7 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Project spotlight',
-    'weight' => '5',
+    'weight' => '8',
     'children' => array(
       0 => 'field_project_link',
     ),
@@ -367,10 +368,10 @@ function epd_case_study_field_group_info() {
       'label' => 'Project spotlight',
       'instance_settings' => array(
         'id' => 'spotlight',
-        'classes' => '',
+        'classes' => 'case-study-section w-clearfix',
         'element' => 'div',
         'show_label' => '1',
-        'label_element' => 'h2',
+        'label_element' => 'h2 class="case-study-h2"',
         'attributes' => '',
       ),
     ),
@@ -476,7 +477,7 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Top tips for donors',
-    'weight' => '3',
+    'weight' => '6',
     'children' => array(
       0 => 'field_intro_donors',
       1 => 'field_donors_top_tips',
@@ -537,7 +538,7 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Top tips for researchers',
-    'weight' => '2',
+    'weight' => '5',
     'children' => array(
       0 => 'field_intro',
       1 => 'field_researchers_top_tips',
@@ -598,7 +599,7 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'References',
-    'weight' => '7',
+    'weight' => '9',
     'children' => array(
       0 => 'field_references',
     ),
@@ -734,6 +735,37 @@ function epd_case_study_field_group_info() {
   );
   $field_groups['group_social_wrapper|node|case_study|default'] = $field_group;
 
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_title_wrapper|node|case_study|default';
+  $field_group->group_name = 'group_title_wrapper';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'case_study';
+  $field_group->mode = 'default';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Title Wrapper',
+    'weight' => '0',
+    'children' => array(
+      0 => 'field_pdf_download',
+      1 => 'title',
+    ),
+    'format_type' => 'html-element',
+    'format_settings' => array(
+      'label' => 'Title Wrapper',
+      'instance_settings' => array(
+        'id' => '',
+        'classes' => 'homepage-titles larger w-clearfix',
+        'element' => 'h2',
+        'show_label' => '0',
+        'label_element' => 'div',
+        'attributes' => '',
+      ),
+    ),
+  );
+  $field_groups['group_title_wrapper|node|case_study|default'] = $field_group;
+
   // Translatables
   // Included for use with string extractors like potx.
   t('About this case study');
@@ -751,6 +783,7 @@ function epd_case_study_field_group_info() {
   t('References');
   t('Researchers Images');
   t('Social Wrapper');
+  t('Title Wrapper');
   t('Top tips for donors');
   t('Top tips for researchers');
 

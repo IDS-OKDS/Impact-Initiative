@@ -2768,3 +2768,8 @@ ol.numbered li::before {
   font-weight: 400;
   text-align: center;
 }
+
+.download-pdf-button a {
+  color: white;
+  text-decoration: none;
+}
