@@ -34,5 +34,13 @@ function wysiwyg_customisations_wysiwyg_plugin( $editor, $version ) {
       )
     );
   }
-
 }
+
+function wysiwyg_customisations_preprocess_html(&$variables) {
+  if ((arg(0) != 'media' && arg(1) != 'browser')) {
+    $theme_path = drupal_get_path('theme', 'seven');
+    $css_path = drupal_get_path('theme', 'basic') . '/css/tinymce.css';
+    drupal_add_css($css_path, array('weight' => CSS_THEME));
+  }
+}
+
