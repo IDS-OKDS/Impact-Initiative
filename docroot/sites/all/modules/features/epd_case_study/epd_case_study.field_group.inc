@@ -113,7 +113,7 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = 'group_content_wrapper';
   $field_group->data = array(
     'label' => 'Conclusion',
-    'weight' => '7',
+    'weight' => '8',
     'children' => array(
       0 => 'body',
       1 => 'download_button_2',
@@ -396,9 +396,10 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = 'group_content_wrapper';
   $field_group->data = array(
     'label' => 'Project spotlight',
-    'weight' => '8',
+    'weight' => '7',
     'children' => array(
       0 => 'field_project_link',
+      1 => 'field_project_link_text',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(
@@ -429,6 +430,7 @@ function epd_case_study_field_group_info() {
     'weight' => '4',
     'children' => array(
       0 => 'field_project_link',
+      1 => 'field_project_link_text',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -487,9 +489,8 @@ function epd_case_study_field_group_info() {
     'label' => 'Publishing options',
     'weight' => '6',
     'children' => array(
-      0 => 'field_author',
-      1 => 'field_published_date',
-      2 => 'field_people',
+      0 => 'field_published_date',
+      1 => 'field_people',
     ),
     'format_type' => 'tab',
     'format_settings' => array(

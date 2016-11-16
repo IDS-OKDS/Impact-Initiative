@@ -25,9 +25,9 @@ function epd_case_study_ctools_plugin_api($module = NULL, $api = NULL) {
 function epd_case_study_node_info() {
   $items = array(
     'case_study' => array(
-      'name' => t('Case Study'),
+      'name' => t('Learning Guide'),
       'base' => 'node_content',
-      'description' => t('Content type for the Impact Initiative\'s Case Studies.'),
+      'description' => t('Content type for the Impact Initiative\'s Learning Guide.'),
       'has_title' => '1',
       'title_label' => t('Title'),
       'help' => '',
