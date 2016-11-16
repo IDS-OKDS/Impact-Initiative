@@ -65,7 +65,7 @@ function epd_settings_wysiwyg_default_profiles() {
       'apply_source_formatting' => 0,
       'paste_auto_cleanup_on_paste' => 0,
       'block_formats' => 'p,address,pre,h2,h3,h4,h5,h6,div',
-      'css_setting' => 'none',
+      'css_setting' => 'self',
       'css_path' => 'sites/all/themes/basic/css/tinymce.css',
       'css_classes' => '',
     ),
