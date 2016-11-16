@@ -145,7 +145,7 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Conclusion',
-    'weight' => '3',
+    'weight' => '4',
     'children' => array(
       0 => 'body',
       1 => 'field_pdf_download',
@@ -427,7 +427,7 @@ function epd_case_study_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Project spotlight',
-    'weight' => '4',
+    'weight' => '3',
     'children' => array(
       0 => 'field_project_link',
       1 => 'field_project_link_text',
