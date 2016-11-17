@@ -1,7 +1,7 @@
 name = epd_case_study
 core = 7.x
 package = Features
-version = 7.x-1.10
+version = 7.x-1.11
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = ds
@@ -23,6 +23,7 @@ features[ctools][] = ds:ds:1
 features[ctools][] = field_group:field_group:1
 features[ctools][] = strongarm:strongarm:1
 features[ds_field_settings][] = node|case_study|default
+features[ds_fields][] = about_the_impact_lab
 features[ds_fields][] = addthis
 features[ds_fields][] = breadcrumbs
 features[ds_fields][] = case_study_menu

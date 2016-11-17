@@ -23,7 +23,8 @@ function epd_case_study_field_group_info() {
     'label' => 'Author Wrapper',
     'weight' => '38',
     'children' => array(
-      0 => 'group_pub',
+      0 => 'about_the_impact_lab',
+      1 => 'group_pub',
     ),
     'format_type' => 'div',
     'format_settings' => array(
