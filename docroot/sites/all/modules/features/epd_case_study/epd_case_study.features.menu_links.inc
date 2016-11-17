@@ -33,7 +33,7 @@ function epd_case_study_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -47,
+    'weight' => -46,
     'customized' => 1,
   );
   // Exported menu link: menu-case-study-anchors_introduction:http://theimpactinitiative1.dev.dd:8083/admin/structure/menu/item/2465/edit#intro.
@@ -112,7 +112,7 @@ function epd_case_study_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => -46,
+    'weight' => -47,
     'customized' => 1,
   );
   // Exported menu link: menu-case-study-anchors_top-tips-for-donors:menutoken/58120e4f19989.

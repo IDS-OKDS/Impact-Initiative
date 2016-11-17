@@ -1,7 +1,7 @@
 name = epd_case_study
 core = 7.x
 package = Features
-version = 7.x-1.9
+version = 7.x-1.10
 dependencies[] = ctools
 dependencies[] = date
 dependencies[] = ds
