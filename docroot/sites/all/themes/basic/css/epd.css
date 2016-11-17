@@ -317,7 +317,7 @@ body:before {
    text-decoration: underline;
 }
 .view-conference-news-and-views .views-row .views-field-title .field-content a,
-#quicktabs-search .view-display-id-page_1 .views-row .views-field-title .field-content a , .node-project header h2 a, .w-tab-pane .field-name-field-organisations a, .w-tab-pane .field-name-field-publications a, .w-tab-pane .field-name-field-people a, .w-tab-pane .field-name-field-project-partners a, .view-news-and-views-archive .views-row .views-field-title .field-content a{
+#quicktabs-search .view-display-id-page_1 .views-row .views-field-title .field-content a , .node-project header h2 a, .w-tab-pane .field-name-field-organisations a, .w-tab-pane .field-name-field-publications a, .w-tab-pane .field-name-field-people a, .w-tab-pane .field-name-field-project-partners a {
     margin-top: 0px;
     font-family: Lato, sans-serif;
     color: #26275f;
@@ -899,7 +899,10 @@ input.form-submit { padding: 4px 8px; background-color: rgba(0,130,243,1); color
 
 h1, h2, h3, h4 {
     font-family: Oswald, Arial, sans-serif;
+	font-weight: 400;
 }
+.view-news-and-views-archive h2 a, h3 a { text-decoration: none; }
+.view-events h3 { margin-top: 0; }
 
 body {
     font-family: Lato, Arial,sans-serif;
