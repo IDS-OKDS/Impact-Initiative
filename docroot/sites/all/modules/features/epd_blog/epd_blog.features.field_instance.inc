@@ -715,6 +715,49 @@ function epd_blog_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'taxonomy_term-people-field_partner'.
+  $field_instances['taxonomy_term-people-field_partner'] = array(
+    'bundle' => 'people',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 6,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'taxonomy_term',
+    'field_name' => 'field_partner',
+    'label' => 'Partner',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 8,
+    ),
+  );
+
   // Exported field_instance: 'taxonomy_term-people-field_photo'.
   $field_instances['taxonomy_term-people-field_photo'] = array(
     'bundle' => 'people',
@@ -986,6 +1029,7 @@ function epd_blog_field_default_field_instances() {
   t('Keywords');
   t('Names & organisations');
   t('ORCID ID');
+  t('Partner');
   t('Partners');
   t('People');
   t('Photo');
