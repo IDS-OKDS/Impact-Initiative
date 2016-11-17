@@ -27,6 +27,9 @@ drush @$site.$target_env en master_dependency -y
 echo "Update database:"
 drush @$site.$target_env updatedb --yes
 
+echo "Clearing Features:"
+drush @$site.$target_env fra -y
+
 echo "Clearing Cache:"
 drush @$site.$target_env cc all
 

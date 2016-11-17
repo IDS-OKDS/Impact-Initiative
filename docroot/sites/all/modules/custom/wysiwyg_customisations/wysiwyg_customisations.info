@@ -1,0 +1,6 @@
+name            = WYSIWYG Customisations
+package         = User Interface
+description     = Customisation of the WYSIWYG module - currently updates TinyMCE v3.5.x.x with HTML5 elements as well as adding access to the "Visual Blocks" plugin.
+core            = 7.x
+dependencies[]  = wysiwyg
+files[]         = wysiwyg_customisations.module

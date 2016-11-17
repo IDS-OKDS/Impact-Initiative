@@ -28,10 +28,10 @@ function epd_project_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'text',
         'settings' => array(
-          'trim_length' => 600,
+          'trim_length' => 500,
         ),
         'type' => 'text_summary_or_trimmed',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -81,7 +81,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 28,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -127,7 +127,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 23,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -176,7 +176,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 5,
+        'weight' => 21,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -221,7 +221,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 3,
+        'weight' => 19,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -263,7 +263,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 6,
+        'weight' => 22,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -308,7 +308,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 25,
+        'weight' => 36,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -359,7 +359,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 27,
+        'weight' => 38,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -418,7 +418,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 28,
+        'weight' => 39,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -472,7 +472,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 26,
+        'weight' => 37,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -518,7 +518,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 21,
+        'weight' => 32,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -563,7 +563,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 29,
+        'weight' => 40,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -613,7 +613,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 11,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -659,7 +659,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 25,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -706,7 +706,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 20,
+        'weight' => 31,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -756,7 +756,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 24,
+        'weight' => 35,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -806,7 +806,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 23,
+        'weight' => 34,
       ),
       'text_teaser' => array(
         'label' => 'hidden',
@@ -853,7 +853,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 19,
+        'weight' => 30,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -903,7 +903,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 4,
+        'weight' => 20,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -947,7 +947,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 15,
+        'weight' => 27,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -992,7 +992,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 14,
+        'weight' => 26,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -1042,7 +1042,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 12,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -1094,7 +1094,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 22,
+        'weight' => 33,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -1141,7 +1141,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 18,
+        'weight' => 29,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -1187,7 +1187,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 1,
+        'weight' => 18,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -1232,7 +1232,7 @@ function epd_project_field_default_field_instances() {
         'module' => 'image',
         'settings' => array(
           'image_link' => '',
-          'image_style' => '',
+          'image_style' => '216_x_145',
         ),
         'type' => 'image',
         'weight' => 0,
@@ -1307,7 +1307,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 12,
+        'weight' => 24,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -1352,7 +1352,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 13,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -1408,7 +1408,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 17,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -1468,7 +1468,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 16,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -1524,7 +1524,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 15,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -1580,7 +1580,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 14,
       ),
       'text_teaser' => array(
         'label' => 'above',

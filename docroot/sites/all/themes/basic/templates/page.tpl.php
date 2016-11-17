@@ -170,21 +170,21 @@
 					<?php if ($breadcrumb || $title|| $messages || $tabs || $action_links): ?>
 						<!-- <div id="content-header"> -->
 
-					<?php print $breadcrumb; ?>
+						<?php print $breadcrumb; ?>
 
-					<?php if ($page['highlighted']): ?>
-						<div id="highlighted">
-						<?php print render($page['highlighted']) ?>
-						</div>
+						<?php if ($page['highlighted']): ?>
+							<div id="highlighted">
+							<?php print render($page['highlighted']) ?>
+							</div>
 						<?php endif; ?>
 
 						<?php if(!drupal_is_front_page()): ?>
 							<?php print render($title_prefix); ?>
 
-							<?php if ($title): ?>
-							<h1 class="title">
-							<?php print $title; ?>
-							</h1>
+							<?php if ($title && isset($node->type) && $node->type != "case_study"): ?>
+								<h1 class="title">
+									<?php print $title; ?>
+								</h1>
 							<?php endif; ?>
 
 							<?php print render($title_suffix); ?>
@@ -205,14 +205,14 @@
 						</ul>
 						<?php endif; ?>
 
-						<!-- </div> /#content-header -->
-						<?php endif; ?>
+					<!-- </div> /#content-header -->
+					<?php endif; ?>
 
-						<div id="content-area">
-						<?php print render($page['content']) ?>
-						</div>
+					<div id="content-area">
+					<?php print render($page['content']) ?>
+					</div>
 
-						<?php print $feed_icons; ?>
+					<?php print $feed_icons; ?>
 
 					</section>
 					<!-- /content-inner /content -->

@@ -1,0 +1,46 @@
+<?php
+/**
+ * Implements hook_wysiwyg_editor_settings_alter().
+ *
+ * Documentation Ref: http://www.tinymce.com/tryit/html5_formats.php
+ */
+function wysiwyg_customisations_wysiwyg_editor_settings_alter( &$settings, $context ) {
+  if($context['profile']->editor == 'tinymce') {
+    $settings['end_container_on_empty_block'] = TRUE;
+
+    $settings['style_formats'] = array(
+      array(
+        'title'   => 'Callout Box',
+        'block'   => 'div',
+        'classes' => 'callout-box w-clearfix w-col w-col-12',
+        'wrapper' => TRUE
+      ),
+    );
+  }
+}
+
+
+function wysiwyg_customisations_wysiwyg_plugin( $editor, $version ) {
+
+  if($editor == 'tinymce' && version_compare($version, '3.4.1', '>=')) {
+    return array(
+      'visualblocks' => array(
+        'path'                    => 'plugins/visualblocks',
+        'buttons'                 => array('visualblocks' => t('Visual Blocks')),
+        'extensions'              => array('visualblocks' => t('Visual Blocks')),
+        'url'                     => 'http://wiki.moxiecode.com/index.php/TinyMCE:Plugins/visualblocks',
+        'internal'                => TRUE,
+        'load'                    => TRUE
+      )
+    );
+  }
+}
+
+function wysiwyg_customisations_preprocess_html(&$variables) {
+  if ((arg(0) != 'media' && arg(1) != 'browser')) {
+    $theme_path = drupal_get_path('theme', 'seven');
+    $css_path = drupal_get_path('theme', 'basic') . '/css/tinymce.css';
+    drupal_add_css($css_path, array('weight' => CSS_THEME));
+  }
+}
+

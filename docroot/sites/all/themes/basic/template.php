@@ -451,3 +451,39 @@ function basic_epd_get_referenced_entity($entity_reference){
     }
     return $referenced_entity;
 }
+
+
+/*
+ * Remove ul from sticky menu on case study
+ */
+
+function basic_menu_tree__menu_case_study_anchors($variables) {
+  return '<div class="tabs w-clearfix">' . $variables['tree'] . '</div>';
+}
+
+function basic_menu_link__menu_case_study_anchors(array $variables) {
+  $element = $variables['element'];
+  $sub_menu = '';
+
+  if ($element['#below']) {
+    $sub_menu = drupal_render($element['#below']);
+  }
+  $link = str_replace('[current-page:url]', '', $element['#original_link']['options']['menu_token_link_path']);
+
+  $output = '<a href="' . $link .'" class="case-study tab w-inline-block"><div class="tab-text">' . $element['#title'] . '</div></a>';
+  return $output . $sub_menu;
+}
+
+function basic_preprocess_field(&$variables, $hook) {
+  if(isset($variables['element']['#field_name']) && $variables['element']['#field_name'] = 'field_pdf_download' && isset($variables['element']['#field_type']) && $variables['element']['#field_type'] == 'entityreference' && isset($variables['element'][0]['#markup'])) {
+    if(isset($variables['element']['#object']->field_pdf_download)){
+      $nid = $variables['element']['#object']->field_pdf_download['und'][0]['target_id'];
+      $title = "Download PDF";
+      $classes = 'download-pdf-button';
+      if(isset($variables['element']['#view_mode']) && $variables['element']['#view_mode'] == 'full') {
+        $classes = 'download-pdf-button top';
+      }
+      $variables['items'][0]['#markup'] =  l('<span class="icon-font download"></span>&nbsp;' . $title, 'node/'.$nid, array('attributes' => array ('class' => $classes), 'html' => TRUE));
+    }
+  }
+}

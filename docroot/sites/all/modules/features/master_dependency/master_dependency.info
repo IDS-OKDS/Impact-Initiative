@@ -7,22 +7,29 @@ dependencies[] = context
 dependencies[] = date_views
 dependencies[] = features
 dependencies[] = field_group
+dependencies[] = inline_entity_form
 dependencies[] = date_popup
 dependencies[] = strongarm
+dependencies[] = views_fieldsets
 
 ; Custom
+dependencies[] = epd_copyright_licensing
 dependencies[] = epd_map_descriptions
 dependencies[] = epd_styles_view_handler
 dependencies[] = epd_view_modes
+dependencies[] = wysiwyg_customisations
 
 ; Features
 dependencies[] = epd_blog
+dependencies[] = epd_case_study
 dependencies[] = epd_events
 dependencies[] = epd_files
 dependencies[] = epd_news
+dependencies[] = epd_perms
 dependencies[] = epd_project
 dependencies[] = epd_resource
 dependencies[] = epd_search
 dependencies[] = epd_settings
 dependencies[] = epd_themes
+dependencies[] = epd_top_tips
 dependencies[] = epd_tokens
