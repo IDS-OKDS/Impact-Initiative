@@ -368,11 +368,12 @@ function epd_case_study_field_group_info() {
     'label' => 'Intro',
     'weight' => '0',
     'children' => array(
-      0 => 'field_main_image',
+      0 => 'field_description',
       1 => 'field_introduction',
-      2 => 'field_description',
-      3 => 'title',
-      4 => 'group_intro_images',
+      2 => 'field_main_image',
+      3 => 'field_short_title',
+      4 => 'title',
+      5 => 'group_intro_images',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -550,8 +551,8 @@ function epd_case_study_field_group_info() {
     'label' => 'Recommendations for donors',
     'weight' => '2',
     'children' => array(
-      0 => 'field_intro_donors',
-      1 => 'field_donors_top_tips',
+      0 => 'field_donors_top_tips',
+      1 => 'field_intro_donors',
       2 => 'group_donors_images',
     ),
     'format_type' => 'tab',

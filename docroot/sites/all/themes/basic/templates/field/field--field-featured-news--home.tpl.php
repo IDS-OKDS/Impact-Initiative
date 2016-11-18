@@ -1,9 +1,7 @@
     <div class="w-section maincontent newsandviews">
-      <div class="maincontentwrapper">
+      <div class="maincontentwrapper alternative">
         <div class="featured">
-		  <?php if (!$label_hidden): ?>
-		    <h2 class="h2featured alternative"><?php print l($label, 'blog'); ?></h2>
-		  <?php endif; ?>
+		  
 
           <?php 
           $fields_content = array();
@@ -28,67 +26,81 @@
         <?php endforeach; ?>
 		  
         <div class="w-row">
-          <div class="w-col w-col-6">
-          	<?php if(isset($fields_content[0])): ?>
-          	<?php print($fields_content[0]['style']); ?>
-            <a class="w-clearfix w-inline-block featuredlinkblock" href="<?php print($fields_content[0]['url']); ?>">
-              <div class="w-clearfix featuredphoto featuredphoto_<?php print($fields_content[0]['nid']); ?> big">
-                <h3 class="featuredh3"><?php print($fields_content[0]['title']); ?></h3>
-              </div>
-              <div class="featuredp"><?php print($fields_content[0]['body']); ?></div>
-            </a>
-            <?php endif; ?>
-          </div>
-          <div class="w-col w-col-6">
-            <div class="w-row">
-              <div class="w-col w-col-6">
-              	<?php if(isset($fields_content[1])): ?>
-              	<?php print($fields_content[1]['style']); ?>
-                <a class="w-clearfix w-inline-block featuredlinkblock small" href="<?php print($fields_content[1]['url']); ?>">
-                  <div class="w-clearfix featuredphoto featuredphoto_<?php print($fields_content[1]['nid']); ?>">
-                    <h3 class="featuredh3"><?php print($fields_content[1]['title']); ?></h3>
-                  </div>
-                </a>
-                <?php endif; ?>
-              </div>
-              <div class="w-col w-col-6">
-              	<?php if(isset($fields_content[2])): ?>
-              	<?php print($fields_content[2]['style']); ?>
-                <a class="w-clearfix w-inline-block featuredlinkblock small" href="<?php print($fields_content[2]['url']); ?>">
-                  <div class="w-clearfix featuredphoto featuredphoto_<?php print($fields_content[2]['nid']); ?>">
-                    <h3 class="featuredh3"><?php print($fields_content[2]['title']); ?></h3>
-                  </div>
-                </a>
-                <?php endif; ?>
-              </div>
-            </div>
-            <div class="w-row">
-              <div class="w-col w-col-6">
-              	<?php if(isset($fields_content[3])): ?>
-              	<?php print($fields_content[3]['style']); ?>
-                <a class="w-clearfix w-inline-block featuredlinkblock small" href="<?php print($fields_content[3]['url']); ?>">
-                  <div class="w-clearfix featuredphoto featuredphoto_<?php print($fields_content[3]['nid']); ?>">
-                    <h3 class="featuredh3"><?php print($fields_content[3]['title']); ?></h3>
-                  </div>
-                </a>
-                <?php endif; ?>
-              </div>
-              <div class="w-col w-col-6">
-              	<?php if(isset($fields_content[4])): ?>
-              	<?php print($fields_content[4]['style']); ?>
-                <a class="w-clearfix w-inline-block featuredlinkblock small" href="<?php print($fields_content[4]['url']); ?>">
-                  <div class="w-clearfix featuredphoto featuredphoto_<?php print($fields_content[4]['nid']); ?>">
-                    <h3 class="featuredh3"><?php print($fields_content[4]['title']); ?></h3>
-                  </div>
-                </a>
-                <?php endif; ?>
-              </div>
-            </div>
-          </div>
-        </div>	
-        
-        <p class="seemore"><?php print l('See more ' . $label, 'blog'); ?></p>
-
+		
+			<div class="w-col w-col-12">
+		 
+				
+				<div class="w-col w-col-6">
+				
+				<?php if (!$label_hidden): ?>
+					<h2 class="h2featured alternative"><?php print l($label, 'blog'); ?></h2>
+				<?php endif; ?>
+				<?php if(isset($fields_content[0])): ?>
+					<?php print($fields_content[0]['style']); ?>
+					<a class="w-clearfix w-inline-block featuredlinkblock" href="<?php print($fields_content[0]['url']); ?>">
+					<div class="w-clearfix featuredphoto featuredphoto_<?php print($fields_content[0]['nid']); ?> big">
+						<h3 class="featuredh3"><?php print($fields_content[0]['title']); ?></h3>
+					</div>
+					<div class="featuredp"><?php print($fields_content[0]['body']); ?></div>
+					</a>
+				<?php endif; ?>
+   
+				<div class="w-row">
+					<div class="w-col w-col-6">
+						<?php if(isset($fields_content[1])): ?>
+						<?php print($fields_content[1]['style']); ?>
+						<a class="w-clearfix w-inline-block featuredlinkblock small" href="<?php print($fields_content[1]['url']); ?>">
+						<div class="w-clearfix featuredphoto featuredphoto_<?php print($fields_content[1]['nid']); ?>">
+							<h3 class="featuredh3"><?php print($fields_content[1]['title']); ?></h3>
+						</div>
+						</a>
+						<?php endif; ?>
+					</div>
+					<div class="w-col w-col-6">
+						<?php if(isset($fields_content[2])): ?>
+						<?php print($fields_content[2]['style']); ?>
+						<a class="w-clearfix w-inline-block featuredlinkblock small" href="<?php print($fields_content[2]['url']); ?>">
+						<div class="w-clearfix featuredphoto featuredphoto_<?php print($fields_content[2]['nid']); ?>">
+							<h3 class="featuredh3"><?php print($fields_content[2]['title']); ?></h3>
+						</div>
+						</a>
+						<?php endif; ?>
+					</div>
+				</div>
+				<div class="w-row">
+					<div class="w-col w-col-6">
+						<?php if(isset($fields_content[3])): ?>
+						<?php print($fields_content[3]['style']); ?>
+						<a class="w-clearfix w-inline-block featuredlinkblock small" href="<?php print($fields_content[3]['url']); ?>">
+							<div class="w-clearfix featuredphoto featuredphoto_<?php print($fields_content[3]['nid']); ?>">
+							<h3 class="featuredh3"><?php print($fields_content[3]['title']); ?></h3>
+						</div>
+						</a>
+						<?php endif; ?>
+					</div>
+					<div class="w-col w-col-6">
+						<?php if(isset($fields_content[4])): ?>
+						<?php print($fields_content[4]['style']); ?>
+						<a class="w-clearfix w-inline-block featuredlinkblock small" href="<?php print($fields_content[4]['url']); ?>">
+						<div class="w-clearfix featuredphoto featuredphoto_<?php print($fields_content[4]['nid']); ?>">
+							<h3 class="featuredh3"><?php print($fields_content[4]['title']); ?></h3>
+						</div>
+						</a>
+						<?php endif; ?>
+					</div>
+				</div>
+				<p class="seemore"><a href="/blog">See more News and Views</a></p>
+				</div>
+				
+				<div class="w-col w-col-6 impact-lab">
+					<h2 class="h2featured alternative"><?php print 'Impact Lab'; ?></h2>
+					<?php print views_embed_view('learning_guides', 'block');?>
+				</div>
+				
+			</div>	
+          
+		</div>
+		
         </div>
       </div>
     </div>

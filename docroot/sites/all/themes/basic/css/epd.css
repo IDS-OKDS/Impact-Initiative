@@ -60,7 +60,7 @@ body {
 }
 
 .front .maincontentwrapper.alternative {
-    margin-top: -94px;
+    margin-top: -104px;
 }
 
 .logged-in.front .maincontentwrapper.alternative {
@@ -107,6 +107,20 @@ body:before {
 	font-size:0;
 	line-height:0;
 }
+
+.front .w-col-12 > .w-col-6:first-child {
+	padding-right: 20px;
+}
+.front .h2featured { margin-right: 0px;margin-left: 0px;border-bottom: 3px solid #444; }
+.front .w-row { margin-top: 10px; }
+
+.front .impact-lab .item-list ul {padding: 0; margin: 0; list-style: none; }
+.front .impact-lab .item-list ul  li {padding: 0 0 0px 0; margin: 0 0 10px 0; border: 1px solid #ccc; }
+.front .impact-lab .item-list ul  li:after { clear: both; content: ''; display: table; }
+.front .impact-lab .item-list ul  li  img { padding: 0 10px 0px 0; }
+.front .impact-lab .item-list ul  li  h3 a { color: #444; border-bottom: 1px dotted #444; }
+.front .impact-lab .view-header { font-size: 1.2em; margin: 10px 0px; }
+
 
 .footer ul.menu {
 	padding:0;

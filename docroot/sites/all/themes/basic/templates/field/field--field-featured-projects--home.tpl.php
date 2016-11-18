@@ -1,5 +1,5 @@
     <div class="w-section maincontent featuredprojects">
-      <div class="maincontentwrapper alternative">
+      <div class="maincontentwrapper">
         <div class="featured">
 		  <?php if (!$label_hidden): ?>
 		    <h2 class="h2featured alternative"><?php print $label ?></h2>
