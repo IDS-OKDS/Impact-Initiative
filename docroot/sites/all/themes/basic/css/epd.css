@@ -450,7 +450,8 @@ input#edit-title, input#edit-keys {width:100%;}
 .sharethis-wrapper {
 	margin-bottom:1em;
 }
-
+.view-associated-people .views-row  .views-field-description { padding: 10px; background-color: #eee;}
+.view-associated-people .views-row  img { width: 100%; max-width: 100%;}
 .view-associated-person .item-list ul {
 	list-style-type: none;
 }
