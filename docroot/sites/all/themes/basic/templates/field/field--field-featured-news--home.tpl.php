@@ -27,14 +27,16 @@
 		  
         <div class="w-row">
 		
-			<div class="w-col w-col-12">
-		 
+		<div class="w-col w-col-12">
+		 	<?php if (!$label_hidden): ?>
+				<h2 class="h2featured alternative"><?php print l($label, 'blog'); ?></h2>
+			<?php endif; ?>
+
+			<div class="w-row">
 				
 				<div class="w-col w-col-6">
 				
-				<?php if (!$label_hidden): ?>
-					<h2 class="h2featured alternative"><?php print l($label, 'blog'); ?></h2>
-				<?php endif; ?>
+
 				<?php if(isset($fields_content[0])): ?>
 					<?php print($fields_content[0]['style']); ?>
 					<a class="w-clearfix w-inline-block featuredlinkblock" href="<?php print($fields_content[0]['url']); ?>">
@@ -44,9 +46,12 @@
 					<div class="featuredp"><?php print($fields_content[0]['body']); ?></div>
 					</a>
 				<?php endif; ?>
+				</div>
    
-				<div class="w-row">
-					<div class="w-col w-col-6">
+				<div class="w-col w-col-6">
+
+					
+				    		<div class="w-col w-col-6">
 						<?php if(isset($fields_content[1])): ?>
 						<?php print($fields_content[1]['style']); ?>
 						<a class="w-clearfix w-inline-block featuredlinkblock small" href="<?php print($fields_content[1]['url']); ?>">
@@ -55,8 +60,9 @@
 						</div>
 						</a>
 						<?php endif; ?>
-					</div>
-					<div class="w-col w-col-6">
+						</div>
+
+						<div class="w-col w-col-6">
 						<?php if(isset($fields_content[2])): ?>
 						<?php print($fields_content[2]['style']); ?>
 						<a class="w-clearfix w-inline-block featuredlinkblock small" href="<?php print($fields_content[2]['url']); ?>">
@@ -65,10 +71,11 @@
 						</div>
 						</a>
 						<?php endif; ?>
-					</div>
-				</div>
-				<div class="w-row">
-					<div class="w-col w-col-6">
+						</div>
+					
+					
+					
+						<div class="w-col w-col-6">
 						<?php if(isset($fields_content[3])): ?>
 						<?php print($fields_content[3]['style']); ?>
 						<a class="w-clearfix w-inline-block featuredlinkblock small" href="<?php print($fields_content[3]['url']); ?>">
@@ -77,8 +84,8 @@
 						</div>
 						</a>
 						<?php endif; ?>
-					</div>
-					<div class="w-col w-col-6">
+						</div>
+						<div class="w-col w-col-6">
 						<?php if(isset($fields_content[4])): ?>
 						<?php print($fields_content[4]['style']); ?>
 						<a class="w-clearfix w-inline-block featuredlinkblock small" href="<?php print($fields_content[4]['url']); ?>">
@@ -87,17 +94,21 @@
 						</div>
 						</a>
 						<?php endif; ?>
-					</div>
+						</div>
+					
+						<p class="seemore"><a href="/blog">See more News and Views</a></p>
+					
 				</div>
-				<p class="seemore"><a href="/blog">See more News and Views</a></p>
-				</div>
-				
-				<div class="w-col w-col-6 impact-lab">
+
+			</div>
+			
+
+		
+				<!--<div class="w-col w-col-6 impact-lab">
 					<h2 class="h2featured alternative"><?php print 'Impact Lab'; ?></h2>
 					<?php print views_embed_view('learning_guides', 'block');?>
-				</div>
-				
-			</div>	
+				</div>-->
+
           
 		</div>
 		
