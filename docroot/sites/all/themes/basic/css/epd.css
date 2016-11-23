@@ -60,7 +60,7 @@ body {
 }
 
 .front .maincontentwrapper.alternative {
-    margin-top: -94px;
+    margin-top: -104px;
 }
 
 .logged-in.front .maincontentwrapper.alternative {
@@ -107,6 +107,20 @@ body:before {
 	font-size:0;
 	line-height:0;
 }
+
+.front .w-col-12 > .w-col-6:first-child {
+	padding-right: 20px;
+}
+.front .h2featured { margin-right: 0px;margin-left: 0px;border-bottom: 3px solid #444; }
+.front .w-row { margin-top: 10px; }
+
+.front .impact-lab .item-list ul {padding: 0; margin: 0; list-style: none; }
+.front .impact-lab .item-list ul  li {padding: 0 0 0px 0; margin: 0 0 10px 0; border: 1px solid #ccc; }
+.front .impact-lab .item-list ul  li:after { clear: both; content: ''; display: table; }
+.front .impact-lab .item-list ul  li  img { padding: 0 10px 0px 0; }
+.front .impact-lab .item-list ul  li  h3 a { color: #444; border-bottom: 1px dotted #444; }
+.front .impact-lab .view-header { font-size: 1.2em; margin: 10px 0px; }
+
 
 .footer ul.menu {
 	padding:0;
@@ -317,7 +331,7 @@ body:before {
    text-decoration: underline;
 }
 .view-conference-news-and-views .views-row .views-field-title .field-content a,
-#quicktabs-search .view-display-id-page_1 .views-row .views-field-title .field-content a , .node-project header h2 a, .w-tab-pane .field-name-field-organisations a, .w-tab-pane .field-name-field-publications a, .w-tab-pane .field-name-field-people a, .w-tab-pane .field-name-field-project-partners a, .view-news-and-views-archive .views-row .views-field-title .field-content a{
+#quicktabs-search .view-display-id-page_1 .views-row .views-field-title .field-content a , .node-project header h2 a, .w-tab-pane .field-name-field-organisations a, .w-tab-pane .field-name-field-publications a, .w-tab-pane .field-name-field-people a, .w-tab-pane .field-name-field-project-partners a {
     margin-top: 0px;
     font-family: Lato, sans-serif;
     color: #26275f;
@@ -436,7 +450,8 @@ input#edit-title, input#edit-keys {width:100%;}
 .sharethis-wrapper {
 	margin-bottom:1em;
 }
-
+.view-associated-people .views-row  .views-field-description { padding: 10px; background-color: #eee;}
+.view-associated-people .views-row  img { width: 100%; max-width: 100%;}
 .view-associated-person .item-list ul {
 	list-style-type: none;
 }
@@ -899,8 +914,28 @@ input.form-submit { padding: 4px 8px; background-color: rgba(0,130,243,1); color
 
 h1, h2, h3, h4 {
     font-family: Oswald, Arial, sans-serif;
+	font-weight: 400;
 }
+.view-news-and-views-archive h2 a, h3 a { text-decoration: none; }
+.view-events h3 { margin-top: 0; }
 
 body {
     font-family: Lato, Arial,sans-serif;
 }
+h4.top-tip-title { font-weight: bold; }
+.contentp.example blockquote {
+   border-left: 0px solid #e2e2e2;
+}
+
+.media-element-container .file-video {
+	margin: 20px auto; 
+	width: 90%;
+}
+.media-element-container .file-video {
+	background-color: #eee; padding: 10px;
+}
+.media-element-container .file-video iframe { width: 100%; }
+.media-element-container .file-video .field-name-field-file-caption { font-size: 0.9em; font-weight: bold; }
+
+.media-element-container .file-image {margin: 20px auto; width: 90%; }
+.media-element-container .file-image img{padding: 1px; border: 1px solid #777;}
