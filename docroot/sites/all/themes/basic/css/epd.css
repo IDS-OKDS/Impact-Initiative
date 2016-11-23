@@ -923,3 +923,19 @@ body {
     font-family: Lato, Arial,sans-serif;
 }
 h4.top-tip-title { font-weight: bold; }
+.contentp.example blockquote {
+   border-left: 0px solid #e2e2e2;
+}
+
+.media-element-container .file-video {
+	margin: 20px auto; 
+	width: 90%;
+}
+.media-element-container .file-video {
+	background-color: #eee; padding: 10px;
+}
+.media-element-container .file-video iframe { width: 100%; }
+.media-element-container .file-video .field-name-field-file-caption { font-size: 0.9em; font-weight: bold; }
+
+.media-element-container .file-image {margin: 20px auto; width: 90%; }
+.media-element-container .file-image img{padding: 1px; border: 1px solid #777;}

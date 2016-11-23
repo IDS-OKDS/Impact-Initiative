@@ -56,11 +56,65 @@ function epd_top_tips_ds_field_settings_info() {
     'field_example_text' => array(
       'formatter_settings' => array(
         'ft' => array(
-          'fis' => TRUE,
-          'fis-el' => 'p',
-          'fis-cl' => 'contentp example flex w-clearfix',
-          'fis-at' => '',
-          'fis-def-at' => FALSE,
+          'fi' => TRUE,
+          'fi-el' => 'div',
+          'fi-cl' => 'contentp example flex w-clearfix',
+          'fi-at' => '',
+          'fi-def-at' => FALSE,
+          'fi-odd-even' => FALSE,
+          'fi-first-last' => FALSE,
+        ),
+      ),
+    ),
+    'field_example_project_2' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'lb' => 'Example',
+          'ow' => TRUE,
+          'ow-el' => 'h5',
+          'ow-cl' => 'example-title',
+          'ow-def-cl' => FALSE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+      ),
+    ),
+    'field_example_text_2' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'fi' => TRUE,
+          'fi-el' => 'div',
+          'fi-cl' => 'contentp example flex w-clearfix',
+          'fi-at' => '',
+          'fi-def-at' => FALSE,
+          'fi-odd-even' => FALSE,
+          'fi-first-last' => FALSE,
+        ),
+      ),
+    ),
+    'field_example_project_3' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'lb' => 'Example',
+          'ow' => TRUE,
+          'ow-el' => 'h5',
+          'ow-cl' => 'example-title',
+          'ow-def-cl' => FALSE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+      ),
+    ),
+    'field_example_text_3' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'fi' => TRUE,
+          'fi-el' => 'div',
+          'fi-cl' => 'contentp example flex w-clearfix',
+          'fi-at' => '',
+          'fi-def-at' => FALSE,
+          'fi-odd-even' => FALSE,
+          'fi-first-last' => FALSE,
         ),
       ),
     ),
@@ -110,6 +164,10 @@ function epd_top_tips_ds_layout_settings_info() {
         1 => 'field_description',
         2 => 'field_example_project',
         3 => 'field_example_text',
+        4 => 'field_example_project_2',
+        5 => 'field_example_text_2',
+        6 => 'field_example_project_3',
+        7 => 'field_example_text_3',
       ),
     ),
     'fields' => array(
@@ -117,6 +175,10 @@ function epd_top_tips_ds_layout_settings_info() {
       'field_description' => 'ds_content',
       'field_example_project' => 'ds_content',
       'field_example_text' => 'ds_content',
+      'field_example_project_2' => 'ds_content',
+      'field_example_text_2' => 'ds_content',
+      'field_example_project_3' => 'ds_content',
+      'field_example_text_3' => 'ds_content',
     ),
     'classes' => array(),
     'wrappers' => array(
