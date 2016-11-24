@@ -939,3 +939,28 @@ h4.top-tip-title { font-weight: bold; }
 
 .media-element-container .file-image {margin: 20px auto; width: 90%; }
 .media-element-container .file-image img{padding: 1px; border: 1px solid #777;}
+
+.lab-image.case-study {
+  width: 66%;
+}
+.contentp.flex {
+  width: 66%;
+}
+.top-tip {
+  width: 66%;
+}
+
+@media (max-width: 991px) {
+	.lab-image.case-study {   width: 100%;}
+	.contentp.flex { width: 100%;}
+	.related-wrapper.top { width: inherit; }
+}
+@media (max-width: 1134px) {
+		.related-wrapper.top { width: 150px; }
+}
+	
+.related-wrapper { margin-left: 0; }
+.related-wrapper.top {
+    margin-top: 0px;
+    border-top: 0px solid #fff;
+}
