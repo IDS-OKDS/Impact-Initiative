@@ -903,14 +903,9 @@ input.form-submit { padding: 4px 8px; background-color: rgba(0,130,243,1); color
   float: left;
 }
 
-.footer #navigation-region {
-  width:380px;
-}
-
 .footer .block-64 {
   margin-top: 1em;
 }
-
 
 h1, h2, h3, h4 {
     font-family: Oswald, Arial, sans-serif;
