@@ -244,18 +244,20 @@
     <footer class="w-section footer">
       <div class="maincontentwrapper">
         <div class="w-row">
-          <div class="w-col w-col-6 w-clearfix">
+          <div class="w-col w-col-3 w-clearfix">
 		  <div class="soc-med"><a class="w-inline-block footerlink" href="https://twitter.com/The_Impact_Init"><img src="<?php print(base_path() . path_to_theme()); ?>/IDS-ITEE_files/twitter.png"></a></div>
 		  <div class="soc-med"><a class="w-inline-block footerlink" title="View our photos on Flickr" href="https://www.flickr.com/photos/139208357@N08/"><img src="<?php print(base_path() . path_to_theme()); ?>/IDS-ITEE_files/flickr.png"></a></div>
 <div class="soc-med"><a class="w-inline-block footerlink" href="https://www.facebook.com/idsuk/"><img src="<?php print(base_path() . path_to_theme()); ?>/IDS-ITEE_files/facebook.png"></a></div>
-
+</div>
+		<div class="w-col w-col-6 w-clearfix">
           <?php if ($page['footer_left']): ?>
 				<div id="navigation-region">
 				<?php print render($page['footer_left']); ?>
 				</div>
 				<?php endif; ?>
 			</div>
-          <div class="w-col w-col-6 w-clearfix"><img alt="ESRC and DFID logos" class="footerlogo esrc" src="<?php print(base_path() . path_to_theme()); ?>/images/ESRC-DFID-logo.png"></div>
+		
+          <div class="w-col w-col-3 w-clearfix"><img alt="ESRC and DFID logos" class="footerlogo esrc" src="<?php print(base_path() . path_to_theme()); ?>/images/ESRC-DFID-logo.png"></div>
         </div>
       </div>
     </footer>
