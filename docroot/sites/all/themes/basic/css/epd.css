@@ -622,6 +622,10 @@ input.form-submit { padding: 4px 8px; background-color: rgba(0,130,243,1); color
   float: left;
 }
 
+.view-themes h3 a {
+	color: #333;
+}
+
 .view-themes .views-field-field-theme-image {
   margin-bottom: 10px;
 }

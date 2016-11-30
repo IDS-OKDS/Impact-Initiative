@@ -388,6 +388,21 @@ function epd_case_study_ds_custom_fields_info() {
 
   $ds_field = new stdClass();
   $ds_field->api_version = 1;
+  $ds_field->field = 'licensing';
+  $ds_field->label = 'Licensing';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = 'case_study|*';
+  $ds_field->properties = array(
+    'block' => 'epd_copyright_licensing|epd_copyright_licensing',
+    'block_render' => '1',
+  );
+  $export['licensing'] = $ds_field;
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
   $ds_field->field = 'menu_fixed';
   $ds_field->label = 'Menu Fixed';
   $ds_field->field_type = 7;
