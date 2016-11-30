@@ -1314,9 +1314,8 @@ function epd_case_study_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 40,
       ),
       'image_teaser' => array(

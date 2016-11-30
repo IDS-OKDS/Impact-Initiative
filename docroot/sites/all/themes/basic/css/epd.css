@@ -944,7 +944,9 @@ h4.top-tip-title { font-weight: bold; }
 .top-tip {
   width: 66%;
 }
-
+.top-tip .contentp.flex {
+  width: 100%;
+}
 @media (max-width: 991px) {
 	.lab-image.case-study {   width: 100%;}
 	.contentp.flex { width: 100%;}
@@ -958,4 +960,28 @@ h4.top-tip-title { font-weight: bold; }
 .related-wrapper.top {
     margin-top: 0px;
     border-top: 0px solid #fff;
+}
+/* Copy of about-impact */
+.related-wrapper .licensing {
+    margin-top: 0px;
+    padding-bottom: 10px;
+    border-bottom: 1px dotted dimgrey;
+    font-family: Oswald, sans-serif;
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: 400;
+}
+.related-wrapper .licensing-content .block {
+	background-image: url('../images/ogp_licence_icon.png');
+	background-position: 100% 0%;
+	background-size: 80px auto;
+	background-repeat: no-repeat;
+	padding-right: 80px;
+}
+.related-wrapper h3.about-impact-lab{
+	background-image: url('../images/flash.png');
+	background-position: 0% 0%;
+	background-size: auto 1.2em;
+	background-repeat: no-repeat;
+	padding-left: 1.2em;
 }
