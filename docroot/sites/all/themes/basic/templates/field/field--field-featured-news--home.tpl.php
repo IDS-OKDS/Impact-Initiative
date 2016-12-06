@@ -93,8 +93,10 @@
 				</div>
 				
 				<div class="w-col w-col-6 impact-lab">
-					<h2 class="h2featured alternative"><?php print 'Impact Lab'; ?></h2>
+					<h2 class="h2featured alternative"><?php print 'The Impact Lab'; ?></h2>
 					<?php print views_embed_view('learning_guides', 'block');?>
+					<?php $block = module_invoke('epd_copyright_licensing', 'block_view','epd_about_impact_lab');
+						  print render($block['content']);?>
 				</div>
 				
 			</div>	

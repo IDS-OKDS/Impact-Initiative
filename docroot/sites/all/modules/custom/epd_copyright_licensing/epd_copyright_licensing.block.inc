@@ -11,7 +11,7 @@
 function epd_copyright_licensing_block_info() {
   $blocks = array();
   $blocks['epd_copyright_licensing'] = array(
-    'info' => t('Global Information'),
+    'info' => t('Copyright and Licensing'),
   );
   $blocks['epd_about_impact_lab'] = array(
     'info' => t('About The Impact Lab'),

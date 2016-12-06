@@ -14,14 +14,23 @@ define('EPD_RC_API', 'http://gtr.rcuk.ac.uk/gtr/api/');
  */
 function epdmod_menu() {
 	$items['admin/config/epd'] = array(
-    'title' => 'Evidence Policy Directorate',
-    'description' => 'Settings related to EPD.',
+    'title' => 'Impact Initiative site administration',
+    'description' => 'Settings related to managing the Impact Initiative website.',
     'position' => 'left',
     'weight' => -15,
     'page callback' => 'system_admin_menu_block_page',
     'access arguments' => array('access administration pages'),
     'file' => 'system.admin.inc',
+	'file path' => drupal_get_path('module', 'system'),
 	);
+
+	$items['admin/config/epd/updates'] = array(
+    'title' => 'Ad-hoc data updates',
+    'description' => 'Updates related to updating data - USE WITH CARE.',
+    'page callback' => 'epdmod_updates_page',
+    'access arguments' => array('access administration pages'),
+    );
+
 	$items['admin/config/epd/import'] = array(
     'title' => 'Import CSV',
     'description' => 'Import project content from a <abbr title="Comma Separated Values">CSV</abbr> file . Used to call external API',
@@ -49,9 +58,36 @@ function epdmod_menu() {
     'page arguments' => array('epdmod_location_form'),
 	//  'file' => 'epdmod.admin.inc',
 	);
+	
+	$items['admin/config/epd/updates/keywords'] = array(
+    'title' => 'Import keywords data CSV',
+    'description' => 'Import additional keywords data into content',
+	// 'access callback' => 'user_access',
+    'access arguments' => array('administer site configuration'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('epdmod_keywords_form'),
+	//  'file' => 'epdmod.admin.inc',
+	);
+	
 	return $items ;
 }
 
+/**
+ * Build a form to upload CSV to.
+ */
+function epdmod_updates_page() {
+	$content['raw_markup'] = array(
+		'#type' => 'markup',
+		'#markup' => '<ul>'.
+					'<li>'.l('Import keywords', 'admin/config/epd/updates/keywords').'</li>'.
+					'</ul>',
+	);
+
+  return $content;
+	
+}
+  
+  
 /**
  * Build a form to upload CSV to.
  */
@@ -154,6 +190,38 @@ function epdmod_idsinternal_form() {
     );
     return $form ;
 }
+
+
+/**
+ * Build a form to upload CSV to.
+ */
+function epdmod_keywords_form() {
+	$form['#attributes'] = array(
+    'enctype' => 'multipart/form-data'
+    );
+     $form['node_id'] = array(
+    '#title' => t('Node Id column'),
+    '#type'  => 'textfield',
+    '#default_value'  => 0,
+    '#size' => 5,
+    '#description' => t('The column in the spreadsheet that has the Node value.'),    
+    );
+    $form['csvfile'] = array(
+    '#title' => t('CSV File'),
+    '#type'  => 'file',
+    '#description' => ($max_size = parse_size(ini_get('upload_max_filesize'))) ? t('Due to server restrictions, the <strong>maximum upload file size is !max_size</strong>. Files that exceed this size will be disregarded.', array('!max_size' => format_size($max_size))) : '',    
+    );
+    $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Commence Update'),
+    );
+    $form['#validate'] = array(
+    'epdmod_validate_fileupload',
+    'epdmod_form_validate',
+    );
+    return $form ;
+}
+
 
 
 /**
@@ -359,6 +427,88 @@ function epdmod_idsinternal_form_submit(&$form, &$form_state) {
 	}
 	batch_set($batch);
 }
+
+
+/**
+ * This is for the Keywords import data
+ */
+function epdmod_keywords_form_submit(&$form, &$form_state) {
+	$data = array();
+	/*$batch = array(
+    'title' => t('Importing CSV ...'),
+    'operations' => array(),
+    'init_message' => t('Commencing'),
+    'progress_message' => t('Processed @current out of @total.'),
+    'error_message' => t('An error occurred during processing'),
+    'finished' => 'epdmod_import_finished',
+	) ;
+	*/
+	$html = '';
+	$keywords_vid = taxonomy_vocabulary_machine_name_load('keywords')->vid;
+	$keyword_mapping = array();
+	$count = 0;
+	if ( isset( $form_state['values']['csvupload'] ) ) {
+		if ( $handle = fopen($form_state['values']['csvupload'], 'r') ) {
+			
+			
+			/* Get the existing taxonomy terms */
+			$keyword_terms = taxonomy_get_tree($keywords_vid, 0, NULL, FALSE);
+			foreach ($keyword_terms as $k => $term) {
+				/*if ($count++ <  10) {
+					$html .= $count . ': '.$k.': '. print_r($term, true). '<br/>';
+				}*/
+				$current_keywords[strtolower(str_replace(' ', '-', $term->name))] = $term->tid;
+			}	
+				
+			$line_count = 1 ;
+			$first = TRUE ;
+			$line = fgetcsv($handle, 4096);
+			
+			while ( $line = fgetcsv($handle, 4096) ) {
+				/**
+				 * we use base64_encode to ensure we don't overload the batch
+				 * processor by stuffing complex objects into it
+				 */
+
+				$current_term = strtolower(str_replace(' ', '-', epd_clean_dirty_csv_chars($line[0])));
+				$new = array(epd_clean_dirty_csv_chars($line[1]), epd_clean_dirty_csv_chars($line[2]), epd_clean_dirty_csv_chars($line[3]));
+				
+				if (isset($current_keywords[$current_term]) && ($line_count < 10)) {
+					$html .= $line_count . ': '.$current_term .'(id - ' . $current_keywords[$current_term].'): '. print_r($new, true). '<br/>';	
+				}
+				// Get the taxonomy term 
+				
+				
+				
+				/*$pos = strpos($grant_reference_column_value, 'ES/');
+				if ($pos !== false) {
+					// to filter out ES/E021654/1 then RES-167-25-0251-A
+					$temp_arr = explode(' ', $grant_reference_column_value);
+					$grant_reference = $temp_arr[0];
+					$grant_reference = trim($grant_reference);
+					$grant_reference_arr[$grant_reference] = $ids_internal_data;
+				}
+				*/
+				$line_count++;
+			}
+			fclose($handle);
+		} // we caught this in csvimport_form_validate()
+	} // we caught this in csvimport_form_validate()
+
+	/*foreach($grant_reference_arr as $grant_reference => $ids_data){
+		$ids_data = serialize($ids_data);
+		$batch['operations'][] = array('_epdmod_import_ids_additional', array($grant_reference, $ids_data));
+	}
+	batch_set($batch);*/
+	drupal_set_message($html);
+}
+
+/**
+ *	Create new keywords set, linked to the old ones.
+**/
+
+
+
 
 
 function epd_clean_dirty_csv_chars($string) {

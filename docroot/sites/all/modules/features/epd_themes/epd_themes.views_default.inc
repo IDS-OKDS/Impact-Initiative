@@ -70,6 +70,7 @@ function epd_themes_views_default_views() {
   $handler->display->display_options['fields']['name']['alter']['path'] = 'search?field_themes_tid[]=[tid]';
   $handler->display->display_options['fields']['name']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['name']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['name']['element_type'] = 'h3';
   $handler->display->display_options['fields']['name']['element_label_colon'] = FALSE;
   /* Field: Taxonomy term: Description field with option to add styles */
   $handler->display->display_options['fields']['description_with_styles']['id'] = 'description_with_styles';

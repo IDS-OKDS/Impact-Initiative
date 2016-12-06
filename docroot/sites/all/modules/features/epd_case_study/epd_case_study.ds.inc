@@ -17,6 +17,30 @@ function epd_case_study_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'case_study';
   $ds_fieldsetting->view_mode = 'default';
   $ds_fieldsetting->settings = array(
+    'licensing' => array(
+      'weight' => '3',
+      'label' => 'above',
+      'format' => 'default',
+      'formatter_settings' => array(
+        'ft' => array(
+          'lb-col' => TRUE,
+          'lbw' => 1,
+          'lbw-el' => 'h3',
+          'lbw-cl' => 'licensing',
+          'ow' => TRUE,
+          'ow-el' => 'div',
+          'ow-cl' => 'related-link-block top-info licensing-content',
+          'ow-def-cl' => FALSE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+          'fis' => TRUE,
+          'fis-el' => 'p',
+          'fis-cl' => '',
+          'fis-at' => '',
+          'fis-def-at' => FALSE,
+        ),
+      ),
+    ),
     'about_the_impact_lab' => array(
       'weight' => '2',
       'label' => 'above',
@@ -26,7 +50,7 @@ function epd_case_study_ds_field_settings_info() {
           'lb-col' => TRUE,
           'lbw' => 1,
           'lbw-el' => 'h3',
-          'lbw-cl' => 'about-impact',
+          'lbw-cl' => 'about-impact about-impact-lab',
           'ow' => TRUE,
           'ow-el' => 'div',
           'ow-cl' => 'related-link-block top-info',
@@ -115,6 +139,25 @@ function epd_case_study_ds_field_settings_info() {
         ),
       ),
     ),
+    'field_donors_top_tips' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'ow' => TRUE,
+          'ow-el' => 'ol',
+          'ow-cl' => 'numbered',
+          'ow-def-cl' => FALSE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+          'fi' => TRUE,
+          'fi-el' => 'li',
+          'fi-cl' => 'top-tip',
+          'fi-at' => '',
+          'fi-def-at' => FALSE,
+          'fi-odd-even' => FALSE,
+          'fi-first-last' => FALSE,
+        ),
+      ),
+    ),
     'field_intro' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -162,44 +205,6 @@ function epd_case_study_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_researchers_top_tips' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'ow' => TRUE,
-          'ow-el' => 'ol',
-          'ow-cl' => 'numbered',
-          'ow-def-cl' => FALSE,
-          'ow-at' => '',
-          'ow-def-at' => FALSE,
-          'fi' => TRUE,
-          'fi-el' => 'li',
-          'fi-cl' => 'top-tip',
-          'fi-at' => '',
-          'fi-def-at' => FALSE,
-          'fi-odd-even' => FALSE,
-          'fi-first-last' => FALSE,
-        ),
-      ),
-    ),
-    'field_donors_top_tips' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'ow' => TRUE,
-          'ow-el' => 'ol',
-          'ow-cl' => 'numbered',
-          'ow-def-cl' => FALSE,
-          'ow-at' => '',
-          'ow-def-at' => FALSE,
-          'fi' => TRUE,
-          'fi-el' => 'li',
-          'fi-cl' => 'top-tip',
-          'fi-at' => '',
-          'fi-def-at' => FALSE,
-          'fi-odd-even' => FALSE,
-          'fi-first-last' => FALSE,
-        ),
-      ),
-    ),
     'field_published_date' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -230,6 +235,25 @@ function epd_case_study_ds_field_settings_info() {
           'fis-cl' => 'contentp flex w-clearfix',
           'fis-at' => '',
           'fis-def-at' => FALSE,
+        ),
+      ),
+    ),
+    'field_researchers_top_tips' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'ow' => TRUE,
+          'ow-el' => 'ol',
+          'ow-cl' => 'numbered',
+          'ow-def-cl' => FALSE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+          'fi' => TRUE,
+          'fi-el' => 'li',
+          'fi-cl' => 'top-tip',
+          'fi-at' => '',
+          'fi-def-at' => FALSE,
+          'fi-odd-even' => FALSE,
+          'fi-first-last' => FALSE,
         ),
       ),
     ),
@@ -364,6 +388,21 @@ function epd_case_study_ds_custom_fields_info() {
 
   $ds_field = new stdClass();
   $ds_field->api_version = 1;
+  $ds_field->field = 'licensing';
+  $ds_field->label = 'Licensing';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = 'case_study|*';
+  $ds_field->properties = array(
+    'block' => 'epd_copyright_licensing|epd_copyright_licensing',
+    'block_render' => '1',
+  );
+  $export['licensing'] = $ds_field;
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
   $ds_field->field = 'menu_fixed';
   $ds_field->label = 'Menu Fixed';
   $ds_field->field_type = 7;
@@ -407,65 +446,67 @@ function epd_case_study_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'ds_content' => array(
-        0 => 'addthis',
-        1 => 'menu_fixed',
+        0 => 'menu_fixed',
+        1 => 'addthis',
         2 => 'group_pub',
-        3 => 'group_content_wrapper',
-        4 => 'title',
+        3 => 'title',
+        4 => 'group_content_wrapper',
         5 => 'about_the_impact_lab',
-        6 => 'group_title_wrapper',
-        7 => 'field_pdf_download',
-        8 => 'case_study_menu',
-        9 => 'group_intro',
-        10 => 'group_recs_for_researchers',
-        11 => 'group_recs_for_donors',
+        6 => 'field_pdf_download',
+        7 => 'group_title_wrapper',
+        8 => 'licensing',
+        9 => 'case_study_menu',
+        10 => 'group_intro',
+        11 => 'group_recs_for_researchers',
         12 => 'field_project_link',
-        13 => 'field_project_link_text',
+        13 => 'group_recs_for_donors',
         14 => 'group_project_references',
-        15 => 'group_conclusion',
-        16 => 'group_references',
+        15 => 'field_project_link_text',
+        16 => 'group_conclusion',
         17 => 'field_conclusion_images',
-        18 => 'field_donors_images',
-        19 => 'field_intro_donors',
-        20 => 'group_donors_images',
-        21 => 'field_intro_images',
-        22 => 'field_donors_top_tips',
-        23 => 'body',
-        24 => 'download_button_2',
-        25 => 'group_conclusion_images',
-        26 => 'field_intro',
-        27 => 'group_researchers_images',
-        28 => 'field_researchers_images',
-        29 => 'field_researchers_top_tips',
-        30 => 'field_references',
-        31 => 'field_people',
-        32 => 'field_published_date',
-        33 => 'group_social_wrapper',
-        34 => 'field_main_image',
-        35 => 'group_author_wrapper',
-        36 => 'field_introduction',
-        37 => 'group_intro_images',
+        18 => 'group_references',
+        19 => 'field_donors_images',
+        20 => 'field_intro_donors',
+        21 => 'group_donors_images',
+        22 => 'field_intro_images',
+        23 => 'field_donors_top_tips',
+        24 => 'body',
+        25 => 'download_button_2',
+        26 => 'group_conclusion_images',
+        27 => 'field_intro',
+        28 => 'group_researchers_images',
+        29 => 'field_researchers_images',
+        30 => 'field_researchers_top_tips',
+        31 => 'field_references',
+        32 => 'field_people',
+        33 => 'field_published_date',
+        34 => 'group_social_wrapper',
+        35 => 'field_main_image',
+        36 => 'group_author_wrapper',
+        37 => 'field_introduction',
+        38 => 'group_intro_images',
       ),
     ),
     'fields' => array(
-      'addthis' => 'ds_content',
       'menu_fixed' => 'ds_content',
+      'addthis' => 'ds_content',
       'group_pub' => 'ds_content',
-      'group_content_wrapper' => 'ds_content',
       'title' => 'ds_content',
+      'group_content_wrapper' => 'ds_content',
       'about_the_impact_lab' => 'ds_content',
-      'group_title_wrapper' => 'ds_content',
       'field_pdf_download' => 'ds_content',
+      'group_title_wrapper' => 'ds_content',
+      'licensing' => 'ds_content',
       'case_study_menu' => 'ds_content',
       'group_intro' => 'ds_content',
       'group_recs_for_researchers' => 'ds_content',
-      'group_recs_for_donors' => 'ds_content',
       'field_project_link' => 'ds_content',
-      'field_project_link_text' => 'ds_content',
+      'group_recs_for_donors' => 'ds_content',
       'group_project_references' => 'ds_content',
+      'field_project_link_text' => 'ds_content',
       'group_conclusion' => 'ds_content',
-      'group_references' => 'ds_content',
       'field_conclusion_images' => 'ds_content',
+      'group_references' => 'ds_content',
       'field_donors_images' => 'ds_content',
       'field_intro_donors' => 'ds_content',
       'group_donors_images' => 'ds_content',
