@@ -13,9 +13,10 @@ module_load_include('inc', 'epd_copyright_licensing', 'epd_copyright_licensing.b
 function epd_copyright_licensing_menu() {
   $items['admin/config/epd/info'] = array(
     'title' => 'Global Information',
+	'description'=> 'Update text which is used across the site, for example licensing information and Impact Lab overview',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('epd_copyright_licensing_settings_form'),
-    'access arguments' => array('administer epd copyright and licensing'),
+    'access arguments' => array('administer epd global information'),
     'file' => 'epd_copyright_licensing.admin.inc',
   );
 
@@ -24,7 +25,7 @@ function epd_copyright_licensing_menu() {
 
 function epd_copyright_licensing_permission() {
   return array(
-    'administer epd copyright and licensing' => array(
+    'administer epd global information' => array(
       'title' => t('Administer EPD Global Information'),
       'description' => t('Perform administration tasks for EPD global information.'),
     ),
