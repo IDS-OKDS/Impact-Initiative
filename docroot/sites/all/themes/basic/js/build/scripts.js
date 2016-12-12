@@ -50,6 +50,9 @@ Drupal.behaviors.basic = {
 
     $(document).ready(function() {
       // Execute code once the DOM is ready.
+	  	 	if ( ! ($('#donors.case-study-section').length )) {
+				$('a[href="#donors"]').hide();
+		}
     });
   }
 };

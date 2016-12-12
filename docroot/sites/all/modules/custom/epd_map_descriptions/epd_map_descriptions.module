@@ -13,7 +13,7 @@ module_load_include('inc', 'epd_map_descriptions', 'epd_map_descriptions.block')
 function epd_map_descriptions_menu() {
   $items['admin/config/epd/map_descriptions'] = array(
     'title' => 'Map Descriptions',
-	'description' => 'Introductory text used on search results map pages',
+	'description' => 'Introductory text used on search results map pages', 
     'page callback' => 'drupal_get_form',
     'page arguments' => array('epd_map_descriptions_settings_form'),
     'access arguments' => array('administer epd map descriptions'),

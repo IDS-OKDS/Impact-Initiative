@@ -475,6 +475,17 @@ function basic_menu_link__menu_case_study_anchors(array $variables) {
 }
 
 function basic_preprocess_field(&$variables, $hook) {
+  $element = $variables['element'];
+  if (isset($element['#field_name'])) {
+    if ($element['#field_name'] == 'field_potential_impact') {
+		//drupal_set_message(print_r($element['#object']->field_potential_impact,true));
+		$text = $variables['items']['0']['#markup'];
+		//$text = $variables['element']['#object']->field_potential_impact['und'][0]['value'];
+		$text = preg_replace("/\cM|\f|\r|\n/", "<br>", $text);
+		$variables['items']['0']['#markup'] = nl2br($text);
+    }
+  }
+  
   if(isset($variables['element']['#field_name']) && $variables['element']['#field_name'] = 'field_pdf_download' && isset($variables['element']['#field_type']) && $variables['element']['#field_type'] == 'entityreference' && isset($variables['element'][0]['#markup'])) {
     if(isset($variables['element']['#object']->field_pdf_download)){
       $nid = $variables['element']['#object']->field_pdf_download['und'][0]['target_id'];
