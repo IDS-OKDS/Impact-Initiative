@@ -49,7 +49,10 @@ Drupal.behaviors.basic = {
     });
 
     $(document).ready(function() {
-      // Execute code once the DOM is ready.
+      // Execute code once the DOM is ready.// Hid the donor tab if there isn't a donor section on Learning Guides
+	 	if ( ! ($('#donors.case-study-section').length )) {
+				$('a[href="#donors"]').hide();
+		}
     });
   }
 };
