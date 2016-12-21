@@ -68,7 +68,15 @@ function epdmod_menu() {
     'page arguments' => array('epdmod_keywords_form'),
 	//  'file' => 'epdmod.admin.inc',
 	);
-	
+	$items['admin/config/epd/updates/keyword_mappings'] = array(
+    'title' => 'Process keyword mappings',
+    'description' => 'Process II keywords, based on imported keywords',
+	// 'access callback' => 'user_access',
+    'access arguments' => array('administer site configuration'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('epdmod_process_mapped_keywords_form'),
+	//  'file' => 'epdmod.admin.inc',
+	);
 	return $items ;
 }
 
@@ -79,7 +87,8 @@ function epdmod_updates_page() {
 	$content['raw_markup'] = array(
 		'#type' => 'markup',
 		'#markup' => '<ul>'.
-					'<li>'.l('Import keywords', 'admin/config/epd/updates/keywords').'</li>'.
+					'<li>'.l('Import keyword mappings', 'admin/config/epd/updates/keywords').'</li>'.
+					'<li>'.l('Process keyword mappings', 'admin/config/epd/updates/keyword_mappings').'</li>'.
 					'</ul>',
 	);
 
@@ -223,6 +232,19 @@ function epdmod_keywords_form() {
 }
 
 
+/**
+ * Build a form to trigger the processing
+ */
+function epdmod_process_mapped_keywords_form() {
+	$form['#attributes'] = array(
+    //'enctype' => 'multipart/form-data'
+    );
+    $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Process mappings'),
+    );
+    return $form ;
+}
 
 /**
  * Build a simple form to start location 
@@ -428,7 +450,6 @@ function epdmod_idsinternal_form_submit(&$form, &$form_state) {
 	batch_set($batch);
 }
 
-
 /**
  * This is for the Keywords import data
  */
@@ -445,6 +466,8 @@ function epdmod_keywords_form_submit(&$form, &$form_state) {
 	*/
 	$html = '';
 	$keywords_vid = taxonomy_vocabulary_machine_name_load('keywords')->vid;
+	$ii_keywords_vid = taxonomy_vocabulary_machine_name_load('ii_keyword')->vid;
+	//drupal_set_message('vid: '.$ii_keywords_vid);
 	$keyword_mapping = array();
 	$count = 0;
 	if ( isset( $form_state['values']['csvupload'] ) ) {
@@ -457,7 +480,7 @@ function epdmod_keywords_form_submit(&$form, &$form_state) {
 				/*if ($count++ <  10) {
 					$html .= $count . ': '.$k.': '. print_r($term, true). '<br/>';
 				}*/
-				$current_keywords[strtolower(str_replace(' ', '-', $term->name))] = $term->tid;
+				$current_keywords[strtolower(epd_clean_dirty_csv_chars($term->name))] = $term->tid;
 			}	
 				
 			$line_count = 1 ;
@@ -470,31 +493,31 @@ function epdmod_keywords_form_submit(&$form, &$form_state) {
 				 * processor by stuffing complex objects into it
 				 */
 
-				$current_term = strtolower(str_replace(' ', '-', epd_clean_dirty_csv_chars($line[0])));
-				$new = array(epd_clean_dirty_csv_chars($line[1]), epd_clean_dirty_csv_chars($line[2]), epd_clean_dirty_csv_chars($line[3]));
+				// Get all the data
+				//if($line_count < 10) { $html .= '<p>'.print_r($line, true).'</p>'; }
+				$current_term = strtolower(epd_clean_dirty_csv_chars($line[0]));
+				$new = array($line[1], $line[2], $line[3]);
 				
-				if (isset($current_keywords[$current_term]) && ($line_count < 10)) {
-					$html .= $line_count . ': '.$current_term .'(id - ' . $current_keywords[$current_term].'): '. print_r($new, true). '<br/>';	
+				if (isset($current_keywords[$current_term]) ) {
+					//$html .= $line_count . ': '.$current_term .' (id - ' . $current_keywords[$current_term].'): '. print_r($new, true). '<br/>';	
+				
+					/* Add a new term to the II Keywords vocabulary if the term doesn't exist, otherwise get the term.
+						Then update the mapping field with current term
+					*/	
+					if ($line[1] != '') { $tid = epd_add_ii_term($line[1], array($current_keywords[$current_term]), $ii_keywords_vid); }
+					if ($line[2] != '') { $tid = epd_add_ii_term($line[2], array($current_keywords[$current_term]), $ii_keywords_vid); }
+					if ($line[3] != '') { $tid = epd_add_ii_term($line[3], array($current_keywords[$current_term]), $ii_keywords_vid); }
 				}
-				// Get the taxonomy term 
-				
-				
-				
-				/*$pos = strpos($grant_reference_column_value, 'ES/');
-				if ($pos !== false) {
-					// to filter out ES/E021654/1 then RES-167-25-0251-A
-					$temp_arr = explode(' ', $grant_reference_column_value);
-					$grant_reference = $temp_arr[0];
-					$grant_reference = trim($grant_reference);
-					$grant_reference_arr[$grant_reference] = $ids_internal_data;
-				}
-				*/
 				$line_count++;
 			}
 			fclose($handle);
+			
+			
+			
 		} // we caught this in csvimport_form_validate()
 	} // we caught this in csvimport_form_validate()
 
+	
 	/*foreach($grant_reference_arr as $grant_reference => $ids_data){
 		$ids_data = serialize($ids_data);
 		$batch['operations'][] = array('_epdmod_import_ids_additional', array($grant_reference, $ids_data));
@@ -502,17 +525,112 @@ function epdmod_keywords_form_submit(&$form, &$form_state) {
 	batch_set($batch);*/
 	drupal_set_message($html);
 }
-
+function epd_add_ii_term(&$term_name, $mapped_terms, &$ii_keywords_vid) {
+	//drupal_set_message('Try to add term '.$term_name);
+	$ii_terms = taxonomy_get_term_by_name($term_name, 'ii_keyword');
+	//drupal_set_message('Got terms! '.print_r($ii_terms,true));
+	if (!empty($ii_terms)) {
+		$ii_terms = array_values($ii_terms);
+		$tid = $ii_terms[0]->tid;
+		$ii_term = $ii_terms[0];
+		$ii_term = taxonomy_term_load($tid);
+		//drupal_set_message('Found term '.print_r($ii_terms,true));
+	} else {
+		$ii_term = new stdClass();
+		$ii_term->name = $term_name;
+		$ii_term->vid = $ii_keywords_vid;
+		$ii_term->parent = array(0);
+		//drupal_set_message('Adding term: '.print_r($ii_term,true));
+		taxonomy_term_save($ii_term);
+	}
+	$tid = $ii_term->tid;
+	foreach($mapped_terms as $mt) {
+		//drupal_set_message(print_r($mapped_terms,true));
+		// Check if it's already mapped
+		$exists = false;
+		if (property_exists($ii_term,'field_mapped_keyword')) { 
+			foreach($ii_term->field_mapped_keyword[LANGUAGE_NONE] as $term) {
+				if ($term['tid'] == (integer)$mt) {
+					$exists = true;
+				}
+			}
+		}
+		if (!$exists) {
+			$ii_term->field_mapped_keyword[LANGUAGE_NONE][]['tid'] = (integer)$mt;
+			//drupal_set_message('Append related field term '.$mt.' gives: '.print_r($ii_term,true));
+		}
+	}
+	taxonomy_term_save($ii_term);
+	return $tid;
+}
 /**
  *	Create new keywords set, linked to the old ones.
 **/
 
+function epdmod_process_mapped_keywords_form_submit(&$form, &$form_state) {
+	
+	$keywords_vid = taxonomy_vocabulary_machine_name_load('keywords')->vid;
+	$ii_keywords_vid = taxonomy_vocabulary_machine_name_load('ii_keyword')->vid;
+	$keywords = array();
+	// Get all the mappings
+	$ii_terms = taxonomy_get_tree($ii_keywords_vid, 0, NULL, TRUE);
+		//$ii_terms = taxonomy_get_term_by_name($term_name, 'ii_keyword');
 
-
-
+	drupal_set_message('Process the mappings');
+	drupal_set_message('Processing '. count($ii_terms). ' mappings');
+	foreach($ii_terms as $ii_term) {
+		//drupal_set_message(print_r($ii_term,true));
+		if (property_exists($ii_term, 'field_mapped_keyword')) {
+			if (count($ii_term->field_mapped_keyword) > 0) {
+				foreach($ii_term->field_mapped_keyword[LANGUAGE_NONE] as $term) {
+					$keywords[$term['tid']][] = $ii_term->tid;
+				}
+			}
+			//drupal_set_message($term['tid'].': '.print_r($keywords[$term['tid']],true));
+		}
+	}
+	// Now have an array of all keyword tids, with the new II keywords we wish to map.
+	// Now get he relevant project node and update it.
+	foreach($keywords as $tid => $mappings) {
+		if(count($mappings) > 0) {
+			$project_nids = taxonomy_select_nodes($tid, FALSE);
+			foreach($project_nids as $project_nid) {
+				$node = node_load($project_nid);
+				$added = false;
+				foreach($mappings as $ii_keyword_tid) {
+					// Add each of the mappings to the node, if they don't already exist
+					$exists = false;
+					if (property_exists($node,'field_ii_keywords')) { 
+						foreach($node->field_ii_keywords[$node->language] as $term) {
+							if ($term['tid'] == (integer)$ii_keyword_tid) {
+								$exists = true;
+							}
+						}
+						if (!$exists) {
+							$node->field_ii_keywords[$node->language][]['tid'] = (integer)$ii_keyword_tid;
+							//drupal_set_message('Append related field term '.$ii_keyword_tid.' to: '.print_r($node->nid,true));
+							$added = true;
+						}
+					}
+				}
+				// If we're updated the node, save it
+				if ($added && property_exists($node,'field_ii_keywords')) {
+						node_save($node);
+				}
+			}
+		}	
+	}
+	//drupal_set_message(print_r($keywords[$term['tid']],true));
+	drupal_set_message('Complete. ');
+	
+}
 
 function epd_clean_dirty_csv_chars($string) {
    $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+   return preg_replace('/[^A-Za-z0-9\-\|\/\&]/', '', $string); // Removes special chars.
+}
+
+function epd_clean_csv_chars($string) {
    return preg_replace('/[^A-Za-z0-9\-\|\/\&]/', '', $string); // Removes special chars.
 }
 
@@ -804,7 +922,7 @@ function _epdmod_create_project_node($project) {
 
 	if(isset($project->potentialImpact)){
 		$node->field_potential_impact[$node->language][0]['format'] = 'full_html';
-		$node->field_potential_impact[$node->language][0]['value'] = $project->potentialImpact;
+		$node->field_potential_impact[$node->language][0]['value'] = nlbr($project->potentialImpact);
 	}
 
 	_epdmod_process_project_links($node, $project->links->link);
