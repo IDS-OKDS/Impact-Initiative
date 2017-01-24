@@ -21,6 +21,7 @@ dependencies[] = wysiwyg_customisations
 
 ; Features
 dependencies[] = epd_blog
+dependencies[] = epd_edited_collection
 dependencies[] = epd_case_study
 dependencies[] = epd_events
 dependencies[] = epd_files
