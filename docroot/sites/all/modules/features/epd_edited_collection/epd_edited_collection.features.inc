@@ -1,13 +1,19 @@
 <?php
 /**
  * @file
- * edited_collection.features.inc
+ * epd_edited_collection.features.inc
  */
 
 /**
  * Implements hook_ctools_plugin_api().
  */
-function edited_collection_ctools_plugin_api($module = NULL, $api = NULL) {
+function epd_edited_collection_ctools_plugin_api($module = NULL, $api = NULL) {
+  if ($module == "ds" && $api == "ds") {
+    return array("version" => "1");
+  }
+  if ($module == "field_group" && $api == "field_group") {
+    return array("version" => "1");
+  }
   if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => "1");
   }
@@ -16,7 +22,7 @@ function edited_collection_ctools_plugin_api($module = NULL, $api = NULL) {
 /**
  * Implements hook_node_info().
  */
-function edited_collection_node_info() {
+function epd_edited_collection_node_info() {
   $items = array(
     'edited_collection' => array(
       'name' => t('Edited collection'),

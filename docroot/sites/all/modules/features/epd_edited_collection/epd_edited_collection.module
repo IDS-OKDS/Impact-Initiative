@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the epd_edited_collection feature.
+ */
+
+include_once 'epd_edited_collection.features.inc';

@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * edited_collection.features.field_instance.inc
+ * epd_edited_collection.features.field_instance.inc
  */
 
 /**
  * Implements hook_field_default_field_instances().
  */
-function edited_collection_field_default_field_instances() {
+function epd_edited_collection_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance: 'node-edited_collection-field_author'.
@@ -23,6 +23,16 @@ function edited_collection_field_default_field_instances() {
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
         'weight' => 6,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'ds',
+        'settings' => array(
+          'taxonomy_term_link' => 0,
+          'taxonomy_term_separator' => ', ',
+        ),
+        'type' => 'ds_taxonomy_separator',
+        'weight' => 10,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -72,12 +82,15 @@ function edited_collection_field_default_field_instances() {
       'default' => array(
         'label' => 'above',
         'module' => 'entityreference',
-        'settings' => array(
-          'links' => 1,
-          'view_mode' => 'teaser',
-        ),
-        'type' => 'entityreference_entity_view',
+        'settings' => array(),
+        'type' => 'entityreference_entity_id',
         'weight' => 7,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 29,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -141,6 +154,13 @@ function edited_collection_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 4,
       ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 26,
+      ),
       'image_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -199,6 +219,13 @@ function edited_collection_field_default_field_instances() {
         'type' => 'taxonomy_term_reference_link',
         'weight' => 5,
       ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 27,
+      ),
       'image_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -251,6 +278,13 @@ function edited_collection_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 2,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 25,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -311,6 +345,15 @@ function edited_collection_field_default_field_instances() {
         ),
         'type' => 'image',
         'weight' => 3,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'file_entity',
+        'settings' => array(
+          'file_view_mode' => 'image_with_caption',
+        ),
+        'type' => 'file_rendered',
+        'weight' => 24,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -389,6 +432,15 @@ function edited_collection_field_default_field_instances() {
         'type' => 'entityreference_label',
         'weight' => 9,
       ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => 1,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 2,
+      ),
       'image_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -423,7 +475,7 @@ function edited_collection_field_default_field_instances() {
         'fields' => array(),
         'type_settings' => array(
           'allow_clone' => 0,
-          'allow_existing' => 0,
+          'allow_existing' => 1,
           'allow_new' => 1,
           'delete_references' => 0,
           'label_plural' => 'nodes',
@@ -455,6 +507,19 @@ function edited_collection_field_default_field_instances() {
         ),
         'type' => 'date_default',
         'weight' => 8,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+        ),
+        'type' => 'date_default',
+        'weight' => 12,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -517,6 +582,12 @@ function edited_collection_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 1,
       ),
+      'full' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 3,
+      ),
       'image_teaser' => array(
         'label' => 'above',
         'settings' => array(),
@@ -574,6 +645,13 @@ function edited_collection_field_default_field_instances() {
         'settings' => array(),
         'type' => 'text_default',
         'weight' => 0,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 3,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -635,7 +713,13 @@ function edited_collection_field_default_field_instances() {
         'module' => 'color_field',
         'settings' => array(),
         'type' => 'color_field_default_formatter',
-        'weight' => 4,
+        'weight' => 6,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -647,7 +731,7 @@ function edited_collection_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 13,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -669,7 +753,7 @@ function edited_collection_field_default_field_instances() {
       'module' => 'color_field',
       'settings' => array(),
       'type' => 'color_field_spectrum_widget',
-      'weight' => 38,
+      'weight' => 6,
     ),
   );
 
@@ -685,7 +769,14 @@ function edited_collection_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 6,
+        'weight' => 8,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 25,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -697,7 +788,7 @@ function edited_collection_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 17,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -727,7 +818,7 @@ function edited_collection_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 41,
+      'weight' => 8,
     ),
   );
 
@@ -743,7 +834,14 @@ function edited_collection_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 5,
+        'weight' => 7,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 24,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -755,7 +853,7 @@ function edited_collection_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 16,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -785,7 +883,7 @@ function edited_collection_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 40,
+      'weight' => 7,
     ),
   );
 
@@ -802,6 +900,12 @@ function edited_collection_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
+        'weight' => 3,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 1,
       ),
       'image_teaser' => array(
@@ -814,7 +918,7 @@ function edited_collection_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 5,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -844,7 +948,7 @@ function edited_collection_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 34,
+      'weight' => 3,
     ),
   );
 
@@ -860,7 +964,17 @@ function edited_collection_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 9,
+        'weight' => 11,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'ds',
+        'settings' => array(
+          'taxonomy_term_link' => 1,
+          'taxonomy_term_separator' => ', ',
+        ),
+        'type' => 'ds_taxonomy_separator',
+        'weight' => 4,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -872,7 +986,7 @@ function edited_collection_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 18,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -897,7 +1011,7 @@ function edited_collection_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 47,
+      'weight' => 11,
     ),
   );
 
@@ -915,7 +1029,16 @@ function edited_collection_field_default_field_instances() {
           'image_style' => '',
         ),
         'type' => 'image',
-        'weight' => 2,
+        'weight' => 4,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'file_entity',
+        'settings' => array(
+          'file_view_mode' => 'image_with_caption',
+        ),
+        'type' => 'file_rendered',
+        'weight' => 23,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -927,7 +1050,7 @@ function edited_collection_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 4,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -975,7 +1098,7 @@ function edited_collection_field_default_field_instances() {
         ),
       ),
       'type' => 'media_generic',
-      'weight' => 36,
+      'weight' => 4,
     ),
   );
 
@@ -987,13 +1110,22 @@ function edited_collection_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'entityreference',
         'settings' => array(
           'link' => FALSE,
         ),
         'type' => 'entityreference_label',
-        'weight' => 7,
+        'weight' => 17,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 1,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -1005,7 +1137,7 @@ function edited_collection_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 20,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -1029,7 +1161,7 @@ function edited_collection_field_default_field_instances() {
         'fields' => array(),
         'type_settings' => array(
           'allow_clone' => 0,
-          'allow_existing' => 0,
+          'allow_existing' => 1,
           'allow_new' => 1,
           'delete_references' => 0,
           'label_plural' => 'nodes',
@@ -1039,7 +1171,7 @@ function edited_collection_field_default_field_instances() {
         ),
       ),
       'type' => 'inline_entity_form',
-      'weight' => 43,
+      'weight' => 9,
     ),
   );
 
@@ -1055,7 +1187,14 @@ function edited_collection_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_link',
-        'weight' => 3,
+        'weight' => 5,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_plain',
+        'weight' => 2,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -1067,7 +1206,7 @@ function edited_collection_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 3,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -1092,7 +1231,88 @@ function edited_collection_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 37,
+      'weight' => 5,
+    ),
+  );
+
+  // Exported field_instance:
+  // 'node-edited_collection_chapter-field_published_date'.
+  $field_instances['node-edited_collection_chapter-field_published_date'] = array(
+    'bundle' => 'edited_collection_chapter',
+    'default_value' => array(),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+        ),
+        'type' => 'date_default',
+        'weight' => 18,
+      ),
+      'full' => array(
+        'label' => 'above',
+        'module' => 'date',
+        'settings' => array(
+          'format_type' => 'long',
+          'fromto' => 'both',
+          'multiple_from' => '',
+          'multiple_number' => '',
+          'multiple_to' => '',
+        ),
+        'type' => 'date_default',
+        'weight' => 3,
+      ),
+      'image_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 15,
+      ),
+      'text_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_published_date',
+    'label' => 'Published Date',
+    'required' => 0,
+    'settings' => array(
+      'default_value' => 'now',
+      'default_value2' => 'same',
+      'default_value_code' => '',
+      'default_value_code2' => '',
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'date',
+      'settings' => array(
+        'increment' => 15,
+        'input_format' => 'd/m/Y - H:i:s',
+        'input_format_custom' => '',
+        'label_position' => 'above',
+        'text_parts' => array(),
+        'year_range' => '-3:+3',
+      ),
+      'type' => 'date_popup',
+      'weight' => 12,
     ),
   );
 
@@ -1108,7 +1328,14 @@ function edited_collection_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 8,
+        'weight' => 10,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 28,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -1120,7 +1347,7 @@ function edited_collection_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 19,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -1150,7 +1377,7 @@ function edited_collection_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 45,
+      'weight' => 10,
     ),
   );
 
@@ -1163,11 +1390,18 @@ function edited_collection_field_default_field_instances() {
     'description' => '',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 0,
+        'weight' => 16,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 2,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -1179,7 +1413,7 @@ function edited_collection_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'text_teaser' => array(
         'label' => 'above',
@@ -1209,7 +1443,7 @@ function edited_collection_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 32,
+      'weight' => 2,
     ),
   );
 
