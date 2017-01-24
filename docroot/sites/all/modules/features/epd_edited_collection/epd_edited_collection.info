@@ -104,5 +104,7 @@ features[variable][] = node_preview_edited_collection
 features[variable][] = node_preview_edited_collection_chapter
 features[variable][] = node_submitted_edited_collection
 features[variable][] = node_submitted_edited_collection_chapter
+features[variable][] = pathauto_node_edited_collection_chapter_pattern
+features[variable][] = pathauto_node_edited_collection_pattern
 features[views_view][] = edited_collection_chapter
 project path = sites/all/modules/features

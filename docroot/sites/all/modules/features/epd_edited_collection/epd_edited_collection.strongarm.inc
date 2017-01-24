@@ -282,5 +282,19 @@ function epd_edited_collection_strongarm() {
   $strongarm->value = 0;
   $export['node_submitted_edited_collection_chapter'] = $strongarm;
 
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_edited_collection_chapter_pattern';
+  $strongarm->value = '[node:menu-link:parent:url:path]/[node:title]';
+  $export['pathauto_node_edited_collection_chapter_pattern'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'pathauto_node_edited_collection_pattern';
+  $strongarm->value = 'impactlab/collection/[node:title]';
+  $export['pathauto_node_edited_collection_pattern'] = $strongarm;
+
   return $export;
 }
