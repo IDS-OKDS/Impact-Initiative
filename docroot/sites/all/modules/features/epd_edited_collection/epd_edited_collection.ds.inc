@@ -306,6 +306,21 @@ function epd_edited_collection_ds_custom_fields_info() {
 
   $ds_field = new stdClass();
   $ds_field->api_version = 1;
+  $ds_field->field = 'chapter_navigation';
+  $ds_field->label = 'Chapter Navigation';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = 'edited_collection_chapter|full';
+  $ds_field->properties = array(
+    'block' => 'epdmod|edited_collection_chapters',
+    'block_render' => '1',
+  );
+  $export['chapter_navigation'] = $ds_field;
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
   $ds_field->field = 'chapter_teaser';
   $ds_field->label = 'Chapter Teaser';
   $ds_field->field_type = 6;

@@ -26,6 +26,7 @@ features[ctools][] = views:views_default:3.0
 features[ds_field_settings][] = node|edited_collection_chapter|default
 features[ds_field_settings][] = node|edited_collection_chapter|full
 features[ds_field_settings][] = node|edited_collection|full
+features[ds_fields][] = chapter_navigation
 features[ds_fields][] = chapter_teaser
 features[ds_layout_settings][] = node|edited_collection_chapter|default
 features[ds_layout_settings][] = node|edited_collection_chapter|full
