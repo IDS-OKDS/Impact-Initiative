@@ -37,6 +37,11 @@ function epd_edited_collection_ds_field_settings_info() {
       'label' => 'hidden',
       'format' => 'default',
     ),
+    'collection_link' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
     'addthis' => array(
       'weight' => '2',
       'label' => 'hidden',
@@ -334,6 +339,21 @@ function epd_edited_collection_ds_custom_fields_info() {
   );
   $export['chapter_teaser'] = $ds_field;
 
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
+  $ds_field->field = 'collection_link';
+  $ds_field->label = 'Collection Link';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = 'edited_collection_chapter|full';
+  $ds_field->properties = array(
+    'block' => 'views|6938e52b2218e02e873c92ce7a5f6ec5',
+    'block_render' => '1',
+  );
+  $export['collection_link'] = $ds_field;
+
   return $export;
 }
 
@@ -406,43 +426,45 @@ function epd_edited_collection_ds_layout_settings_info() {
     'regions' => array(
       'ds_content' => array(
         0 => 'group_content_wrapper',
-        1 => 'title',
-        2 => 'field_pdf_download',
-        3 => 'field_short_title',
-        4 => 'addthis',
-        5 => 'field_persons',
-        6 => 'field_published_date',
-        7 => 'group_pub',
+        1 => 'collection_link',
+        2 => 'title',
+        3 => 'field_persons',
+        4 => 'field_pdf_download',
+        5 => 'field_short_title',
+        6 => 'addthis',
+        7 => 'field_published_date',
         8 => 'field_keywords',
-        9 => 'group_title_wrapper',
-        10 => 'group_intro',
-        11 => 'chapter_navigation',
-        12 => 'group_social_wrapper',
-        13 => 'field_main_image',
-        14 => 'field_foreward',
+        9 => 'group_pub',
+        10 => 'group_title_wrapper',
+        11 => 'group_intro',
+        12 => 'chapter_navigation',
+        13 => 'group_social_wrapper',
+        14 => 'field_main_image',
         15 => 'group_abstract',
-        16 => 'field_content',
-        17 => 'group_references',
-        18 => 'field_references',
+        16 => 'field_foreward',
+        17 => 'field_content',
+        18 => 'group_references',
+        19 => 'field_references',
       ),
     ),
     'fields' => array(
       'group_content_wrapper' => 'ds_content',
+      'collection_link' => 'ds_content',
       'title' => 'ds_content',
+      'field_persons' => 'ds_content',
       'field_pdf_download' => 'ds_content',
       'field_short_title' => 'ds_content',
       'addthis' => 'ds_content',
-      'field_persons' => 'ds_content',
       'field_published_date' => 'ds_content',
-      'group_pub' => 'ds_content',
       'field_keywords' => 'ds_content',
+      'group_pub' => 'ds_content',
       'group_title_wrapper' => 'ds_content',
       'group_intro' => 'ds_content',
       'chapter_navigation' => 'ds_content',
       'group_social_wrapper' => 'ds_content',
       'field_main_image' => 'ds_content',
-      'field_foreward' => 'ds_content',
       'group_abstract' => 'ds_content',
+      'field_foreward' => 'ds_content',
       'field_content' => 'ds_content',
       'group_references' => 'ds_content',
       'field_references' => 'ds_content',

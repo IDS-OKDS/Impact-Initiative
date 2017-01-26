@@ -974,7 +974,7 @@ function epd_edited_collection_field_default_field_instances() {
           'taxonomy_term_separator' => ', ',
         ),
         'type' => 'ds_taxonomy_separator',
-        'weight' => 4,
+        'weight' => 3,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -1194,7 +1194,7 @@ function epd_edited_collection_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 2,
+        'weight' => 1,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -1267,7 +1267,7 @@ function epd_edited_collection_field_default_field_instances() {
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 3,
+        'weight' => 2,
       ),
       'image_teaser' => array(
         'label' => 'above',

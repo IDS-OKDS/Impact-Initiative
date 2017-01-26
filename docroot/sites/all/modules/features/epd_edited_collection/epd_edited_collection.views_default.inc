@@ -39,7 +39,7 @@ function epd_edited_collection_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['relationship'] = 'reverse_field_chapters_node';
+  $handler->display->display_options['fields']['title']['relationship'] = 'field_chapters_target_id';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
@@ -360,6 +360,30 @@ function epd_edited_collection_views_default_views() {
   $handler->display->display_options['filters']['field_chapters_target_id']['field'] = 'field_chapters_target_id';
   $handler->display->display_options['filters']['field_chapters_target_id']['relationship'] = 'reverse_field_chapters_node';
   $handler->display->display_options['filters']['field_chapters_target_id']['operator'] = 'not empty';
+
+  /* Display: Collection Link */
+  $handler = $view->new_display('block', 'Collection Link', 'collection_link');
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referencing entity */
+  $handler->display->display_options['relationships']['reverse_field_chapters_node']['id'] = 'reverse_field_chapters_node';
+  $handler->display->display_options['relationships']['reverse_field_chapters_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_chapters_node']['field'] = 'reverse_field_chapters_node';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'reverse_field_chapters_node';
+  $handler->display->display_options['fields']['title']['label'] = 'Collection';
+  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
+  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_type'] = 'div';
+  $handler->display->display_options['fields']['title']['element_class'] = 'meta2';
+  $handler->display->display_options['fields']['title']['element_label_type'] = 'div';
+  $handler->display->display_options['fields']['title']['element_label_class'] = 'meta1';
+  $handler->display->display_options['fields']['title']['element_wrapper_type'] = 'div';
+  $handler->display->display_options['fields']['title']['element_wrapper_class'] = 'metaentry w-clearfix';
+  $handler->display->display_options['fields']['title']['element_default_classes'] = FALSE;
   $export['edited_collection_chapter'] = $view;
 
   return $export;

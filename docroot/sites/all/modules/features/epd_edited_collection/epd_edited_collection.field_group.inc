@@ -218,6 +218,7 @@ function epd_edited_collection_field_group_info() {
       0 => 'field_persons',
       1 => 'field_keywords',
       2 => 'field_published_date',
+      3 => 'collection_link',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(
