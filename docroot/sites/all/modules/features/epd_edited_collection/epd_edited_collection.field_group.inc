@@ -83,8 +83,9 @@ function epd_edited_collection_field_group_info() {
     'label' => 'Main content wrapper',
     'weight' => '0',
     'children' => array(
-      0 => 'group_title_wrapper',
-      1 => 'group_intro',
+      0 => 'chapter_navigation',
+      1 => 'group_title_wrapper',
+      2 => 'group_intro',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(
@@ -143,7 +144,7 @@ function epd_edited_collection_field_group_info() {
   $field_group->parent_name = 'group_content_wrapper';
   $field_group->data = array(
     'label' => 'Introduction',
-    'weight' => '19',
+    'weight' => '15',
     'children' => array(
       0 => 'field_main_image',
       1 => 'field_content',

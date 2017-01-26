@@ -1359,3 +1359,100 @@ function epdmod_get_theme_color($tid){
 	$term = taxonomy_term_load($tid);
 	return $term->field_theme_colour[LANGUAGE_NONE][0]['safe_value'];
 }
+
+/*
+ * hook_block_info();
+ */
+function epdmod_block_info() {
+  $blocks['edited_collection_chapters'] = array(
+    'info' => t('Chapters'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+  // Return our blocks.
+  return $blocks;
+}
+
+/*
+ * hook_block_view();
+ */
+function epdmod_block_view($delta = '') {
+  switch($delta) {
+    case 'edited_collection_chapters':
+      // Check to make sure our user has access to the blocks
+      if(user_access('access content')) {
+        $block['subject'] = '';
+        $block['content'] = _epdmod_edited_collection_chapters();
+        return $block;
+      }
+      break;
+  }
+}
+
+// Related accommodation sidebar
+function _epdmod_edited_collection_chapters() {
+
+  $node = menu_get_object();
+
+  // do we have a cached version of this?
+  if (isset($node)) {
+    $cid = __FUNCTION__ . '_' . $node->nid;
+
+//    if ($cache = cache_get($cid)) {
+//      $output = $cache->data;
+//    }
+  }
+
+  // no cache :(
+  if (isset($node) && empty($output)) {
+
+    $cid = __FUNCTION__ . '_' . $node->nid;
+
+    // Set some variables
+    $nid = $node->nid;
+    $output = '';
+
+    // Get parent nodes for edited collection chapters
+    if ($node->type == 'edited_collection_chapter') {
+      $query = db_query("SELECT DISTINCT field_chapters_node.nid AS parent_node_nid, node.nid AS nid FROM node node LEFT JOIN field_data_field_chapters field_data_field_chapters ON node.nid = field_data_field_chapters.entity_id AND field_data_field_chapters.entity_type = 'node' LEFT JOIN node node_field_data_field_chapters ON field_data_field_chapters.field_chapters_target_id = node_field_data_field_chapters.nid LEFT JOIN field_data_field_chapters field_data_field_chapters2 ON node.nid = field_data_field_chapters2.field_chapters_target_id AND field_data_field_chapters2.entity_type = 'node' LEFT JOIN node field_chapters_node ON field_data_field_chapters2.entity_id = field_chapters_node.nid WHERE (( (node.nid = ". $nid ." ) )AND(( (node.status = '1') )))");
+      $parent_nid = $query->fetchAll()[0]->parent_node_nid;
+
+      $parent_node = node_load($parent_nid);
+      $key_global = FALSE;
+      foreach ($parent_node->field_chapters['und'] as $key => $value) {
+        if($value['target_id'] === $nid){
+          $key_global = $key;
+          break;
+        }
+      }
+      $next = $key_global + 1;
+      $previous = $key_global - 1;
+
+      $chapters = $parent_node->field_chapters['und'];
+      $last_key = array_keys($chapters);
+      $last_key = end($last_key);
+
+      if($next > $last_key) {
+        $next = '';
+      }
+
+      if($previous < 0) {
+        $previous = '';
+      }
+      $prev_exists = is_numeric($previous);
+      if($prev_exists) {
+        $output .= views_embed_view('edited_collection_chapter', 'prev', $parent_nid, $previous);
+      }
+
+      $next_exists = is_numeric($next);
+      if($next_exists) {
+        $output .= views_embed_view('edited_collection_chapter', 'next', $parent_nid, $next);
+      }
+    }
+
+    // cache this for later
+    cache_set($cid, $output, 'cache', CACHE_TEMPORARY);
+  }
+
+  // Return our output
+  return $output;
+}

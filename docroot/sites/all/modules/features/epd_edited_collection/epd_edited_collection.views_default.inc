@@ -26,22 +26,24 @@ function epd_edited_collection_views_default_views() {
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
   $handler->display->display_options['exposed_form']['type'] = 'basic';
   $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '0';
+  $handler->display->display_options['pager']['options']['offset'] = '';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'node';
   $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['relationship'] = 'reverse_field_chapters_node';
   $handler->display->display_options['fields']['title']['label'] = '';
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  /* Sort criterion: Content: Post date */
-  $handler->display->display_options['sorts']['created']['id'] = 'created';
-  $handler->display->display_options['sorts']['created']['table'] = 'node';
-  $handler->display->display_options['sorts']['created']['field'] = 'created';
-  $handler->display->display_options['sorts']['created']['order'] = 'DESC';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
   /* Contextual filter: Content: Nid */
   $handler->display->display_options['arguments']['nid']['id'] = 'nid';
   $handler->display->display_options['arguments']['nid']['table'] = 'node';
@@ -58,65 +60,6 @@ function epd_edited_collection_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
-
-  /* Display: Entity Reference */
-  $handler = $view->new_display('entityreference', 'Entity Reference', 'entityreference_1');
-  $handler->display->display_options['defaults']['title'] = FALSE;
-  $handler->display->display_options['pager']['type'] = 'some';
-  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'entityreference_style';
-  $handler->display->display_options['style_options']['search_fields'] = array(
-    'title' => 'title',
-  );
-  $handler->display->display_options['defaults']['style_options'] = FALSE;
-  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['row_plugin'] = 'entityreference_fields';
-  $handler->display->display_options['defaults']['row_options'] = FALSE;
-  $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Content: Nid */
-  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['table'] = 'node';
-  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
-  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
-
-  /* Display: Block */
-  $handler = $view->new_display('block', 'Block', 'block_1');
-  $handler->display->display_options['defaults']['relationships'] = FALSE;
-  /* Relationship: Entity Reference: Referenced Entity */
-  $handler->display->display_options['relationships']['field_chapters_target_id']['id'] = 'field_chapters_target_id';
-  $handler->display->display_options['relationships']['field_chapters_target_id']['table'] = 'field_data_field_chapters';
-  $handler->display->display_options['relationships']['field_chapters_target_id']['field'] = 'field_chapters_target_id';
-  /* Relationship: Entity Reference: Referencing entity */
-  $handler->display->display_options['relationships']['reverse_field_chapters_node']['id'] = 'reverse_field_chapters_node';
-  $handler->display->display_options['relationships']['reverse_field_chapters_node']['table'] = 'node';
-  $handler->display->display_options['relationships']['reverse_field_chapters_node']['field'] = 'reverse_field_chapters_node';
-  $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Title */
-  $handler->display->display_options['fields']['title']['id'] = 'title';
-  $handler->display->display_options['fields']['title']['table'] = 'node';
-  $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['relationship'] = 'field_chapters_target_id';
-  $handler->display->display_options['fields']['title']['label'] = '';
-  $handler->display->display_options['fields']['title']['alter']['word_boundary'] = FALSE;
-  $handler->display->display_options['fields']['title']['alter']['ellipsis'] = FALSE;
-  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
-  /* Field: Content: Chapters */
-  $handler->display->display_options['fields']['field_chapters']['id'] = 'field_chapters';
-  $handler->display->display_options['fields']['field_chapters']['table'] = 'field_data_field_chapters';
-  $handler->display->display_options['fields']['field_chapters']['field'] = 'field_chapters';
-  $handler->display->display_options['fields']['field_chapters']['relationship'] = 'reverse_field_chapters_node';
-  $handler->display->display_options['fields']['field_chapters']['label'] = '';
-  $handler->display->display_options['fields']['field_chapters']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_chapters']['type'] = 'entityreference_entity_view';
-  $handler->display->display_options['fields']['field_chapters']['settings'] = array(
-    'view_mode' => 'teaser',
-    'links' => 1,
-  );
-  $handler->display->display_options['fields']['field_chapters']['delta_offset'] = '0';
 
   /* Display: Chapter Teaser */
   $handler = $view->new_display('block', 'Chapter Teaser', 'chapter_teaser');
@@ -267,6 +210,156 @@ function epd_edited_collection_views_default_views() {
   $handler->display->display_options['filters']['status']['value'] = 1;
   $handler->display->display_options['filters']['status']['group'] = 1;
   $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+
+  /* Display: Next */
+  $handler = $view->new_display('block', 'Next', 'next');
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referencing entity */
+  $handler->display->display_options['relationships']['reverse_field_chapters_node']['id'] = 'reverse_field_chapters_node';
+  $handler->display->display_options['relationships']['reverse_field_chapters_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_chapters_node']['field'] = 'reverse_field_chapters_node';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Chapters */
+  $handler->display->display_options['fields']['field_chapters']['id'] = 'field_chapters';
+  $handler->display->display_options['fields']['field_chapters']['table'] = 'field_data_field_chapters';
+  $handler->display->display_options['fields']['field_chapters']['field'] = 'field_chapters';
+  $handler->display->display_options['fields']['field_chapters']['relationship'] = 'reverse_field_chapters_node';
+  $handler->display->display_options['fields']['field_chapters']['label'] = '';
+  $handler->display->display_options['fields']['field_chapters']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_chapters']['alter']['text'] = 'Next – [field_chapters]';
+  $handler->display->display_options['fields']['field_chapters']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_chapters']['alter']['path'] = 'node/!1';
+  $handler->display->display_options['fields']['field_chapters']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_chapters']['settings'] = array(
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_chapters']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_chapters']['delta_offset'] = '0';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Chapters (field_chapters:delta) */
+  $handler->display->display_options['sorts']['delta']['id'] = 'delta';
+  $handler->display->display_options['sorts']['delta']['table'] = 'field_data_field_chapters';
+  $handler->display->display_options['sorts']['delta']['field'] = 'delta';
+  $handler->display->display_options['sorts']['delta']['relationship'] = 'reverse_field_chapters_node';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['not'] = TRUE;
+  /* Contextual filter: Content: Chapters (field_chapters:delta) */
+  $handler->display->display_options['arguments']['delta']['id'] = 'delta';
+  $handler->display->display_options['arguments']['delta']['table'] = 'field_data_field_chapters';
+  $handler->display->display_options['arguments']['delta']['field'] = 'delta';
+  $handler->display->display_options['arguments']['delta']['relationship'] = 'reverse_field_chapters_node';
+  $handler->display->display_options['arguments']['delta']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['delta']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['delta']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['delta']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['delta']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Chapters (field_chapters) */
+  $handler->display->display_options['filters']['field_chapters_target_id']['id'] = 'field_chapters_target_id';
+  $handler->display->display_options['filters']['field_chapters_target_id']['table'] = 'field_data_field_chapters';
+  $handler->display->display_options['filters']['field_chapters_target_id']['field'] = 'field_chapters_target_id';
+  $handler->display->display_options['filters']['field_chapters_target_id']['relationship'] = 'reverse_field_chapters_node';
+  $handler->display->display_options['filters']['field_chapters_target_id']['operator'] = 'not empty';
+
+  /* Display: Previous */
+  $handler = $view->new_display('block', 'Previous', 'prev');
+  $handler->display->display_options['defaults']['query'] = FALSE;
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['query']['options']['distinct'] = TRUE;
+  $handler->display->display_options['query']['options']['pure_distinct'] = TRUE;
+  $handler->display->display_options['defaults']['pager'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'some';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '1';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referencing entity */
+  $handler->display->display_options['relationships']['reverse_field_chapters_node']['id'] = 'reverse_field_chapters_node';
+  $handler->display->display_options['relationships']['reverse_field_chapters_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_chapters_node']['field'] = 'reverse_field_chapters_node';
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Chapters */
+  $handler->display->display_options['fields']['field_chapters']['id'] = 'field_chapters';
+  $handler->display->display_options['fields']['field_chapters']['table'] = 'field_data_field_chapters';
+  $handler->display->display_options['fields']['field_chapters']['field'] = 'field_chapters';
+  $handler->display->display_options['fields']['field_chapters']['relationship'] = 'reverse_field_chapters_node';
+  $handler->display->display_options['fields']['field_chapters']['label'] = '';
+  $handler->display->display_options['fields']['field_chapters']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field_chapters']['alter']['text'] = 'Previous – [field_chapters]';
+  $handler->display->display_options['fields']['field_chapters']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_chapters']['alter']['path'] = 'node/!1';
+  $handler->display->display_options['fields']['field_chapters']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_chapters']['settings'] = array(
+    'link' => 1,
+  );
+  $handler->display->display_options['fields']['field_chapters']['group_rows'] = FALSE;
+  $handler->display->display_options['fields']['field_chapters']['delta_offset'] = '0';
+  $handler->display->display_options['defaults']['sorts'] = FALSE;
+  /* Sort criterion: Content: Chapters (field_chapters:delta) */
+  $handler->display->display_options['sorts']['delta']['id'] = 'delta';
+  $handler->display->display_options['sorts']['delta']['table'] = 'field_data_field_chapters';
+  $handler->display->display_options['sorts']['delta']['field'] = 'delta';
+  $handler->display->display_options['sorts']['delta']['relationship'] = 'reverse_field_chapters_node';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['not'] = TRUE;
+  /* Contextual filter: Content: Chapters (field_chapters:delta) */
+  $handler->display->display_options['arguments']['delta']['id'] = 'delta';
+  $handler->display->display_options['arguments']['delta']['table'] = 'field_data_field_chapters';
+  $handler->display->display_options['arguments']['delta']['field'] = 'delta';
+  $handler->display->display_options['arguments']['delta']['relationship'] = 'reverse_field_chapters_node';
+  $handler->display->display_options['arguments']['delta']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['delta']['default_argument_type'] = 'node';
+  $handler->display->display_options['arguments']['delta']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['delta']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['delta']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Chapters (field_chapters) */
+  $handler->display->display_options['filters']['field_chapters_target_id']['id'] = 'field_chapters_target_id';
+  $handler->display->display_options['filters']['field_chapters_target_id']['table'] = 'field_data_field_chapters';
+  $handler->display->display_options['filters']['field_chapters_target_id']['field'] = 'field_chapters_target_id';
+  $handler->display->display_options['filters']['field_chapters_target_id']['relationship'] = 'reverse_field_chapters_node';
+  $handler->display->display_options['filters']['field_chapters_target_id']['operator'] = 'not empty';
   $export['edited_collection_chapter'] = $view;
 
   return $export;
