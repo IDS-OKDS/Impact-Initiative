@@ -1397,9 +1397,9 @@ function _epdmod_edited_collection_chapters() {
   if (isset($node)) {
     $cid = __FUNCTION__ . '_' . $node->nid;
 
-//    if ($cache = cache_get($cid)) {
-//      $output = $cache->data;
-//    }
+    if ($cache = cache_get($cid)) {
+      $output = $cache->data;
+    }
   }
 
   // no cache :(
