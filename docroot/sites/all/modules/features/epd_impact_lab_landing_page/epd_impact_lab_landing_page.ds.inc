@@ -19,10 +19,17 @@ function epd_impact_lab_landing_page_ds_field_settings_info() {
   $ds_fieldsetting->settings = array(
     'how_to_enable_impact_block' => array(
       'weight' => '8',
-      'label' => 'hidden',
+      'label' => 'above',
       'format' => 'default',
       'formatter_settings' => array(
         'ft' => array(
+          'lb' => 'How to enable impact',
+          'lb-col' => TRUE,
+          'lbw' => 1,
+          'lbw-el' => 'h3',
+          'lbw-cl' => 'about-impact',
+          'prefix' => '<div class="related-link-block top-info">',
+          'suffix' => '</div>',
           'ow' => TRUE,
           'ow-el' => 'div',
           'ow-cl' => 'related-wrapper',
@@ -68,10 +75,17 @@ function epd_impact_lab_landing_page_ds_field_settings_info() {
     ),
     'where_to_get_funding_for_impact_' => array(
       'weight' => '6',
-      'label' => 'hidden',
+      'label' => 'above',
       'format' => 'default',
       'formatter_settings' => array(
         'ft' => array(
+          'lb' => 'Where to get funding for impact',
+          'lb-col' => TRUE,
+          'lbw' => 1,
+          'lbw-el' => 'h2',
+          'lbw-cl' => 'about-impact',
+          'prefix' => '<div class="related-link-block top-info">',
+          'suffix' => '</div>',
           'ow' => TRUE,
           'ow-el' => 'div',
           'ow-cl' => 'related-wrapper',
@@ -116,19 +130,6 @@ function epd_impact_lab_landing_page_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_special_collection' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'lb' => 'Special collection',
-          'lb-el' => 'h3',
-          'fis' => TRUE,
-          'fis-el' => 'div',
-          'fis-cl' => 'contentp flex w-clearfix',
-          'fis-at' => '',
-          'fis-def-at' => FALSE,
-        ),
-      ),
-    ),
     'field_learning_guides' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -152,6 +153,19 @@ function epd_impact_lab_landing_page_ds_field_settings_info() {
           'fi-def-at' => FALSE,
           'fi-odd-even' => FALSE,
           'fi-first-last' => FALSE,
+        ),
+      ),
+    ),
+    'field_special_collection' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'lb' => 'Special collection',
+          'lb-el' => 'h3',
+          'fis' => TRUE,
+          'fis-el' => 'div',
+          'fis-cl' => 'contentp flex w-clearfix',
+          'fis-at' => '',
+          'fis-def-at' => FALSE,
         ),
       ),
     ),

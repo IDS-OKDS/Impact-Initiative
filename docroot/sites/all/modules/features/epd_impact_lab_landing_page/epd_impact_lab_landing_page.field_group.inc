@@ -26,8 +26,8 @@ function epd_impact_lab_landing_page_field_group_info() {
       0 => 'body',
       1 => 'field_short_title',
       2 => 'title',
-      3 => 'group_special_collection',
-      4 => 'group_learning_guides',
+      3 => 'group_learning_guides',
+      4 => 'group_special_collection',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(
