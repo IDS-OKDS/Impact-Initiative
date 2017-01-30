@@ -16,6 +16,12 @@ function epd_copyright_licensing_block_info() {
   $blocks['epd_about_impact_lab'] = array(
     'info' => t('About The Impact Lab'),
   );
+  $blocks['epd_special_collections_block'] = array(
+    'info' => t('How to enable impact'),
+  );
+  $blocks['epd_learning_guides_block'] = array(
+    'info' => t('Where to get funding for impact'),
+  );
 
 
   return $blocks;
@@ -35,6 +41,14 @@ function epd_copyright_licensing_block_view($delta = '') {
     case 'epd_about_impact_lab':
       $block['subject'] = '';
       $block['content'] = variable_get('epd_about_impact_lab', array('value' => ''))['value'];
+      break;
+    case 'epd_special_collections_block':
+      $block['subject'] = '';
+      $block['content'] = variable_get('epd_special_collections_block', array('value' => ''))['value'];
+      break;
+    case 'epd_learning_guides_block':
+      $block['subject'] = '';
+      $block['content'] = variable_get('epd_learning_guides_block', array('value' => ''))['value'];
       break;
   }
 

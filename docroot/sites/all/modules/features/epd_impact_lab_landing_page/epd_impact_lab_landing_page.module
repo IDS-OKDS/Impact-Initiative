@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the epd_impact_lab_landing_page feature.
+ */
+
+include_once 'epd_impact_lab_landing_page.features.inc';

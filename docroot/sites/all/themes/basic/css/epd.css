@@ -1039,6 +1039,26 @@ h4.top-tip-title { font-weight: bold; }
     bottom: 6px;
 }
 
+.view-id-impact_lab_landing_page .views-row {
+    padding: 0 10px 0px 0;
+    margin: 0 0 10px 0;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+
+.view-id-impact_lab_landing_page .pull-left img {
+    padding-right: 10px;
+}
+
+.view-id-impact_lab_landing_page h3 {
+    margin-top: 10px;
+}
+
+.view-id-impact_lab_landing_page h3 a {
+    color: #444;
+    border-bottom: 1px dotted #444;
+}
+
 @media screen and (max-width: 767px) {
     .chapter-teaser-left-section {
         width: 100%;
