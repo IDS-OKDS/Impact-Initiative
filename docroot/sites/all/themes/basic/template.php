@@ -473,6 +473,57 @@ function basic_menu_link__menu_case_study_anchors(array $variables) {
   $output = '<a href="' . $link .'" class="case-study tab w-inline-block"><div class="tab-text">' . $element['#title'] . '</div></a>';
   return $output . $sub_menu;
 }
+function basic_menu_tree__menu_top_menu($variables) {
+  return $variables['tree'];
+}
+
+function basic_menu_link__menu_top_menu(array $variables) {
+  $element = $variables['element'];
+  $sub_menu = '';
+
+  if ($element['#below']) {
+
+    foreach ($element['#below'] as $key => $value) {
+      if (is_int($key)) {
+        $classes = implode(" ", $value['#original_link']['options']['attributes']['class']);
+        $options = array();
+        $options['attributes'] = array('class' => array('dd-link w-dropdown-link ' . $classes));
+
+        $sub_menu .= l($value['#title'], $value['#href'], $options);
+      }
+
+    }
+
+    $classes = implode(" ", $element['#original_link']['options']['attributes']['class']);
+
+    $output = '
+    <div class="nav-drop-down w-dropdown" data-delay="0" style="max-width: 940px;">
+      <div class="dd new-nav-link w-clearfix w-dropdown-toggle">
+        <div class="dd-text-block">
+        <span class="icon-font '. $classes .' "></span>
+          '.  $element['#title'] .'</div>
+        <div class="dd-icon w-icon-dropdown-toggle"></div>
+      </div>
+        <nav class="nav-dd-list w-dropdown-list">
+          '. $sub_menu .'
+        </nav>
+      </div>';
+  } else {
+    $classes = implode(" ", $element['#original_link']['options']['attributes']['class']);
+
+    $options = array();
+    $options['html'] = TRUE;
+    $options['attributes'] = array('class' => array('new-nav-link'));
+
+    $title = '<span class="icon-font '. $classes .' "></span>' . $element['#title'];
+
+
+    $output = l($title, $element['#href'], $options);
+
+  }
+
+  return $output ;
+}
 
 function basic_preprocess_field(&$variables, $hook) {
   $element = $variables['element'];
@@ -485,7 +536,7 @@ function basic_preprocess_field(&$variables, $hook) {
 		$variables['items']['0']['#markup'] = nl2br($text);
     }
   }
-  
+
   if(isset($variables['element']['#field_name']) && $variables['element']['#field_name'] = 'field_pdf_download' && isset($variables['element']['#field_type']) && $variables['element']['#field_type'] == 'entityreference' && isset($variables['element'][0]['#markup'])) {
     if(isset($variables['element']['#object']->field_pdf_download)){
       $nid = $variables['element']['#object']->field_pdf_download['und'][0]['target_id'];

@@ -6,22 +6,14 @@
 			<a class="w-nav-brand logo" href="<?php print(base_path()); ?>"><img
 				height="38"
 				src="<?php print(base_path() . path_to_theme()); ?>/images/TII-logo.png">
-			</a><a href="<?php print(url('')); ?>"><img
-				class="navlink home"
-				src="<?php print(base_path() . path_to_theme()); ?>/images/home.png">
-			</a><a href="<?php print(url('search')); ?>"><img
-				class="navlink search"
-				src="<?php print(base_path() . path_to_theme()); ?>/images/magnifying_glass.png">
 			</a>
-			<nav class="w-nav-menu navmanu" role="navigation">
+			<nav class="navmanu w-nav-menu" role="navigation">
 			<?php if ($page['navigation']): ?>
-				<div id="navigation-region">
 				<?php print render($page['navigation']); ?>
-				</div>
-				<?php endif; ?>
+			<?php endif; ?>
 			</nav>
-			<div class="w-nav-button menubutton">
-				<div class="w-icon-nav-menu menuicon"></div>
+			<div class="menubutton w-nav-button">
+				<div class="menuicon w-icon-nav-menu"></div>
 			</div>
 		</div>
 		<div class="w-nav-overlay" data-wf-ignore=""></div>

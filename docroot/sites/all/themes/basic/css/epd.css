@@ -25,6 +25,44 @@ body {
     color: #333;
 }
 
+ol.numbered {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+ol.numbered li {
+    counter-increment: step-counter;
+    margin-bottom: 5px;
+}
+ol.numbered li::before {
+    content: counter(step-counter);
+    margin-right: 20px;
+    font-size: 80%;
+    background-color: rgb(180, 180, 180);
+    color: white;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 11px;
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin: 33px auto 16.5px;
+    border: 2px solid #fff;
+    border-radius: 4px;
+    background-color: #26275f;
+    box-shadow: 0 0 3px 0 rgba(0, 0, 0, .4);
+    font-family: Lato, sans-serif;
+    color: #fff;
+    font-size: 22px;
+    line-height: 46px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.download-pdf-button a {
+    color: white;
+    text-decoration: none;
+}
 
 .w-nav-menu  .w-nav-link {
 	font-size:inherit;
@@ -611,7 +649,7 @@ h2.h2featured a:hover {
 .view-export-publications .views-exposed-widget { display: inline-block; }
 .view-export-publications .views-exposed-form .views-exposed-widget { width: auto !important; }
 .view-export-publications table .views-field-field-grant-reference { display: none; }
-.view-export-publications table { margin-bottom: 40px; background-color; #f3f3f3;}
+.view-export-publications table { margin-bottom: 40px; background-color: #f3f3f3;}
 .view-export-publications table caption { text-align: left; font-weight: bold; padding: 2px 0; }
 .view-export-publications .view-grouping-header { padding-top: 10px; }
 
@@ -1076,4 +1114,32 @@ h4.top-tip-title { font-weight: bold; }
     .chapter-teaser-right-section .download-pdf-button {
         position: relative;
     }
+}
+
+.icon-font.home::after {
+    content: '\F015';
+}
+
+.icon-font.news::after {
+    content: '\F1EA';
+}
+
+.icon-font.events::after {
+    content: '\F133';
+}
+
+.icon-font.resources::after {
+    content: '\F0F6';
+}
+
+.icon-font.impact::after {
+    content: '\F0E7';
+}
+
+.icon-font.project::after {
+    content: '\F0B1';
+}
+
+.icon-font.search::after {
+    content: '\F002';
 }

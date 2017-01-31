@@ -1,0 +1,27 @@
+name = epd_top_menu
+core = 7.x
+package = Features
+version = 7.x-1.0
+dependencies[] = fe_block
+dependencies[] = features
+dependencies[] = menu
+dependencies[] = menu_block
+features[fe_block_settings][] = menu-menu-top-menu
+features[features_api][] = api:2
+features[menu_custom][] = menu-top-menu
+features[menu_links][] = menu-top-menu_children--young-people:http://theimpactinitiative1.dev.dd:8083//search?field_themes_tid[]=1392
+features[menu_links][] = menu-top-menu_education:menutoken/5890a98f8cd41
+features[menu_links][] = menu-top-menu_events:node/1039
+features[menu_links][] = menu-top-menu_gender:menutoken/5890aa09710a8
+features[menu_links][] = menu-top-menu_governance:menutoken/5890aa431a080
+features[menu_links][] = menu-top-menu_health:menutoken/5890aac3c91dd
+features[menu_links][] = menu-top-menu_home:<front>
+features[menu_links][] = menu-top-menu_livelihoods:menutoken/5890aaf96ef73
+features[menu_links][] = menu-top-menu_news:blog
+features[menu_links][] = menu-top-menu_projects:http://theimpactinitiative1.dev.dd:8083/admin/structure/menu/item/3323/edit#
+features[menu_links][] = menu-top-menu_resources:resources
+features[menu_links][] = menu-top-menu_search:node/974
+features[menu_links][] = menu-top-menu_security:menutoken/5890ab280c306
+features[menu_links][] = menu-top-menu_the-impact-lab:node/1146
+features[menu_links][] = menu-top-menu_urbanrural:menutoken/5890ab4bdcdf9
+project path = sites/all/modules/features
