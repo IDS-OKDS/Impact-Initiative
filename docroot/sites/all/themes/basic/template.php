@@ -494,7 +494,11 @@ function basic_menu_link__menu_top_menu(array $variables) {
 
     }
 
-    $classes = implode(" ", $element['#original_link']['options']['attributes']['class']);
+    $classes = '';
+
+    if (!empty($element['#original_link']['options']['attributes']['class'])) {
+      $classes = implode(" ", $element['#original_link']['options']['attributes']['class']);
+    }
 
     $output = '
     <div class="nav-drop-down w-dropdown" data-delay="0" style="max-width: 940px;">
@@ -509,7 +513,13 @@ function basic_menu_link__menu_top_menu(array $variables) {
         </nav>
       </div>';
   } else {
-    $classes = implode(" ", $element['#original_link']['options']['attributes']['class']);
+
+    $classes = '';
+
+    if (!empty($element['#original_link']['options']['attributes']['class'])) {
+      $classes = implode(" ", $element['#original_link']['options']['attributes']['class']);
+    }
+
 
     $options = array();
     $options['html'] = TRUE;
