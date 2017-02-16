@@ -224,7 +224,7 @@ function epd_impact_lab_landing_page_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 9,
+        'weight' => 5,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -248,7 +248,7 @@ function epd_impact_lab_landing_page_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_special_collection',
-    'label' => 'Special Collection',
+    'label' => 'Edited collection',
     'required' => 0,
     'settings' => array(
       'linkit' => array(
@@ -273,9 +273,9 @@ function epd_impact_lab_landing_page_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Body');
+  t('Edited collection');
   t('Learning Guides');
   t('Short Title');
-  t('Special Collection');
 
   return $field_instances;
 }

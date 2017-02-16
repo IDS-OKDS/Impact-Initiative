@@ -1180,7 +1180,7 @@ function epd_edited_collection_field_default_field_instances() {
     'bundle' => 'edited_collection_chapter',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Add the authors of this chapter. New authors and their biogs can be added in the <a href="/admin/structure/taxonomy/people" target="_blank">people taxonomy</a>',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -1450,6 +1450,7 @@ function epd_edited_collection_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Abstract');
+  t('Add the authors of this chapter. New authors and their biogs can be added in the <a href="/admin/structure/taxonomy/people" target="_blank">people taxonomy</a>');
   t('Authors');
   t('Chapters');
   t('Colour');

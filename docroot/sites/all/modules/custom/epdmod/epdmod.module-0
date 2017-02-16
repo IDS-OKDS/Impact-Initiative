@@ -68,22 +68,8 @@ function epdmod_menu() {
     'page arguments' => array('epdmod_keywords_form'),
 	//  'file' => 'epdmod.admin.inc',
 	);
-	$items['admin/config/epd/updates/keyword_mappings'] = array(
-    'title' => 'Process keyword mappings',
-    'description' => 'Process II keywords, based on imported keywords',
-	// 'access callback' => 'user_access',
-    'access arguments' => array('administer site configuration'),
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('epdmod_process_mapped_keywords_form'),
-	//  'file' => 'epdmod.admin.inc',
-	);
-	$items['admin/config/epd/updates/url_updates'] = array(
-    'title' => 'Process URL updates',
-    'description' => 'Process updated URLs, by node id. New URLs come from OpenDocs or elsewhere on the web',
-    'access arguments' => array('administer site configuration'),
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('epdmod_process_url_updates_form'),
-	);return $items ;
+	
+	return $items ;
 }
 
 /**
@@ -93,9 +79,8 @@ function epdmod_updates_page() {
 	$content['raw_markup'] = array(
 		'#type' => 'markup',
 		'#markup' => '<ul>'.
-					'<li>'.l('Import keyword mappings', 'admin/config/epd/updates/keywords').'</li>'.
-					'<li>'.l('Process keyword mappings', 'admin/config/epd/updates/keyword_mappings').'</li>'.
-					'<li>'.l('Import URL updates', 'admin/config/epd/updates/url_updates').'</li>'.
+					'<li>'.l('Import keywords', 'admin/config/epd/updates/keywords').'</li>'.
+					'<li>'.l('Process keywords', 'admin/config/epd/updates/keywords').'</li>'.
 					'</ul>',
 	);
 
@@ -238,43 +223,6 @@ function epdmod_keywords_form() {
     return $form ;
 }
 
-
-/**
- * Build a form to trigger the processing
- */
-function epdmod_process_mapped_keywords_form() {
-	$form['#attributes'] = array(
-    //'enctype' => 'multipart/form-data'
-    );
-    $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Process mappings'),
-    );
-    return $form ;
-}
-
-/**
- * Build a form to upload CSV to.
- */
-function epdmod_process_url_updates_form() {
-	$form['#attributes'] = array(
-    'enctype' => 'multipart/form-data'
-    );
-    $form['csvfile'] = array(
-    '#title' => t('CSV File'),
-    '#type'  => 'file',
-    '#description' => ($max_size = parse_size(ini_get('upload_max_filesize'))) ? t('Provide a CSV containing columns for (<strong>node_id</strong>, <strong>old_url</strong>, <strong>new_url</strong>, <strong>status</strong>, comments).<br /><br />Due to server restrictions, the <strong>maximum upload file size is !max_size</strong>. Files that exceed this size will be disregarded.', array('!max_size' => format_size($max_size))) : '',    
-    );
-    $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Commence Update'),
-    );
-    $form['#validate'] = array(
-    'epdmod_validate_fileupload',
-    'epdmod_form_validate',
-    );
-    return $form ;
-}
 
 
 /**
@@ -481,6 +429,7 @@ function epdmod_idsinternal_form_submit(&$form, &$form_state) {
 	batch_set($batch);
 }
 
+
 /**
  * This is for the Keywords import data
  */
@@ -497,8 +446,6 @@ function epdmod_keywords_form_submit(&$form, &$form_state) {
 	*/
 	$html = '';
 	$keywords_vid = taxonomy_vocabulary_machine_name_load('keywords')->vid;
-	$ii_keywords_vid = taxonomy_vocabulary_machine_name_load('ii_keyword')->vid;
-	//drupal_set_message('vid: '.$ii_keywords_vid);
 	$keyword_mapping = array();
 	$count = 0;
 	if ( isset( $form_state['values']['csvupload'] ) ) {
@@ -511,7 +458,7 @@ function epdmod_keywords_form_submit(&$form, &$form_state) {
 				/*if ($count++ <  10) {
 					$html .= $count . ': '.$k.': '. print_r($term, true). '<br/>';
 				}*/
-				$current_keywords[strtolower(epd_clean_dirty_csv_chars($term->name))] = $term->tid;
+				$current_keywords[strtolower(str_replace(' ', '-', $term->name))] = $term->tid;
 			}	
 				
 			$line_count = 1 ;
@@ -524,31 +471,31 @@ function epdmod_keywords_form_submit(&$form, &$form_state) {
 				 * processor by stuffing complex objects into it
 				 */
 
-				// Get all the data
-				//if($line_count < 10) { $html .= '<p>'.print_r($line, true).'</p>'; }
-				$current_term = strtolower(epd_clean_dirty_csv_chars($line[0]));
-				$new = array($line[1], $line[2], $line[3]);
+				$current_term = strtolower(str_replace(' ', '-', epd_clean_dirty_csv_chars($line[0])));
+				$new = array(epd_clean_dirty_csv_chars($line[1]), epd_clean_dirty_csv_chars($line[2]), epd_clean_dirty_csv_chars($line[3]));
 				
-				if (isset($current_keywords[$current_term]) ) {
-					//$html .= $line_count . ': '.$current_term .' (id - ' . $current_keywords[$current_term].'): '. print_r($new, true). '<br/>';	
-				
-					/* Add a new term to the II Keywords vocabulary if the term doesn't exist, otherwise get the term.
-						Then update the mapping field with current term
-					*/	
-					if ($line[1] != '') { $tid = epd_add_ii_term($line[1], array($current_keywords[$current_term]), $ii_keywords_vid); }
-					if ($line[2] != '') { $tid = epd_add_ii_term($line[2], array($current_keywords[$current_term]), $ii_keywords_vid); }
-					if ($line[3] != '') { $tid = epd_add_ii_term($line[3], array($current_keywords[$current_term]), $ii_keywords_vid); }
+				if (isset($current_keywords[$current_term]) && ($line_count < 10)) {
+					$html .= $line_count . ': '.$current_term .'(id - ' . $current_keywords[$current_term].'): '. print_r($new, true). '<br/>';	
 				}
+				// Get the taxonomy term 
+				
+				
+				
+				/*$pos = strpos($grant_reference_column_value, 'ES/');
+				if ($pos !== false) {
+					// to filter out ES/E021654/1 then RES-167-25-0251-A
+					$temp_arr = explode(' ', $grant_reference_column_value);
+					$grant_reference = $temp_arr[0];
+					$grant_reference = trim($grant_reference);
+					$grant_reference_arr[$grant_reference] = $ids_internal_data;
+				}
+				*/
 				$line_count++;
 			}
 			fclose($handle);
-			
-			
-			
 		} // we caught this in csvimport_form_validate()
 	} // we caught this in csvimport_form_validate()
 
-	
 	/*foreach($grant_reference_arr as $grant_reference => $ids_data){
 		$ids_data = serialize($ids_data);
 		$batch['operations'][] = array('_epdmod_import_ids_additional', array($grant_reference, $ids_data));
@@ -556,215 +503,20 @@ function epdmod_keywords_form_submit(&$form, &$form_state) {
 	batch_set($batch);*/
 	drupal_set_message($html);
 }
-function epd_add_ii_term(&$term_name, $mapped_terms, &$ii_keywords_vid) {
-	//drupal_set_message('Try to add term '.$term_name);
-	$ii_terms = taxonomy_get_term_by_name($term_name, 'ii_keyword');
-	//drupal_set_message('Got terms! '.print_r($ii_terms,true));
-	if (!empty($ii_terms)) {
-		$ii_terms = array_values($ii_terms);
-		$tid = $ii_terms[0]->tid;
-		$ii_term = $ii_terms[0];
-		$ii_term = taxonomy_term_load($tid);
-		//drupal_set_message('Found term '.print_r($ii_terms,true));
-	} else {
-		$ii_term = new stdClass();
-		$ii_term->name = $term_name;
-		$ii_term->vid = $ii_keywords_vid;
-		$ii_term->parent = array(0);
-		//drupal_set_message('Adding term: '.print_r($ii_term,true));
-		taxonomy_term_save($ii_term);
-	}
-	$tid = $ii_term->tid;
-	foreach($mapped_terms as $mt) {
-		//drupal_set_message(print_r($mapped_terms,true));
-		// Check if it's already mapped
-		$exists = false;
-		if (property_exists($ii_term,'field_mapped_keyword')) { 
-			foreach($ii_term->field_mapped_keyword[LANGUAGE_NONE] as $term) {
-				if ($term['tid'] == (integer)$mt) {
-					$exists = true;
-				}
-			}
-		}
-		if (!$exists) {
-			$ii_term->field_mapped_keyword[LANGUAGE_NONE][]['tid'] = (integer)$mt;
-			//drupal_set_message('Append related field term '.$mt.' gives: '.print_r($ii_term,true));
-		}
-	}
-	taxonomy_term_save($ii_term);
-	return $tid;
-}
+
 /**
  *	Create new keywords set, linked to the old ones.
 **/
 
-function epdmod_process_mapped_keywords_form_submit(&$form, &$form_state) {
-	
-	$keywords_vid = taxonomy_vocabulary_machine_name_load('keywords')->vid;
-	$ii_keywords_vid = taxonomy_vocabulary_machine_name_load('ii_keyword')->vid;
-	$keywords = array();
-	// Get all the mappings
-	$ii_terms = taxonomy_get_tree($ii_keywords_vid, 0, NULL, TRUE);
-		//$ii_terms = taxonomy_get_term_by_name($term_name, 'ii_keyword');
 
-	drupal_set_message('Process the mappings');
-	drupal_set_message('Processing '. count($ii_terms). ' mappings');
-	foreach($ii_terms as $ii_term) {
-		//drupal_set_message(print_r($ii_term,true));
-		if (property_exists($ii_term, 'field_mapped_keyword')) {
-			if (count($ii_term->field_mapped_keyword) > 0) {
-				foreach($ii_term->field_mapped_keyword[LANGUAGE_NONE] as $term) {
-					$keywords[$term['tid']][] = $ii_term->tid;
-				}
-			}
-			//drupal_set_message($term['tid'].': '.print_r($keywords[$term['tid']],true));
-		}
-	}
-	// Now have an array of all keyword tids, with the new II keywords we wish to map.
-	// Now get he relevant project node and update it.
-	foreach($keywords as $tid => $mappings) {
-		if(count($mappings) > 0) {
-			$project_nids = taxonomy_select_nodes($tid, FALSE);
-			foreach($project_nids as $project_nid) {
-				$node = node_load($project_nid);
-				$added = false;
-				foreach($mappings as $ii_keyword_tid) {
-					// Add each of the mappings to the node, if they don't already exist
-					$exists = false;
-					if (property_exists($node,'field_ii_keywords')) { 
-						foreach($node->field_ii_keywords[$node->language] as $term) {
-							if ($term['tid'] == (integer)$ii_keyword_tid) {
-								$exists = true;
-							}
-						}
-						if (!$exists) {
-							$node->field_ii_keywords[$node->language][]['tid'] = (integer)$ii_keyword_tid;
-							//drupal_set_message('Append related field term '.$ii_keyword_tid.' to: '.print_r($node->nid,true));
-							$added = true;
-						}
-					}
-				}
-				// If we're updated the node, save it
-				if ($added && property_exists($node,'field_ii_keywords')) {
-						node_save($node);
-				}
-			}
-		}	
-	}
-	//drupal_set_message(print_r($keywords[$term['tid']],true));
-	drupal_set_message('Complete. ');
-	
-}
 
-/**
- * This is for the Keywords import data
- */
-function epdmod_process_url_updates_form_submit(&$form, &$form_state) {
-	
-	$html = '';
-	//$keywords_vid = taxonomy_vocabulary_machine_name_load('keywords')->vid;
-	//$ii_keywords_vid = taxonomy_vocabulary_machine_name_load('ii_keyword')->vid;
-	$urls = array();
-	$count = 0;
-	if ( isset( $form_state['values']['csvupload'] ) ) {
-		if ( $handle = fopen($form_state['values']['csvupload'], 'r') ) {
-			
-			$line_count = 1 ;
-			$first = TRUE ;
-			//$line = fgetcsv($handle, 4096);
-			// Doesn't have " as enclosures for fields, so have to use while fgets
-			//while ( $line = fgetcsv($handle, 4096, ',', '"') && ($line_count < 10) ) {
-			while (($data = fgets($handle, 4096)) !== false) {	
-				// Get all the data
-				//if($line_count < 10) { $html .= '<p>Row: '.print_r($line, true).'</p>'; }
-				if($line_count > 0) { //and $line_count < 30) { // first line is headings
-					$line = explode(',', $data);
-					// line(nid, old link, new link, status, comments)
-					$nid = ($line[0]);
-					//$old_url = $line[1];
-					if ((int)$nid > 0) {
-						$new_url = $line[2];
-						if (trim($new_url) == '') {
-							$html .= '<p>Processing node <a href="/node/'.$nid.'/edit" target="fred">'.$nid.'</a> - No new URL</p>';
-						} else {
-							
-						//$data_checked = time();
-						//$status = $line[3];
-						//$comments = $line[4];
-						$html .= '<p>Processing node <a href="/node/'.$nid.'/edit" target="fred">'.$nid.'</a></p>';
-						$notes = array();
-						 
-						if ($node = node_load($nid)) {
-							if ($new_url == 'N/A' || $new_url == 'N/F' || trim($new_url) == '') {
-								$notes[] = 'No new url';
-								$notes[] = 'Status: '.$line[3].' | '.$line[4];
-								$node->field_url_broken[LANGUAGE_NONE][0] = 1;
-							} else {
-						
-								// Convert OpenDocs urls
-								epdmod_convert_opendocs_url($new_url);
-								$notes[] = 'Update to : ' .l($new_url,$new_url);
-								$notes[] = 'Status: '.$line[3].' | '.$line[4];
-								$node->field_url_updated[LANGUAGE_NONE][0] = array(
-									'value' => date('Y-m-d H:i:s', strtotime('now')),
-									'timezone' => 'UTC',
-									'timezone_db' => 'UTC',
-									);
-								$node->field_url_broken[LANGUAGE_NONE][0] = 0;
-								$node->field_updated_publication_url[LANGUAGE_NONE][0]['url'] = $new_url;
-							}
-							foreach($notes as $note) {
-									if (isset($node->field_notes[LANGUAGE_NONE])) {
-											$node->field_notes[LANGUAGE_NONE][0]['value'] .= '<p>'.date('Y-m-d H:i:s', strtotime('now')).':'. $note. '</p>';
-									} else {
-											$node->field_notes[$node->language][0]['value'] .= '<p>'.date('Y-m-d H:i:s', strtotime('now')).':'. $note. '</p>';
-									}
-							}
-							node_save($node);
-						} else {
-							drupal_set_message('Couldn\'t find node: '.$nid. ' on line '.$line_count);
-						}
-					}
-					}
-				}
-				$line_count++;
-			}
-			fclose($handle);
 
-			
-		} // we caught this in csvimport_form_validate()
-	} // we caught this in csvimport_form_validate()
-	drupal_set_message($html);
-}
+
 function epd_clean_dirty_csv_chars($string) {
    $string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
    return preg_replace('/[^A-Za-z0-9\-\|\/\&]/', '', $string); // Removes special chars.
 }
 
-function epd_clean_csv_chars($string) {
-   return preg_replace('/[^A-Za-z0-9\-\|\/\&]/', '', $string); // Removes special chars.
-}
-
-/* Get the short form of Opendocs (DSpace) urls
-* e.g. https://opendocs.ids.ac.uk/opendocs/bitstream/handle/123456789/11942/filename.pdf?sequence=1
-* e.g. https://opendocs.ids.ac.uk/opendocs/bitstream/123456789/11942/1/ (Must have trailing slash!) 
-*
-*/
-function epdmod_convert_opendocs_url(&$string) {
-   //return preg_replace('/[^A-Za-z0-9\-\|\/\&]/', '', $string); // Removes special chars.
-   
-   $url = parse_url($string);
-   
-   if ($url['host'] != 'opendocs.ids.ac.uk') {
-	return false;
-   }
-   $pattern ='/(https?:\/\/)?(opendocs\.ids\.ac\.uk\/opendocs\/bitstream\/)(?:handle)?\/(123456789\/)([0-9]*)\/(?:.*sequence=)([0-9]*)(.*)/i';
-   $replacement = '\1\2\3\4/\5/';
-   $string = preg_replace ( $pattern, $replacement , $string );
-   //drupal_set_message (l($link, $link));
-
-   return true;
-}
 
 /**
  * Handle location form submission. Add all the Project nodes into a set of batch operations
@@ -1053,7 +805,7 @@ function _epdmod_create_project_node($project) {
 
 	if(isset($project->potentialImpact)){
 		$node->field_potential_impact[$node->language][0]['format'] = 'full_html';
-		$node->field_potential_impact[$node->language][0]['value'] = nlbr($project->potentialImpact);
+		$node->field_potential_impact[$node->language][0]['value'] = $project->potentialImpact;
 	}
 
 	_epdmod_process_project_links($node, $project->links->link);
@@ -1489,101 +1241,4 @@ function epdmod_form_alter(&$form, $form_state, $form_id) {
 function epdmod_get_theme_color($tid){
 	$term = taxonomy_term_load($tid);
 	return $term->field_theme_colour[LANGUAGE_NONE][0]['safe_value'];
-}
-
-/*
- * hook_block_info();
- */
-function epdmod_block_info() {
-  $blocks['edited_collection_chapters'] = array(
-    'info' => t('Chapters'),
-    'cache' => DRUPAL_NO_CACHE,
-  );
-  // Return our blocks.
-  return $blocks;
-}
-
-/*
- * hook_block_view();
- */
-function epdmod_block_view($delta = '') {
-  switch($delta) {
-    case 'edited_collection_chapters':
-      // Check to make sure our user has access to the blocks
-      if(user_access('access content')) {
-        $block['subject'] = '';
-        $block['content'] = _epdmod_edited_collection_chapters();
-        return $block;
-      }
-      break;
-  }
-}
-
-// Related accommodation sidebar
-function _epdmod_edited_collection_chapters() {
-
-  $node = menu_get_object();
-
-  // do we have a cached version of this?
-  if (isset($node)) {
-    $cid = __FUNCTION__ . '_' . $node->nid;
-
-    if ($cache = cache_get($cid)) {
-      $output = $cache->data;
-    }
-  }
-
-  // no cache :(
-  if (isset($node) && empty($output)) {
-
-    $cid = __FUNCTION__ . '_' . $node->nid;
-
-    // Set some variables
-    $nid = $node->nid;
-    $output = '';
-
-    // Get parent nodes for edited collection chapters
-    if ($node->type == 'edited_collection_chapter') {
-      $query = db_query("SELECT DISTINCT field_chapters_node.nid AS parent_node_nid, node.nid AS nid FROM node node LEFT JOIN field_data_field_chapters field_data_field_chapters ON node.nid = field_data_field_chapters.entity_id AND field_data_field_chapters.entity_type = 'node' LEFT JOIN node node_field_data_field_chapters ON field_data_field_chapters.field_chapters_target_id = node_field_data_field_chapters.nid LEFT JOIN field_data_field_chapters field_data_field_chapters2 ON node.nid = field_data_field_chapters2.field_chapters_target_id AND field_data_field_chapters2.entity_type = 'node' LEFT JOIN node field_chapters_node ON field_data_field_chapters2.entity_id = field_chapters_node.nid WHERE (( (node.nid = ". $nid ." ) )AND(( (node.status = '1') )))");
-      $parent_nid = $query->fetchAll()[0]->parent_node_nid;
-
-      $parent_node = node_load($parent_nid);
-      $key_global = FALSE;
-      foreach ($parent_node->field_chapters['und'] as $key => $value) {
-        if($value['target_id'] === $nid){
-          $key_global = $key;
-          break;
-        }
-      }
-      $next = $key_global + 1;
-      $previous = $key_global - 1;
-
-      $chapters = $parent_node->field_chapters['und'];
-      $last_key = array_keys($chapters);
-      $last_key = end($last_key);
-
-      if($next > $last_key) {
-        $next = '';
-      }
-
-      if($previous < 0) {
-        $previous = '';
-      }
-      $prev_exists = is_numeric($previous);
-      if($prev_exists) {
-        $output .= views_embed_view('edited_collection_chapter', 'prev', $parent_nid, $previous);
-      }
-
-      $next_exists = is_numeric($next);
-      if($next_exists) {
-        $output .= views_embed_view('edited_collection_chapter', 'next', $parent_nid, $next);
-      }
-    }
-
-    // cache this for later
-    cache_set($cid, $output, 'cache', CACHE_TEMPORARY);
-  }
-
-  // Return our output
-  return $output;
 }

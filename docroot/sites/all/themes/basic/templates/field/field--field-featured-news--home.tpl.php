@@ -33,7 +33,7 @@
 				<div class="w-col w-col-6">
 				
 				<?php if (!$label_hidden): ?>
-					<h2 class="h2featured alternative"><?php print l($label, 'blog'); ?></h2>
+					<h2 class="h2featured alternative"><span class="icon-font news "></span><?php print l($label, 'blog'); ?></h2>
 				<?php endif; ?>
 				<?php if(isset($fields_content[0])): ?>
 					<?php print($fields_content[0]['style']); ?>
@@ -93,10 +93,14 @@
 				</div>
 				
 				<div class="w-col w-col-6 impact-lab">
-					<h2 class="h2featured alternative"><?php print 'The Impact Lab'; ?></h2>
-					<?php print views_embed_view('learning_guides', 'block');?>
+					<h2 class="h2featured alternative"><span class="icon-font impact "></span><?php print 'The Impact Lab'; ?></h2>
 					<?php $block = module_invoke('epd_copyright_licensing', 'block_view','epd_about_impact_lab');
 						  print render($block['content']);?>
+					<!--p class="contentp">Find out <a href="">what makes impact work</a></p-->
+					<h3>Learning guides</h3>
+					<?php print views_embed_view('learning_guides', 'block');?>
+				<p class="seemore"><a href="/impact-lab">See more at the Impact Lab</a></p>
+					
 				</div>
 				
 			</div>	

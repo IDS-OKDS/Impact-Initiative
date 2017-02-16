@@ -18,7 +18,7 @@ function epd_impact_lab_landing_page_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'full';
   $ds_fieldsetting->settings = array(
     'how_to_enable_impact_block' => array(
-      'weight' => '8',
+      'weight' => '4',
       'label' => 'above',
       'format' => 'default',
       'formatter_settings' => array(
@@ -59,7 +59,7 @@ function epd_impact_lab_landing_page_ds_field_settings_info() {
       ),
     ),
     'special_collections_view' => array(
-      'weight' => '10',
+      'weight' => '6',
       'label' => 'hidden',
       'format' => 'default',
       'formatter_settings' => array(
@@ -159,7 +159,7 @@ function epd_impact_lab_landing_page_ds_field_settings_info() {
     'field_special_collection' => array(
       'formatter_settings' => array(
         'ft' => array(
-          'lb' => 'Special collection',
+          'lb' => 'Edited collection',
           'lb-el' => 'h3',
           'fis' => TRUE,
           'fis-el' => 'div',
@@ -295,14 +295,14 @@ function epd_impact_lab_landing_page_ds_layout_settings_info() {
         1 => 'title',
         2 => 'field_short_title',
         3 => 'body',
-        4 => 'group_special_collection',
-        5 => 'group_learning_guides',
-        6 => 'where_to_get_funding_for_impact_',
-        7 => 'field_learning_guides',
-        8 => 'learning_guides_view',
-        9 => 'how_to_enable_impact_block',
-        10 => 'field_special_collection',
-        11 => 'special_collections_view',
+        4 => 'how_to_enable_impact_block',
+        5 => 'group_special_collection',
+        6 => 'field_special_collection',
+        7 => 'where_to_get_funding_for_impact_',
+        8 => 'special_collections_view',
+        9 => 'group_learning_guides',
+        10 => 'field_learning_guides',
+        11 => 'learning_guides_view',
       ),
     ),
     'fields' => array(
@@ -310,14 +310,14 @@ function epd_impact_lab_landing_page_ds_layout_settings_info() {
       'title' => 'ds_content',
       'field_short_title' => 'ds_content',
       'body' => 'ds_content',
+      'how_to_enable_impact_block' => 'ds_content',
       'group_special_collection' => 'ds_content',
-      'group_learning_guides' => 'ds_content',
+      'field_special_collection' => 'ds_content',
       'where_to_get_funding_for_impact_' => 'ds_content',
+      'special_collections_view' => 'ds_content',
+      'group_learning_guides' => 'ds_content',
       'field_learning_guides' => 'ds_content',
       'learning_guides_view' => 'ds_content',
-      'how_to_enable_impact_block' => 'ds_content',
-      'field_special_collection' => 'ds_content',
-      'special_collections_view' => 'ds_content',
     ),
     'classes' => array(),
     'wrappers' => array(

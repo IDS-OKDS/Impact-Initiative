@@ -55,7 +55,7 @@ function epd_impact_lab_landing_page_field_group_info() {
   $field_group->parent_name = 'group_content_wrapper';
   $field_group->data = array(
     'label' => 'Learning guides wrapper',
-    'weight' => '5',
+    'weight' => '6',
     'children' => array(
       0 => 'field_learning_guides',
       1 => 'learning_guides_view',
@@ -66,7 +66,7 @@ function epd_impact_lab_landing_page_field_group_info() {
       'label' => 'Learning guides wrapper',
       'instance_settings' => array(
         'id' => '',
-        'classes' => 'case-study-section w-clearfix',
+        'classes' => 'case-study-section impact-lab-section-wrapper w-clearfix',
         'element' => 'div',
         'show_label' => '0',
         'label_element' => 'div',
@@ -87,7 +87,7 @@ function epd_impact_lab_landing_page_field_group_info() {
   $field_group->parent_name = 'group_content_wrapper';
   $field_group->data = array(
     'label' => 'Special collection wrapper',
-    'weight' => '4',
+    'weight' => '5',
     'children' => array(
       0 => 'field_special_collection',
       1 => 'how_to_enable_impact_block',
@@ -98,7 +98,7 @@ function epd_impact_lab_landing_page_field_group_info() {
       'label' => 'Special collection wrapper',
       'instance_settings' => array(
         'id' => '',
-        'classes' => 'case-study-section w-clearfix',
+        'classes' => 'case-study-section impact-lab-section-wrapper w-clearfix',
         'element' => 'div',
         'show_label' => '0',
         'label_element' => 'div',
