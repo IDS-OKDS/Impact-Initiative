@@ -265,6 +265,33 @@ function epd_top_menu_menu_default_menu_links() {
     'weight' => -50,
     'customized' => 1,
   );
+  // Exported menu link: menu-top-menu_impact-lab:node/1141.
+  $menu_links['menu-top-menu_impact-lab:node/1141'] = array(
+    'menu_name' => 'menu-top-menu',
+    'link_path' => 'node/1141',
+    'router_path' => 'node/%',
+    'link_title' => 'Impact Lab',
+    'options' => array(
+      'attributes' => array(
+        'class' => array(
+          0 => 'impact',
+        ),
+      ),
+      'item_attributes' => array(
+        'id' => '',
+        'class' => '',
+        'style' => '',
+      ),
+      'identifier' => 'menu-top-menu_impact-lab:node/1141',
+    ),
+    'module' => 'menu',
+    'hidden' => 0,
+    'external' => 0,
+    'has_children' => 0,
+    'expanded' => 0,
+    'weight' => -46,
+    'customized' => 1,
+  );
   // Exported menu link: menu-top-menu_livelihoods:menutoken/5890aaf96ef73.
   $menu_links['menu-top-menu_livelihoods:menutoken/5890aaf96ef73'] = array(
     'menu_name' => 'menu-top-menu',
@@ -423,7 +450,7 @@ function epd_top_menu_menu_default_menu_links() {
     'external' => 0,
     'has_children' => 0,
     'expanded' => 0,
-    'weight' => 0,
+    'weight' => -44,
     'customized' => 1,
   );
   // Exported menu link: menu-top-menu_security:menutoken/5890ab280c306.
@@ -465,33 +492,6 @@ function epd_top_menu_menu_default_menu_links() {
     'weight' => -44,
     'customized' => 1,
     'parent_identifier' => 'menu-top-menu_projects:http://theimpactinitiative1.dev.dd:8083/admin/structure/features/epd_top_menu/recreate#',
-  );
-  // Exported menu link: menu-top-menu_the-impact-lab:node/1146.
-  $menu_links['menu-top-menu_the-impact-lab:node/1146'] = array(
-    'menu_name' => 'menu-top-menu',
-    'link_path' => 'node/1146',
-    'router_path' => 'node/%',
-    'link_title' => 'The Impact Lab',
-    'options' => array(
-      'attributes' => array(
-        'class' => array(
-          0 => 'impact',
-        ),
-      ),
-      'item_attributes' => array(
-        'id' => '',
-        'class' => '',
-        'style' => '',
-      ),
-      'identifier' => 'menu-top-menu_the-impact-lab:node/1146',
-    ),
-    'module' => 'menu',
-    'hidden' => 0,
-    'external' => 0,
-    'has_children' => 0,
-    'expanded' => 0,
-    'weight' => -46,
-    'customized' => 1,
   );
   // Exported menu link: menu-top-menu_urbanrural:menutoken/5890ab4bdcdf9.
   $menu_links['menu-top-menu_urbanrural:menutoken/5890ab4bdcdf9'] = array(
@@ -543,13 +543,13 @@ function epd_top_menu_menu_default_menu_links() {
   t('Governance');
   t('Health');
   t('Home');
+  t('Impact Lab');
   t('Livelihoods');
   t('News');
   t('Projects');
   t('Resources');
   t('Search');
   t('Security');
-  t('The Impact Lab');
   t('Urban/Rural');
 
   return $menu_links;

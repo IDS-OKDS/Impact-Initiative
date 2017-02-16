@@ -31,7 +31,7 @@ function epd_top_menu_default_fe_block_settings() {
         'region' => 'navigation',
         'status' => 1,
         'theme' => 'basic',
-        'weight' => -35,
+        'weight' => 0,
       ),
       'seven' => array(
         'region' => '',
