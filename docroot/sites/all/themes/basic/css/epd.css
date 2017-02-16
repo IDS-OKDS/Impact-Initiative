@@ -178,7 +178,7 @@ body:before {
 .node-impact-lab-landing-page table td { padding: 4px; vertical-align: top;}
 .node-edited-collection-chapter .contentp h2 { border-bottom: 1px dotted dimgrey; }
 .node-edited-collection-chapter .contentp h2 span { background-color: #26275f;  text-align: center; color: #fff; margin: 0 10px 0 0; border: 2px solid #fff; box-shadow: 0 0 3px 0 rgba(0, 0, 0, .4); padding:0px; display: inline-block; width: 2em; height: 2em; line-height: 1.7em;}
-
+.node-edited-collection-chapter blockquote { font-size: 20px; line-height: 24px; }
 
 
 .footer ul.menu {
