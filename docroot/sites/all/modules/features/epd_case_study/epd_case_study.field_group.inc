@@ -23,8 +23,8 @@ function epd_case_study_field_group_info() {
     'label' => 'Author Wrapper',
     'weight' => '38',
     'children' => array(
-      0 => 'licensing',
-      1 => 'about_the_impact_lab',
+      0 => 'about_the_impact_lab',
+      1 => 'licensing',
       2 => 'group_pub',
     ),
     'format_type' => 'div',
@@ -458,15 +458,15 @@ function epd_case_study_field_group_info() {
   $field_group->mode = 'default';
   $field_group->parent_name = 'group_author_wrapper';
   $field_group->data = array(
-    'label' => 'About this case study',
+    'label' => 'About this Learning Guide',
     'weight' => '1',
     'children' => array(
-      0 => 'field_published_date',
-      1 => 'field_people',
+      0 => 'field_people',
+      1 => 'field_published_date',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(
-      'label' => 'About this case study',
+      'label' => 'About this Learning Guide',
       'instance_settings' => array(
         'id' => '',
         'classes' => 'related-link-block top-info',
@@ -809,7 +809,7 @@ function epd_case_study_field_group_info() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('About this case study');
+  t('About this Learning Guide');
   t('Author Wrapper');
   t('Conclusion');
   t('Conclusion Images');
