@@ -183,7 +183,7 @@ function epd_edited_collection_field_default_field_instances() {
     'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_foreward',
-    'label' => 'Foreward',
+    'label' => 'Foreword',
     'required' => 0,
     'settings' => array(
       'linkit' => array(
@@ -1457,8 +1457,8 @@ function epd_edited_collection_field_default_field_instances() {
   t('Content');
   t('Cover Text');
   t('Editors');
-  t('Foreward');
   t('Foreward author');
+  t('Foreword');
   t('Introduction');
   t('Keywords');
   t('Main Image');
