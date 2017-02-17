@@ -5,6 +5,48 @@
  */
 
 /**
+ * Implements hook_ds_field_settings_info().
+ */
+function epd_taxo_people_ds_field_settings_info() {
+  $export = array();
+
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'taxonomy_term|people|full';
+  $ds_fieldsetting->entity_type = 'taxonomy_term';
+  $ds_fieldsetting->bundle = 'people';
+  $ds_fieldsetting->view_mode = 'full';
+  $ds_fieldsetting->settings = array(
+    'title' => array(
+      'weight' => '1',
+      'label' => 'hidden',
+      'format' => 'default',
+      'formatter_settings' => array(
+        'link' => '0',
+        'wrapper' => 'p',
+        'class' => '',
+        'ft' => array(),
+      ),
+    ),
+    'field_photo' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'ow' => TRUE,
+          'ow-el' => 'div',
+          'ow-cl' => 'lab-image',
+          'ow-def-cl' => FALSE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+      ),
+    ),
+  );
+  $export['taxonomy_term|people|full'] = $ds_fieldsetting;
+
+  return $export;
+}
+
+/**
  * Implements hook_ds_layout_settings_info().
  */
 function epd_taxo_people_ds_layout_settings_info() {
@@ -82,6 +124,24 @@ function epd_taxo_people_ds_layout_settings_info() {
     'page_option_title' => '',
   );
   $export['taxonomy_term|people|full'] = $ds_layout;
+
+  return $export;
+}
+
+/**
+ * Implements hook_ds_view_modes_info().
+ */
+function epd_taxo_people_ds_view_modes_info() {
+  $export = array();
+
+  $ds_view_mode = new stdClass();
+  $ds_view_mode->api_version = 1;
+  $ds_view_mode->view_mode = 'full';
+  $ds_view_mode->label = 'Full';
+  $ds_view_mode->entities = array(
+    'taxonomy_term' => 'taxonomy_term',
+  );
+  $export['full'] = $ds_view_mode;
 
   return $export;
 }
