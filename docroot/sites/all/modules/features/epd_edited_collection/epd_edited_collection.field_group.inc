@@ -84,8 +84,8 @@ function epd_edited_collection_field_group_info() {
     'weight' => '0',
     'children' => array(
       0 => 'chapter_navigation',
-      1 => 'group_title_wrapper',
-      2 => 'group_intro',
+      1 => 'group_intro',
+      2 => 'group_title_wrapper',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(
@@ -115,8 +115,8 @@ function epd_edited_collection_field_group_info() {
     'label' => 'Main content wrapper',
     'weight' => '0',
     'children' => array(
-      0 => 'group_title_wrapper',
-      1 => 'group_intro',
+      0 => 'group_intro',
+      1 => 'group_title_wrapper',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(
@@ -146,11 +146,11 @@ function epd_edited_collection_field_group_info() {
     'label' => 'Introduction',
     'weight' => '15',
     'children' => array(
-      0 => 'field_main_image',
-      1 => 'field_content',
-      2 => 'group_social_wrapper',
+      0 => 'field_content',
+      1 => 'field_main_image',
+      2 => 'group_abstract',
       3 => 'group_references',
-      4 => 'group_abstract',
+      4 => 'group_social_wrapper',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(
@@ -180,10 +180,10 @@ function epd_edited_collection_field_group_info() {
     'label' => 'Introduction',
     'weight' => '22',
     'children' => array(
-      0 => 'field_introduction',
-      1 => 'field_main_image',
-      2 => 'field_foreward',
-      3 => 'field_foreward_author',
+      0 => 'field_foreward',
+      1 => 'field_foreward_author',
+      2 => 'field_introduction',
+      3 => 'field_main_image',
       4 => 'chapter_teaser',
       5 => 'group_social_wrapper',
     ),
@@ -215,8 +215,8 @@ function epd_edited_collection_field_group_info() {
     'label' => 'About this edited collection chapter',
     'weight' => '3',
     'children' => array(
-      0 => 'field_persons',
-      1 => 'field_keywords',
+      0 => 'field_keywords',
+      1 => 'field_persons',
       2 => 'field_published_date',
       3 => 'collection_link',
     ),
@@ -403,8 +403,8 @@ function epd_edited_collection_field_group_info() {
     'label' => 'Title wrapper',
     'weight' => '14',
     'children' => array(
-      0 => 'field_short_title',
-      1 => 'field_pdf_download',
+      0 => 'field_pdf_download',
+      1 => 'field_short_title',
       2 => 'title',
     ),
     'format_type' => 'html-element',
@@ -435,8 +435,8 @@ function epd_edited_collection_field_group_info() {
     'label' => 'Title wrapper',
     'weight' => '21',
     'children' => array(
-      0 => 'field_short_title',
-      1 => 'field_pdf_download',
+      0 => 'field_pdf_download',
+      1 => 'field_short_title',
       2 => 'title',
     ),
     'format_type' => 'html-element',

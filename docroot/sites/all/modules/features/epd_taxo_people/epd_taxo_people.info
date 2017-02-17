@@ -1,0 +1,11 @@
+name = epd_taxo_people
+core = 7.x
+package = Features
+version = 7.x-1.0
+dependencies[] = ctools
+dependencies[] = ds
+features[ctools][] = ds:ds:1
+features[ds_layout_settings][] = taxonomy_term|people|default
+features[ds_layout_settings][] = taxonomy_term|people|full
+features[features_api][] = api:2
+project path = sites/all/modules/features

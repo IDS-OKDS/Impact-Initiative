@@ -25,13 +25,13 @@ function epd_edited_collection_field_default_field_instances() {
         'weight' => 6,
       ),
       'full' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'ds',
         'settings' => array(
-          'taxonomy_term_link' => 0,
-          'taxonomy_term_separator' => ', ',
+          'taxonomy_term_reference_view_mode' => 'full',
+          'use_content_language' => 1,
         ),
-        'type' => 'ds_taxonomy_separator',
+        'type' => 'ds_taxonomy_view_mode',
         'weight' => 10,
       ),
       'image_teaser' => array(
@@ -974,7 +974,7 @@ function epd_edited_collection_field_default_field_instances() {
           'taxonomy_term_separator' => ', ',
         ),
         'type' => 'ds_taxonomy_separator',
-        'weight' => 3,
+        'weight' => 4,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -1190,10 +1190,13 @@ function epd_edited_collection_field_default_field_instances() {
         'weight' => 5,
       ),
       'full' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_plain',
+        'label' => 'hidden',
+        'module' => 'ds',
+        'settings' => array(
+          'taxonomy_term_reference_view_mode' => 'full',
+          'use_content_language' => 1,
+        ),
+        'type' => 'ds_taxonomy_view_mode',
         'weight' => 1,
       ),
       'image_teaser' => array(
@@ -1260,14 +1263,14 @@ function epd_edited_collection_field_default_field_instances() {
         'label' => 'above',
         'module' => 'date',
         'settings' => array(
-          'format_type' => 'long',
+          'format_type' => 'medium',
           'fromto' => 'both',
           'multiple_from' => '',
           'multiple_number' => '',
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 2,
+        'weight' => 3,
       ),
       'image_teaser' => array(
         'label' => 'above',

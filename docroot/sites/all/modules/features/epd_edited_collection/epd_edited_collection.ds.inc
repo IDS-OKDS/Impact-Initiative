@@ -32,17 +32,17 @@ function epd_edited_collection_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'edited_collection_chapter';
   $ds_fieldsetting->view_mode = 'full';
   $ds_fieldsetting->settings = array(
+    'addthis' => array(
+      'weight' => '2',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
     'chapter_navigation' => array(
       'weight' => '16',
       'label' => 'hidden',
       'format' => 'default',
     ),
     'collection_link' => array(
-      'weight' => '0',
-      'label' => 'hidden',
-      'format' => 'default',
-    ),
-    'addthis' => array(
       'weight' => '2',
       'label' => 'hidden',
       'format' => 'default',
@@ -58,49 +58,6 @@ function epd_edited_collection_ds_field_settings_info() {
         'ft' => array(),
       ),
     ),
-    'field_short_title' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'ow' => TRUE,
-          'ow-el' => 'h2',
-          'ow-cl' => '',
-          'ow-def-cl' => FALSE,
-          'ow-at' => '',
-          'ow-def-at' => FALSE,
-        ),
-      ),
-    ),
-    'field_persons' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'lbw' => 1,
-          'lbw-el' => 'div',
-          'lbw-cl' => 'meta1',
-          'ow' => TRUE,
-          'ow-el' => 'div',
-          'ow-cl' => 'metaentry w-clearfix',
-          'ow-def-cl' => FALSE,
-          'ow-at' => '',
-          'ow-def-at' => FALSE,
-          'fis' => TRUE,
-          'fis-el' => 'div',
-          'fis-cl' => 'meta2',
-          'fis-at' => '',
-          'fis-def-at' => FALSE,
-        ),
-      ),
-    ),
-    'field_foreward' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'fis' => TRUE,
-          'fis-el' => 'div',
-          'fis-cl' => 'contentp flex w-clearfix',
-          'fis-at' => '',
-          'fis-def-at' => FALSE,
-        ),
-      ),
-    ),
     'field_content' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -112,7 +69,7 @@ function epd_edited_collection_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_references' => array(
+    'field_foreward' => array(
       'formatter_settings' => array(
         'ft' => array(
           'fis' => TRUE,
@@ -143,6 +100,21 @@ function epd_edited_collection_ds_field_settings_info() {
         ),
       ),
     ),
+    'field_persons' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'lbw' => 1,
+          'lbw-el' => 'div',
+          'lbw-cl' => 'meta1',
+          'ow' => TRUE,
+          'ow-el' => 'div',
+          'ow-cl' => 'metaentry w-clearfix',
+          'ow-def-cl' => FALSE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+      ),
+    ),
     'field_published_date' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -163,35 +135,15 @@ function epd_edited_collection_ds_field_settings_info() {
         ),
       ),
     ),
-  );
-  $export['node|edited_collection_chapter|full'] = $ds_fieldsetting;
-
-  $ds_fieldsetting = new stdClass();
-  $ds_fieldsetting->api_version = 1;
-  $ds_fieldsetting->id = 'node|edited_collection|full';
-  $ds_fieldsetting->entity_type = 'node';
-  $ds_fieldsetting->bundle = 'edited_collection';
-  $ds_fieldsetting->view_mode = 'full';
-  $ds_fieldsetting->settings = array(
-    'chapter_teaser' => array(
-      'weight' => '28',
-      'label' => 'hidden',
-      'format' => 'default',
-    ),
-    'addthis' => array(
-      'weight' => '0',
-      'label' => 'hidden',
-      'format' => 'default',
-    ),
-    'title' => array(
-      'weight' => '1',
-      'label' => 'hidden',
-      'format' => 'default',
+    'field_references' => array(
       'formatter_settings' => array(
-        'link' => '0',
-        'wrapper' => 'h1',
-        'class' => '',
-        'ft' => array(),
+        'ft' => array(
+          'fis' => TRUE,
+          'fis-el' => 'div',
+          'fis-cl' => 'contentp flex w-clearfix',
+          'fis-at' => '',
+          'fis-def-at' => FALSE,
+        ),
       ),
     ),
     'field_short_title' => array(
@@ -206,14 +158,48 @@ function epd_edited_collection_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_introduction' => array(
+  );
+  $export['node|edited_collection_chapter|full'] = $ds_fieldsetting;
+
+  $ds_fieldsetting = new stdClass();
+  $ds_fieldsetting->api_version = 1;
+  $ds_fieldsetting->id = 'node|edited_collection|full';
+  $ds_fieldsetting->entity_type = 'node';
+  $ds_fieldsetting->bundle = 'edited_collection';
+  $ds_fieldsetting->view_mode = 'full';
+  $ds_fieldsetting->settings = array(
+    'addthis' => array(
+      'weight' => '0',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'chapter_teaser' => array(
+      'weight' => '28',
+      'label' => 'hidden',
+      'format' => 'default',
+    ),
+    'title' => array(
+      'weight' => '1',
+      'label' => 'hidden',
+      'format' => 'default',
+      'formatter_settings' => array(
+        'link' => '0',
+        'wrapper' => 'h1',
+        'class' => '',
+        'ft' => array(),
+      ),
+    ),
+    'field_author' => array(
       'formatter_settings' => array(
         'ft' => array(
-          'fis' => TRUE,
-          'fis-el' => 'div',
-          'fis-cl' => 'contentp flex w-clearfix',
-          'fis-at' => '',
-          'fis-def-at' => FALSE,
+          'lbw-el' => 'div',
+          'lbw-cl' => 'meta1',
+          'ow' => TRUE,
+          'ow-el' => 'div',
+          'ow-cl' => 'metaentry w-clearfix',
+          'ow-def-cl' => FALSE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
         ),
       ),
     ),
@@ -243,23 +229,28 @@ function epd_edited_collection_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_author' => array(
+    'field_introduction' => array(
       'formatter_settings' => array(
         'ft' => array(
-          'lbw' => 1,
-          'lbw-el' => 'div',
-          'lbw-cl' => 'meta1',
-          'ow' => TRUE,
-          'ow-el' => 'div',
-          'ow-cl' => 'metaentry w-clearfix',
-          'ow-def-cl' => FALSE,
-          'ow-at' => '',
-          'ow-def-at' => FALSE,
           'fis' => TRUE,
           'fis-el' => 'div',
-          'fis-cl' => 'meta2',
+          'fis-cl' => 'contentp flex w-clearfix',
           'fis-at' => '',
           'fis-def-at' => FALSE,
+        ),
+      ),
+    ),
+    'field_pdf_download' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'lb-col' => TRUE,
+          'fi' => TRUE,
+          'fi-el' => 'div',
+          'fi-cl' => 'top',
+          'fi-at' => '',
+          'fi-def-at' => FALSE,
+          'fi-odd-even' => FALSE,
+          'fi-first-last' => FALSE,
         ),
       ),
     ),
@@ -283,17 +274,15 @@ function epd_edited_collection_ds_field_settings_info() {
         ),
       ),
     ),
-    'field_pdf_download' => array(
+    'field_short_title' => array(
       'formatter_settings' => array(
         'ft' => array(
-          'lb-col' => TRUE,
-          'fi' => TRUE,
-          'fi-el' => 'div',
-          'fi-cl' => 'top',
-          'fi-at' => '',
-          'fi-def-at' => FALSE,
-          'fi-odd-even' => FALSE,
-          'fi-first-last' => FALSE,
+          'ow' => TRUE,
+          'ow-el' => 'h2',
+          'ow-cl' => '',
+          'ow-def-cl' => FALSE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
         ),
       ),
     ),
@@ -426,22 +415,22 @@ function epd_edited_collection_ds_layout_settings_info() {
     'regions' => array(
       'ds_content' => array(
         0 => 'group_content_wrapper',
-        1 => 'collection_link',
-        2 => 'title',
-        3 => 'field_persons',
-        4 => 'field_pdf_download',
+        1 => 'title',
+        2 => 'field_persons',
+        3 => 'field_pdf_download',
+        4 => 'addthis',
         5 => 'field_short_title',
-        6 => 'addthis',
+        6 => 'collection_link',
         7 => 'field_published_date',
-        8 => 'field_keywords',
-        9 => 'group_pub',
+        8 => 'group_pub',
+        9 => 'field_keywords',
         10 => 'group_title_wrapper',
         11 => 'group_intro',
         12 => 'chapter_navigation',
         13 => 'group_social_wrapper',
         14 => 'field_main_image',
-        15 => 'group_abstract',
-        16 => 'field_foreward',
+        15 => 'field_foreward',
+        16 => 'group_abstract',
         17 => 'field_content',
         18 => 'group_references',
         19 => 'field_references',
@@ -449,22 +438,22 @@ function epd_edited_collection_ds_layout_settings_info() {
     ),
     'fields' => array(
       'group_content_wrapper' => 'ds_content',
-      'collection_link' => 'ds_content',
       'title' => 'ds_content',
       'field_persons' => 'ds_content',
       'field_pdf_download' => 'ds_content',
-      'field_short_title' => 'ds_content',
       'addthis' => 'ds_content',
+      'field_short_title' => 'ds_content',
+      'collection_link' => 'ds_content',
       'field_published_date' => 'ds_content',
-      'field_keywords' => 'ds_content',
       'group_pub' => 'ds_content',
+      'field_keywords' => 'ds_content',
       'group_title_wrapper' => 'ds_content',
       'group_intro' => 'ds_content',
       'chapter_navigation' => 'ds_content',
       'group_social_wrapper' => 'ds_content',
       'field_main_image' => 'ds_content',
-      'group_abstract' => 'ds_content',
       'field_foreward' => 'ds_content',
+      'group_abstract' => 'ds_content',
       'field_content' => 'ds_content',
       'group_references' => 'ds_content',
       'field_references' => 'ds_content',
@@ -559,8 +548,8 @@ function epd_edited_collection_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'ds_content' => array(
-        0 => 'group_content_wrapper',
-        1 => 'addthis',
+        0 => 'addthis',
+        1 => 'group_content_wrapper',
         2 => 'group_pub',
         3 => 'title',
         4 => 'field_pdf_download',
@@ -578,8 +567,8 @@ function epd_edited_collection_ds_layout_settings_info() {
       ),
     ),
     'fields' => array(
-      'group_content_wrapper' => 'ds_content',
       'addthis' => 'ds_content',
+      'group_content_wrapper' => 'ds_content',
       'group_pub' => 'ds_content',
       'title' => 'ds_content',
       'field_pdf_download' => 'ds_content',
