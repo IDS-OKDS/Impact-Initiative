@@ -246,10 +246,10 @@ function epd_edited_collection_field_group_info() {
   $field_group->parent_name = 'group_social_wrapper';
   $field_group->data = array(
     'label' => 'About this edited collection',
-    'weight' => '1',
+    'weight' => '2',
     'children' => array(
-      0 => 'field_author',
-      1 => 'field_published_date',
+      0 => 'field_published_date',
+      1 => 'field_people',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(

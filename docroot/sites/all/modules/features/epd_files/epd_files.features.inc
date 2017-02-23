@@ -24,3 +24,27 @@ function epd_files_ctools_plugin_api($module = NULL, $api = NULL) {
     return array("version" => "1");
   }
 }
+
+/**
+ * Implements hook_image_default_styles().
+ */
+function epd_files_image_default_styles() {
+  $styles = array();
+
+  // Exported image style: 125_x_150.
+  $styles['125_x_150'] = array(
+    'label' => '125 x 150',
+    'effects' => array(
+      1 => array(
+        'name' => 'image_scale_and_crop',
+        'data' => array(
+          'width' => 125,
+          'height' => 150,
+        ),
+        'weight' => 1,
+      ),
+    ),
+  );
+
+  return $styles;
+}

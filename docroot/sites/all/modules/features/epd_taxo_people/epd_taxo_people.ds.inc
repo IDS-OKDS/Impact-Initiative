@@ -23,7 +23,7 @@ function epd_taxo_people_ds_field_settings_info() {
       'format' => 'default',
       'formatter_settings' => array(
         'link' => '0',
-        'wrapper' => 'p',
+        'wrapper' => 'h4',
         'class' => '',
         'ft' => array(),
       ),

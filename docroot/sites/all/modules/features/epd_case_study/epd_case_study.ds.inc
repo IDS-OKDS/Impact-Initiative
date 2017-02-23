@@ -233,6 +233,31 @@ function epd_case_study_ds_field_settings_info() {
     'field_published_date' => array(
       'formatter_settings' => array(
         'ft' => array(
+          'lbw-el' => 'div',
+          'lbw-cl' => 'meta1',
+          'ow' => TRUE,
+          'ow-el' => 'div',
+          'ow-cl' => 'metaentry w-clearfix',
+          'ow-def-cl' => FALSE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+      ),
+    ),
+    'field_project_link_text' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'fis' => TRUE,
+          'fis-el' => 'div',
+          'fis-cl' => 'contentp flex w-clearfix',
+          'fis-at' => '',
+          'fis-def-at' => FALSE,
+        ),
+      ),
+    ),
+    'field_published_date' => array(
+      'formatter_settings' => array(
+        'ft' => array(
           'lbw' => 1,
           'lbw-el' => 'div',
           'lbw-cl' => 'meta1',

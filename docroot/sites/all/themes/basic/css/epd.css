@@ -1174,3 +1174,18 @@ h4.top-tip-title { font-weight: bold; }
 .callout-box { float: none;}
 .contentp { text-align: inherit; }
 
+.vocabulary-people .lab-image {
+    float: right;
+    margin: 0 5px 10px 10px;
+}
+
+.vocabulary-people p {
+    font-weight: 400;
+}
+.vocabulary-people  a {
+    clear: both;
+    display: block;
+}
+.vocabulary-people {
+    padding-bottom: 10px;
+}

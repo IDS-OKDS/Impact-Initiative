@@ -10,69 +10,6 @@
 function epd_edited_collection_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-edited_collection-field_author'.
-  $field_instances['node-edited_collection-field_author'] = array(
-    'bundle' => 'edited_collection',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'taxonomy',
-        'settings' => array(),
-        'type' => 'taxonomy_term_reference_link',
-        'weight' => 6,
-      ),
-      'full' => array(
-        'label' => 'hidden',
-        'module' => 'ds',
-        'settings' => array(
-          'taxonomy_term_reference_view_mode' => 'full',
-          'use_content_language' => 1,
-        ),
-        'type' => 'ds_taxonomy_view_mode',
-        'weight' => 10,
-      ),
-      'image_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'text_teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'ds_extras_field_template' => '',
-    'entity_type' => 'node',
-    'field_name' => 'field_author',
-    'label' => 'Editors',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'taxonomy',
-      'settings' => array(
-        'autocomplete_path' => 'taxonomy/autocomplete',
-        'size' => 60,
-      ),
-      'type' => 'taxonomy_autocomplete',
-      'weight' => 8,
-    ),
-  );
-
   // Exported field_instance: 'node-edited_collection-field_chapters'.
   $field_instances['node-edited_collection-field_chapters'] = array(
     'bundle' => 'edited_collection',
@@ -136,7 +73,7 @@ function epd_edited_collection_field_default_field_instances() {
         ),
       ),
       'type' => 'inline_entity_form',
-      'weight' => 9,
+      'weight' => 10,
     ),
   );
 
@@ -485,7 +422,70 @@ function epd_edited_collection_field_default_field_instances() {
         ),
       ),
       'type' => 'inline_entity_form',
-      'weight' => 11,
+      'weight' => 12,
+    ),
+  );
+
+  // Exported field_instance: 'node-edited_collection-field_people'.
+  $field_instances['node-edited_collection-field_people'] = array(
+    'bundle' => 'edited_collection',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 10,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'module' => 'ds',
+        'settings' => array(
+          'taxonomy_term_reference_view_mode' => 'full',
+          'use_content_language' => 1,
+        ),
+        'type' => 'ds_taxonomy_view_mode',
+        'weight' => 0,
+      ),
+      'image_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'text_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_people',
+    'label' => 'Editors',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'taxonomy',
+      'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 9,
     ),
   );
 
@@ -519,7 +519,7 @@ function epd_edited_collection_field_default_field_instances() {
           'multiple_to' => '',
         ),
         'type' => 'date_default',
-        'weight' => 12,
+        'weight' => 1,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -564,7 +564,7 @@ function epd_edited_collection_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_popup',
-      'weight' => 10,
+      'weight' => 11,
     ),
   );
 

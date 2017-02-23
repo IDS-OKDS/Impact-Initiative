@@ -169,7 +169,7 @@ function epd_edited_collection_ds_field_settings_info() {
   $ds_fieldsetting->view_mode = 'full';
   $ds_fieldsetting->settings = array(
     'addthis' => array(
-      'weight' => '0',
+      'weight' => '1',
       'label' => 'hidden',
       'format' => 'default',
     ),
@@ -187,20 +187,6 @@ function epd_edited_collection_ds_field_settings_info() {
         'wrapper' => 'h1',
         'class' => '',
         'ft' => array(),
-      ),
-    ),
-    'field_author' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'lbw-el' => 'div',
-          'lbw-cl' => 'meta1',
-          'ow' => TRUE,
-          'ow-el' => 'div',
-          'ow-cl' => 'metaentry w-clearfix',
-          'ow-def-cl' => FALSE,
-          'ow-at' => '',
-          'ow-def-at' => FALSE,
-        ),
       ),
     ),
     'field_foreward' => array(
@@ -280,6 +266,18 @@ function epd_edited_collection_ds_field_settings_info() {
           'ow' => TRUE,
           'ow-el' => 'h2',
           'ow-cl' => '',
+          'ow-def-cl' => FALSE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+      ),
+    ),
+    'field_people' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'ow' => TRUE,
+          'ow-el' => 'div',
+          'ow-cl' => 'metaentry w-clearfix',
           'ow-def-cl' => FALSE,
           'ow-at' => '',
           'ow-def-at' => FALSE,
@@ -548,14 +546,14 @@ function epd_edited_collection_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'ds_content' => array(
-        0 => 'addthis',
+        0 => 'field_people',
         1 => 'group_content_wrapper',
-        2 => 'group_pub',
-        3 => 'title',
-        4 => 'field_pdf_download',
-        5 => 'field_short_title',
-        6 => 'field_author',
-        7 => 'field_published_date',
+        2 => 'title',
+        3 => 'addthis',
+        4 => 'field_published_date',
+        5 => 'field_pdf_download',
+        6 => 'group_pub',
+        7 => 'field_short_title',
         8 => 'group_title_wrapper',
         9 => 'group_intro',
         10 => 'group_social_wrapper',
@@ -567,14 +565,14 @@ function epd_edited_collection_ds_layout_settings_info() {
       ),
     ),
     'fields' => array(
-      'addthis' => 'ds_content',
+      'field_people' => 'ds_content',
       'group_content_wrapper' => 'ds_content',
-      'group_pub' => 'ds_content',
       'title' => 'ds_content',
-      'field_pdf_download' => 'ds_content',
-      'field_short_title' => 'ds_content',
-      'field_author' => 'ds_content',
+      'addthis' => 'ds_content',
       'field_published_date' => 'ds_content',
+      'field_pdf_download' => 'ds_content',
+      'group_pub' => 'ds_content',
+      'field_short_title' => 'ds_content',
       'group_title_wrapper' => 'ds_content',
       'group_intro' => 'ds_content',
       'group_social_wrapper' => 'ds_content',
