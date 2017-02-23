@@ -19,6 +19,7 @@ features[ds_field_settings][] = file|image|image_related
 features[ds_field_settings][] = file|image|image_with_caption
 features[ds_layout_settings][] = file|image|image_related
 features[ds_layout_settings][] = file|image|image_with_caption
+features[ds_layout_settings][] = file|image|teaser
 features[ds_view_modes][] = image_related
 features[ds_view_modes][] = image_with_caption
 features[features_api][] = api:2

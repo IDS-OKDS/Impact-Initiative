@@ -129,6 +129,33 @@ function epd_files_ds_layout_settings_info() {
   );
   $export['file|image|image_with_caption'] = $ds_layout;
 
+  $ds_layout = new stdClass();
+  $ds_layout->api_version = 1;
+  $ds_layout->id = 'file|image|teaser';
+  $ds_layout->entity_type = 'file';
+  $ds_layout->bundle = 'image';
+  $ds_layout->view_mode = 'teaser';
+  $ds_layout->layout = 'ds_reset';
+  $ds_layout->settings = array(
+    'regions' => array(
+      'ds_content' => array(
+        0 => 'file',
+      ),
+    ),
+    'fields' => array(
+      'file' => 'ds_content',
+    ),
+    'classes' => array(),
+    'wrappers' => array(),
+    'layout_wrapper' => 'div',
+    'layout_attributes' => '',
+    'layout_attributes_merge' => TRUE,
+    'layout_link_attribute' => FALSE,
+    'layout_link_custom' => '',
+    'layout_disable_css' => FALSE,
+  );
+  $export['file|image|teaser'] = $ds_layout;
+
   return $export;
 }
 
