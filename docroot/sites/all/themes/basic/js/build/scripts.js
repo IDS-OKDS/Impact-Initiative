@@ -35,8 +35,9 @@ Drupal.behaviors.basic = {
       // Execute code once the window is ready.
 	 setEqualHeight($(".view-id-resources_archive .w-col .featuredp"));
 	 $(".node-edited-collection-chapter .contentp h2").each(function(i) {
-         $(this).prepend('<span>' + (i+1) + '</span>');
+         $(this).addClass("content-section-title clearfix").before('<span class="precounter">' + (i+1) + '</span>');
      });
+	 $('.homepage-titles').css('border-bottom-color', $('.node-edited-collection-chapter .contentp h2 span').css("background-color"));
     });
 
     $(window).load(function() {
