@@ -1191,6 +1191,8 @@ h4.top-tip-title { font-weight: bold; }
     clear: both;
     display: block;
 }
+.vocabulary-people  .highlight a { display: inline; }
+
 .vocabulary-people {
     padding-bottom: 10px;
 }
