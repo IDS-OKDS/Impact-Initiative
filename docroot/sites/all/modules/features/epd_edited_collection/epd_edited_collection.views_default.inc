@@ -234,7 +234,7 @@ function epd_edited_collection_views_default_views() {
   $handler->display->display_options['fields']['field_chapters']['relationship'] = 'reverse_field_chapters_node';
   $handler->display->display_options['fields']['field_chapters']['label'] = '';
   $handler->display->display_options['fields']['field_chapters']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_chapters']['alter']['text'] = 'Next – [field_chapters]';
+  $handler->display->display_options['fields']['field_chapters']['alter']['text'] = '[field_chapters]';
   $handler->display->display_options['fields']['field_chapters']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['field_chapters']['alter']['path'] = 'node/!1';
   $handler->display->display_options['fields']['field_chapters']['element_label_colon'] = FALSE;
@@ -309,7 +309,7 @@ function epd_edited_collection_views_default_views() {
   $handler->display->display_options['fields']['field_chapters']['relationship'] = 'reverse_field_chapters_node';
   $handler->display->display_options['fields']['field_chapters']['label'] = '';
   $handler->display->display_options['fields']['field_chapters']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_chapters']['alter']['text'] = 'Previous – [field_chapters]';
+  $handler->display->display_options['fields']['field_chapters']['alter']['text'] = '[field_chapters]';
   $handler->display->display_options['fields']['field_chapters']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['field_chapters']['alter']['path'] = 'node/!1';
   $handler->display->display_options['fields']['field_chapters']['element_label_colon'] = FALSE;

@@ -21,16 +21,17 @@ function epd_edited_collection_field_group_info() {
   $field_group->parent_name = 'group_intro';
   $field_group->data = array(
     'label' => 'Abstract',
-    'weight' => '24',
+    'weight' => '18',
     'children' => array(
-      0 => 'field_foreward',
+      0 => 'field_content',
+      1 => 'field_foreward',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(
       'label' => 'Abstract',
       'instance_settings' => array(
         'id' => '',
-        'classes' => 'case-study-section w-clearfix',
+        'classes' => 'case-study w-clearfix',
         'element' => 'div',
         'show_label' => '1',
         'label_element' => 'h2 class="case-study-h2"',
@@ -39,6 +40,37 @@ function epd_edited_collection_field_group_info() {
     ),
   );
   $field_groups['group_abstract|node|edited_collection_chapter|full'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_authors|node|edited_collection_chapter|full';
+  $field_group->group_name = 'group_authors';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'edited_collection_chapter';
+  $field_group->mode = 'full';
+  $field_group->parent_name = 'group_pub';
+  $field_group->data = array(
+    'label' => 'Authors',
+    'weight' => '4',
+    'children' => array(
+      0 => 'field_persons',
+    ),
+    'format_type' => 'html-element',
+    'format_settings' => array(
+      'formatter' => '',
+      'instance_settings' => array(
+        'element' => 'div',
+        'show_label' => 0,
+        'label_element' => 'div',
+        'classes' => 'group-authors field-group-html-element',
+        'attributes' => '',
+        'required_fields' => 1,
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_authors|node|edited_collection_chapter|full'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -144,11 +176,11 @@ function epd_edited_collection_field_group_info() {
   $field_group->parent_name = 'group_content_wrapper';
   $field_group->data = array(
     'label' => 'Introduction',
-    'weight' => '15',
+    'weight' => '16',
     'children' => array(
-      0 => 'field_content',
-      1 => 'field_main_image',
-      2 => 'group_abstract',
+      0 => 'field_main_image',
+      1 => 'group_abstract',
+      2 => 'group_pub',
       3 => 'group_references',
       4 => 'group_social_wrapper',
     ),
@@ -210,22 +242,22 @@ function epd_edited_collection_field_group_info() {
   $field_group->entity_type = 'node';
   $field_group->bundle = 'edited_collection_chapter';
   $field_group->mode = 'full';
-  $field_group->parent_name = 'group_social_wrapper';
+  $field_group->parent_name = 'group_intro';
   $field_group->data = array(
-    'label' => 'About this edited collection chapter',
-    'weight' => '3',
+    'label' => 'About this chapter',
+    'weight' => '17',
     'children' => array(
       0 => 'field_keywords',
-      1 => 'field_persons',
-      2 => 'field_published_date',
-      3 => 'collection_link',
+      1 => 'field_published_date',
+      2 => 'collection_link',
+      3 => 'group_authors',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(
-      'label' => 'About this edited collection chapter',
+      'label' => 'About this chapter',
       'instance_settings' => array(
         'id' => '',
-        'classes' => 'related-link-block top-info',
+        'classes' => 'related-link-block top-info related-wrapper',
         'element' => 'div',
         'show_label' => '1',
         'label_element' => 'h3 class="about-impact"',
@@ -277,7 +309,7 @@ function epd_edited_collection_field_group_info() {
   $field_group->parent_name = 'group_intro';
   $field_group->data = array(
     'label' => 'References',
-    'weight' => '26',
+    'weight' => '20',
     'children' => array(
       0 => 'field_references',
     ),
@@ -307,17 +339,16 @@ function epd_edited_collection_field_group_info() {
   $field_group->parent_name = 'group_intro';
   $field_group->data = array(
     'label' => 'Social Wrapper',
-    'weight' => '22',
+    'weight' => '15',
     'children' => array(
       0 => 'addthis',
-      1 => 'group_pub',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(
       'label' => 'Social Wrapper',
       'instance_settings' => array(
         'id' => '',
-        'classes' => 'related-wrapper top',
+        'classes' => '',
         'element' => 'div',
         'show_label' => '0',
         'label_element' => 'div',
@@ -456,9 +487,10 @@ function epd_edited_collection_field_group_info() {
 
   // Translatables
   // Included for use with string extractors like potx.
+  t('About this chapter');
   t('About this edited collection');
-  t('About this edited collection chapter');
   t('Abstract');
+  t('Authors');
   t('Introduction');
   t('Main content wrapper');
   t('References');

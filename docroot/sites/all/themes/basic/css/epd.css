@@ -270,6 +270,23 @@ body:before {
     line-height: 30px;
     font-weight: 700;
 }
+.metaentry { padding: 6px 0px;}
+.meta2 { line-height: 22px; }
+.group-authors .meta1  { width: 100%;}
+.authors-list { margin: 10px 0; padding:0}
+.authors-list  ul{ margin: 0px 0; padding:0}
+.authors-list li { display: none;}
+.authors-list li.first{ display: block;}
+.authors-list li.first a{ display: block;    background-color: #eee;
+    color: #666;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 1px solid #666;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 2px;}
+.authors-list li.first a::after { content: '>';}
+.authors-list li.first a:hover {text-decoration: none;color: #444;background-color:#fff;}
 
 .node-type-project .herotextwrapper .field-item {
 	display:inline-block;
@@ -1053,7 +1070,7 @@ h4.top-tip-title { font-weight: bold; }
 	background-repeat: no-repeat;
 	padding-left: 1.2em;
 }
-
+ h3.about-impact { width: 100%; }
 
 .chapter-teaser {
     display: block;

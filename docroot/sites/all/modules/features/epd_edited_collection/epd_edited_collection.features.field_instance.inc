@@ -10,6 +10,65 @@
 function epd_edited_collection_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'node-edited_collection-field_author'.
+  $field_instances['node-edited_collection-field_author'] = array(
+    'bundle' => 'edited_collection',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'taxonomy',
+        'settings' => array(),
+        'type' => 'taxonomy_term_reference_link',
+        'weight' => 6,
+      ),
+      'full' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+      'image_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'text_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_author',
+    'label' => 'Editors',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'taxonomy',
+      'settings' => array(
+        'autocomplete_path' => 'taxonomy/autocomplete',
+        'size' => 60,
+      ),
+      'type' => 'taxonomy_autocomplete',
+      'weight' => 8,
+    ),
+  );
+
   // Exported field_instance: 'node-edited_collection-field_chapters'.
   $field_instances['node-edited_collection-field_chapters'] = array(
     'bundle' => 'edited_collection',
@@ -96,7 +155,7 @@ function epd_edited_collection_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 26,
+        'weight' => 25,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -161,7 +220,7 @@ function epd_edited_collection_field_default_field_instances() {
         'module' => 'taxonomy',
         'settings' => array(),
         'type' => 'taxonomy_term_reference_plain',
-        'weight' => 27,
+        'weight' => 26,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -221,7 +280,7 @@ function epd_edited_collection_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 25,
+        'weight' => 28,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -717,8 +776,13 @@ function epd_edited_collection_field_default_field_instances() {
       ),
       'full' => array(
         'label' => 'hidden',
-        'settings' => array(),
-        'type' => 'hidden',
+        'module' => 'color_field',
+        'settings' => array(
+          'important' => 1,
+          'property' => 'background-color',
+          'selector' => '.node-edited-collection-chapter .contentp span.precounter',
+        ),
+        'type' => 'color_field_css_declaration',
         'weight' => 10,
       ),
       'image_teaser' => array(
@@ -776,7 +840,7 @@ function epd_edited_collection_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 25,
+        'weight' => 19,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -841,7 +905,7 @@ function epd_edited_collection_field_default_field_instances() {
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
-        'weight' => 24,
+        'weight' => 18,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -974,7 +1038,7 @@ function epd_edited_collection_field_default_field_instances() {
           'taxonomy_term_separator' => ', ',
         ),
         'type' => 'ds_taxonomy_separator',
-        'weight' => 4,
+        'weight' => 6,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -1038,7 +1102,7 @@ function epd_edited_collection_field_default_field_instances() {
           'file_view_mode' => 'image_with_caption',
         ),
         'type' => 'file_rendered',
-        'weight' => 23,
+        'weight' => 16,
       ),
       'image_teaser' => array(
         'label' => 'above',
@@ -1190,14 +1254,14 @@ function epd_edited_collection_field_default_field_instances() {
         'weight' => 5,
       ),
       'full' => array(
-        'label' => 'hidden',
+        'label' => 'above',
         'module' => 'ds',
         'settings' => array(
           'taxonomy_term_reference_view_mode' => 'full',
           'use_content_language' => 1,
         ),
         'type' => 'ds_taxonomy_view_mode',
-        'weight' => 1,
+        'weight' => 5,
       ),
       'image_teaser' => array(
         'label' => 'above',
