@@ -274,6 +274,7 @@ body:before {
 .meta2 { line-height: 22px; }
 .group-authors .meta1  { width: 100%;}
 .authors-list { margin: 10px 0; padding:0}
+.authors-list .label-above { display: none; }
 .authors-list  ul{ margin: 0px 0; padding:0}
 .authors-list li { display: none;}
 .authors-list li.first{ display: block;}
