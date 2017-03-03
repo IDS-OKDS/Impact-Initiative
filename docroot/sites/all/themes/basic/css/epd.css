@@ -182,6 +182,8 @@ body:before {
 
 .node-edited-collection-chapter blockquote { font-size: 20px; line-height: 24px; }
 
+.case-study .contentp table {width: auto !important; }
+.case-study .contentp table td { padding: 4px; border-color: #444; border-style: dotted; border-width: 1px; background-color: #f3f3f3;}
 /* Amended - Prev and next buttons */
 .view-edited-collection-chapter .views-field-field-chapters a { font-weight: bold; text-decoration: none; display: inline-block;padding: 6px 8px; border: 2px solid #999; border-radius: 4px; background-color: #fff; color: #777; margin-right: 10px;}
 .view-edited-collection-chapter .views-field-field-chapters a:hover {background-color: #777; color: #fff; }
@@ -274,7 +276,7 @@ body:before {
 .meta2 { line-height: 22px; }
 .group-authors .meta1  { width: 100%;}
 .authors-list { margin: 10px 0; padding:0}
-.authors-list .label-above { display: none; }
+.authors-list .label-above  { display: none; }
 .authors-list  ul{ margin: 0px 0; padding:0}
 .authors-list li { display: none;}
 .authors-list li.first{ display: block;}
@@ -1201,7 +1203,7 @@ h4.top-tip-title { font-weight: bold; }
     float: right;
     margin: 0 5px 10px 10px;
 }
-
+.vocabulary-people .lab-image img { max-width: 140px; height: auto; }
 .vocabulary-people p {
     font-weight: 400;
 }

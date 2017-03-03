@@ -89,6 +89,28 @@
 						<?php endif; ?>
 					</div>
 				</div>
+				<div class="w-row">
+					<div class="w-col w-col-6">
+						<?php if(isset($fields_content[5])): ?>
+						<?php print($fields_content[5]['style']); ?>
+						<a class="w-clearfix w-inline-block featuredlinkblock small" href="<?php print($fields_content[5]['url']); ?>">
+							<div class="w-clearfix featuredphoto featuredphoto_<?php print($fields_content[5]['nid']); ?>">
+							<h3 class="featuredh3"><?php print($fields_content[5]['title']); ?></h3>
+						</div>
+						</a>
+						<?php endif; ?>
+					</div>
+					<div class="w-col w-col-6">
+						<?php if(isset($fields_content[6])): ?>
+						<?php print($fields_content[6]['style']); ?>
+						<a class="w-clearfix w-inline-block featuredlinkblock small" href="<?php print($fields_content[6]['url']); ?>">
+						<div class="w-clearfix featuredphoto featuredphoto_<?php print($fields_content[6]['nid']); ?>">
+							<h3 class="featuredh3"><?php print($fields_content[6]['title']); ?></h3>
+						</div>
+						</a>
+						<?php endif; ?>
+					</div>
+				</div>
 				<p class="seemore"><a href="/blog">See more News and Views</a></p>
 				</div>
 				

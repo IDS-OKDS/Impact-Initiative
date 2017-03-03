@@ -233,62 +233,6 @@ function epd_case_study_ds_field_settings_info() {
     'field_published_date' => array(
       'formatter_settings' => array(
         'ft' => array(
-          'lbw-el' => 'div',
-          'lbw-cl' => 'meta1',
-          'ow' => TRUE,
-          'ow-el' => 'div',
-          'ow-cl' => 'metaentry w-clearfix',
-          'ow-def-cl' => FALSE,
-          'ow-at' => '',
-          'ow-def-at' => FALSE,
-        ),
-      ),
-    ),
-    'field_project_link_text' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'fis' => TRUE,
-          'fis-el' => 'div',
-          'fis-cl' => 'contentp flex w-clearfix',
-          'fis-at' => '',
-          'fis-def-at' => FALSE,
-        ),
-      ),
-    ),
-    'field_published_date' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'lbw' => 1,
-          'lbw-el' => 'div',
-          'lbw-cl' => 'meta1',
-          'ow' => TRUE,
-          'ow-el' => 'div',
-          'ow-cl' => 'metaentry w-clearfix',
-          'ow-def-cl' => FALSE,
-          'ow-at' => '',
-          'ow-def-at' => FALSE,
-          'fis' => TRUE,
-          'fis-el' => 'div',
-          'fis-cl' => 'meta2',
-          'fis-at' => '',
-          'fis-def-at' => FALSE,
-        ),
-      ),
-    ),
-    'field_project_link_text' => array(
-      'formatter_settings' => array(
-        'ft' => array(
-          'fis' => TRUE,
-          'fis-el' => 'div',
-          'fis-cl' => 'contentp flex w-clearfix',
-          'fis-at' => '',
-          'fis-def-at' => FALSE,
-        ),
-      ),
-    ),
-    'field_published_date' => array(
-      'formatter_settings' => array(
-        'ft' => array(
           'lbw' => 1,
           'lbw-el' => 'div',
           'lbw-cl' => 'meta1',
@@ -528,8 +472,8 @@ function epd_case_study_ds_layout_settings_info() {
         29 => 'field_researchers_images',
         30 => 'field_researchers_top_tips',
         31 => 'field_references',
-        32 => 'field_people',
-        33 => 'field_published_date',
+        32 => 'field_published_date',
+        33 => 'field_people',
         34 => 'group_social_wrapper',
         35 => 'field_main_image',
         36 => 'group_author_wrapper',
@@ -570,8 +514,8 @@ function epd_case_study_ds_layout_settings_info() {
       'field_researchers_images' => 'ds_content',
       'field_researchers_top_tips' => 'ds_content',
       'field_references' => 'ds_content',
-      'field_people' => 'ds_content',
       'field_published_date' => 'ds_content',
+      'field_people' => 'ds_content',
       'group_social_wrapper' => 'ds_content',
       'field_main_image' => 'ds_content',
       'group_author_wrapper' => 'ds_content',
