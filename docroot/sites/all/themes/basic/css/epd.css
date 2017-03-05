@@ -63,6 +63,21 @@ ol.numbered li::before {
     color: white;
     text-decoration: none;
 }
+.about-impact-lab { margin-top: 20px; }
+.field-name-field-linked-file a {
+	display: inline-block;
+    margin-top: 6px;
+    font-size: 14px;
+    line-height: 14px;
+    padding: 10px;
+    clear: both;
+    border-radius: 4px;
+    background-color: #0082f3;
+    font-family: Lato, sans-serif;
+    color: #fff;
+    font-weight: 400;
+    text-decoration: none;
+}
 
 .w-nav-menu  .w-nav-link {
 	font-size:inherit;

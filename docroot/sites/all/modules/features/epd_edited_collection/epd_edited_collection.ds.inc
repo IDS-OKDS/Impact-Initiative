@@ -168,6 +168,52 @@ function epd_edited_collection_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'edited_collection';
   $ds_fieldsetting->view_mode = 'full';
   $ds_fieldsetting->settings = array(
+    'about_the_impact_lab_2' => array(
+      'weight' => '3',
+      'label' => 'above',
+      'format' => 'default',
+      'formatter_settings' => array(
+        'ft' => array(
+          'lbw' => 1,
+          'lbw-el' => 'h3',
+          'lbw-cl' => 'about-impact about-impact-lab',
+          'ow' => TRUE,
+          'ow-el' => 'div',
+          'ow-cl' => 'related-link-block top-info',
+          'ow-def-cl' => FALSE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+          'fis' => TRUE,
+          'fis-el' => 'p',
+          'fis-cl' => 'about-iiabout-ii',
+          'fis-at' => '',
+          'fis-def-at' => FALSE,
+        ),
+      ),
+    ),
+    'licensing_2' => array(
+      'weight' => '4',
+      'label' => 'above',
+      'format' => 'default',
+      'formatter_settings' => array(
+        'ft' => array(
+          'lbw' => 1,
+          'lbw-el' => 'h3',
+          'lbw-cl' => 'licensing',
+          'ow' => TRUE,
+          'ow-el' => 'div',
+          'ow-cl' => 'related-link-block top-info licensing-content',
+          'ow-def-cl' => FALSE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+          'fis' => TRUE,
+          'fis-el' => 'p',
+          'fis-cl' => '',
+          'fis-at' => '',
+          'fis-def-at' => FALSE,
+        ),
+      ),
+    ),
     'addthis' => array(
       'weight' => '1',
       'label' => 'hidden',
@@ -198,7 +244,7 @@ function epd_edited_collection_ds_field_settings_info() {
           'lbw-cl' => 'case-study-h2',
           'fis' => TRUE,
           'fis-el' => 'div',
-          'fis-cl' => 'contentp flex w-clearfix',
+          'fis-cl' => 'contentp flex w-clearfix edited-collection-foreword',
           'fis-at' => '',
           'fis-def-at' => FALSE,
         ),
@@ -298,6 +344,21 @@ function epd_edited_collection_ds_custom_fields_info() {
 
   $ds_field = new stdClass();
   $ds_field->api_version = 1;
+  $ds_field->field = 'about_the_impact_lab_2';
+  $ds_field->label = 'About The Impact Lab';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = '';
+  $ds_field->properties = array(
+    'block' => 'epd_copyright_licensing|epd_about_impact_lab',
+    'block_render' => '3',
+  );
+  $export['about_the_impact_lab_2'] = $ds_field;
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
   $ds_field->field = 'chapter_navigation';
   $ds_field->label = 'Chapter Navigation';
   $ds_field->field_type = 6;
@@ -340,6 +401,21 @@ function epd_edited_collection_ds_custom_fields_info() {
     'block_render' => '1',
   );
   $export['collection_link'] = $ds_field;
+
+  $ds_field = new stdClass();
+  $ds_field->api_version = 1;
+  $ds_field->field = 'licensing_2';
+  $ds_field->label = 'Licensing';
+  $ds_field->field_type = 6;
+  $ds_field->entities = array(
+    'node' => 'node',
+  );
+  $ds_field->ui_limit = '';
+  $ds_field->properties = array(
+    'block' => 'epd_copyright_licensing|epd_copyright_licensing',
+    'block_render' => '3',
+  );
+  $export['licensing_2'] = $ds_field;
 
   return $export;
 }
@@ -550,33 +626,37 @@ function epd_edited_collection_ds_layout_settings_info() {
   $ds_layout->settings = array(
     'regions' => array(
       'ds_content' => array(
-        0 => 'field_people',
-        1 => 'group_content_wrapper',
-        2 => 'title',
-        3 => 'addthis',
-        4 => 'field_published_date',
-        5 => 'group_pub',
-        6 => 'field_pdf_download',
+        0 => 'group_content_wrapper',
+        1 => 'field_published_date',
+        2 => 'addthis',
+        3 => 'title',
+        4 => 'group_pub',
+        5 => 'field_pdf_download',
+        6 => 'field_people',
         7 => 'field_short_title',
-        8 => 'group_title_wrapper',
-        9 => 'group_intro',
-        10 => 'group_social_wrapper',
-        11 => 'field_main_image',
-        12 => 'field_foreward',
-        13 => 'field_foreward_author',
-        14 => 'chapter_teaser',
-        15 => 'field_introduction',
+        8 => 'about_the_impact_lab_2',
+        9 => 'licensing_2',
+        10 => 'group_title_wrapper',
+        11 => 'group_intro',
+        12 => 'group_social_wrapper',
+        13 => 'field_main_image',
+        14 => 'field_foreward',
+        15 => 'field_foreward_author',
+        16 => 'chapter_teaser',
+        17 => 'field_introduction',
       ),
     ),
     'fields' => array(
-      'field_people' => 'ds_content',
       'group_content_wrapper' => 'ds_content',
-      'title' => 'ds_content',
-      'addthis' => 'ds_content',
       'field_published_date' => 'ds_content',
+      'addthis' => 'ds_content',
+      'title' => 'ds_content',
       'group_pub' => 'ds_content',
       'field_pdf_download' => 'ds_content',
+      'field_people' => 'ds_content',
       'field_short_title' => 'ds_content',
+      'about_the_impact_lab_2' => 'ds_content',
+      'licensing_2' => 'ds_content',
       'group_title_wrapper' => 'ds_content',
       'group_intro' => 'ds_content',
       'group_social_wrapper' => 'ds_content',

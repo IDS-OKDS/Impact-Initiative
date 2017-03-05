@@ -507,7 +507,7 @@ function epd_edited_collection_field_default_field_instances() {
           'use_content_language' => 1,
         ),
         'type' => 'ds_taxonomy_view_mode',
-        'weight' => 0,
+        'weight' => 2,
       ),
       'image_teaser' => array(
         'label' => 'above',

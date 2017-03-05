@@ -38,7 +38,20 @@ Drupal.behaviors.basic = {
          $(this).addClass("content-section-title clearfix").before('<span class="precounter">' + (i+1) + '</span>');
      });
 	 $('.homepage-titles').css('border-bottom-color', $('.node-edited-collection-chapter .contentp h2 span').css("background-color"));
-    });
+     $('.edited-collection-foreword').append('<div class="read-more"><a href="#">Read more</a></div>');
+	 $('.edited-collection-foreword .read-more a').click(function() {
+		$('.edited-collection-foreword p').each(function (i) {
+			$(this).fadeIn();
+		});
+		$(this).text('');
+	 });
+	 $('.edited-collection-foreword p').each(function (i) {
+		if (i>0){
+			$(this).hide();
+		}
+     });
+  
+	});
 
     $(window).load(function() {
       // Execute code once the window is fully loaded.

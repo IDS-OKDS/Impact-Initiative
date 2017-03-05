@@ -218,6 +218,70 @@ function epd_resource_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-resource-field_linked_file'.
+  $field_instances['node-resource-field_linked_file'] = array(
+    'bundle' => 'resource',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'module' => 'link',
+        'settings' => array(),
+        'type' => 'link_default',
+        'weight' => 8,
+      ),
+      'image_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'text_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_linked_file',
+    'label' => 'Linked File',
+    'required' => FALSE,
+    'settings' => array(
+      'absolute_url' => 1,
+      'attributes' => array(
+        'class' => '',
+        'rel' => '',
+        'target' => 'default',
+      ),
+      'display' => array(
+        'url_cutoff' => 80,
+      ),
+      'enable_tokens' => 1,
+      'title' => 'optional',
+      'title_label_use_field_label' => FALSE,
+      'title_maxlength' => 128,
+      'title_value' => '',
+      'url' => 0,
+      'user_register_form' => FALSE,
+      'validate_url' => 1,
+    ),
+    'widget' => array(
+      'module' => 'link',
+      'settings' => array(),
+      'type' => 'link_field',
+      'weight' => 10,
+    ),
+  );
+
   // Exported field_instance: 'node-resource-field_primary_theme'.
   $field_instances['node-resource-field_primary_theme'] = array(
     'bundle' => 'resource',
@@ -524,6 +588,7 @@ function epd_resource_field_default_field_instances() {
   t('Associated projects');
   t('Attached File');
   t('Body');
+  t('Linked File');
   t('Primary theme');
   t('Resource type');
   t('Short Title');

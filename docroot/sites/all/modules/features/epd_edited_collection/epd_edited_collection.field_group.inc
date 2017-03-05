@@ -282,6 +282,8 @@ function epd_edited_collection_field_group_info() {
     'children' => array(
       0 => 'field_published_date',
       1 => 'field_people',
+      2 => 'about_the_impact_lab_2',
+      3 => 'licensing_2',
     ),
     'format_type' => 'html-element',
     'format_settings' => array(

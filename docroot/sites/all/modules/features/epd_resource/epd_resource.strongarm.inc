@@ -83,6 +83,15 @@ function epd_resource_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'image_teaser' => array(
+        'custom_settings' => TRUE,
+      ),
+      'text_teaser' => array(
+        'custom_settings' => TRUE,
+      ),
+      'revision' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
