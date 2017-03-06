@@ -119,6 +119,9 @@
 					<?php $block = module_invoke('epd_copyright_licensing', 'block_view','epd_about_impact_lab');
 						  print render($block['content']);?>
 					<!--p class="contentp">Find out <a href="">what makes impact work</a></p-->
+					
+					<h3>Edited collection of articles</h3>
+					<?php print views_embed_view('impact_lab_landing_page', 'edited_collection_list_block');?>
 					<h3>Learning guides</h3>
 					<?php print views_embed_view('learning_guides', 'block');?>
 				<p class="seemore"><a href="/impact-lab">See more at the Impact Lab</a></p>
