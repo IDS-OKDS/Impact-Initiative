@@ -192,8 +192,8 @@ body:before {
 .node-impact-lab-landing-page table { max-width: 100%; height: auto; }
 .node-impact-lab-landing-page table td { padding: 4px; vertical-align: top;}
 /* Amended, plus color background on .node-edited-collection-chapter .contentp span.precounter */
-.node-edited-collection-chapter .contentp h2.content-section-title { margin-top: 14px;margin-left: 2.5em; }
-.node-edited-collection-chapter .contentp span.precounter { background-color: #26275f; float: left; text-align: center; color: #fff; margin: 0 0.4em 0.5em 0; border: 2px solid #fff; box-shadow: 0 0 3px 0 rgba(0, 0, 0, .4); font-size: 2em; display: block; width: 2em; height: 2em; line-height: 1.7em;}
+.node-edited-collection-chapter .contentp h2.content-section-title { margin-top: 60px;margin-left: 2.5em; }
+.node-edited-collection-chapter .contentp span.precounter { background-color: #26275f; float: left; text-align: center; color: #fff; margin: 40px 0.4em 0.5em 0; border: 2px solid #fff; box-shadow: 0 0 3px 0 rgba(0, 0, 0, .4); font-size: 2em; display: block; width: 2em; height: 2em; line-height: 1.7em;}
 
 .node-edited-collection-chapter blockquote { font-size: 20px; line-height: 24px; }
 
@@ -1042,10 +1042,28 @@ h4.top-tip-title { font-weight: bold; }
   width: 66%;
 }
 .node-type-impact-lab-landing-page .lab-image.case-study {
-    width: 50%;
-    float: right;
-    margin-left: 40px;
+    width: 100%;
 }
+.impact-lab-intro {
+	float: left;
+    width: 48%;
+}
+.video-playlist {
+	float: right;
+    width: 48%;
+}
+.video-playlist-wrapper {
+    padding: 10px;
+    background-color: #eee;
+    border-radius: 10px;
+	margin-bottom: 20px;
+}
+.video-playlist-wrapper p { font-size: 0.8em; line-height: 1.6em; padding: 10px 0; }
+.video-playlist-wrapper iframe {
+	max-width: 100%; 
+}
+
+
 .contentp.flex {
   width: 66%;
 }
@@ -1236,3 +1254,5 @@ h4.top-tip-title { font-weight: bold; }
 .vocabulary-people {
     padding-bottom: 10px;
 }
+
+

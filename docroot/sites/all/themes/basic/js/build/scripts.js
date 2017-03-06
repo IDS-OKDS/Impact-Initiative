@@ -37,7 +37,7 @@ Drupal.behaviors.basic = {
 	 $(".node-edited-collection-chapter .contentp h2").each(function(i) {
          $(this).addClass("content-section-title clearfix").before('<span class="precounter">' + (i+1) + '</span>');
      });
-	 $('.homepage-titles').css('border-bottom-color', $('.node-edited-collection-chapter .contentp h2 span').css("background-color"));
+	 $('.homepage-titles').css('border-bottom-color', $('.node-edited-collection-chapter .contentp span.precounter').css("background-color"));
      $('.edited-collection-foreword').append('<div class="read-more"><a href="#">Read more</a></div>');
 	 $('.edited-collection-foreword .read-more a').click(function() {
 		$('.edited-collection-foreword p').each(function (i) {
