@@ -1041,6 +1041,11 @@ h4.top-tip-title { font-weight: bold; }
 .lab-image.case-study {
   width: 66%;
 }
+.node-type-impact-lab-landing-page .lab-image.case-study {
+    width: 50%;
+    float: right;
+    margin-left: 40px;
+}
 .contentp.flex {
   width: 66%;
 }
