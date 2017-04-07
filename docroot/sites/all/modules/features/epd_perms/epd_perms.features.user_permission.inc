@@ -117,6 +117,7 @@ function epd_perms_user_default_permissions() {
     'name' => 'access dashboard',
     'roles' => array(
       'administrator' => 'administrator',
+      'editor' => 'editor',
     ),
     'module' => 'dashboard',
   );
@@ -811,16 +812,6 @@ function epd_perms_user_default_permissions() {
       'administrator' => 'administrator',
     ),
     'module' => 'context_ui',
-  );
-
-  // Exported permission: 'administer epd copyright and licensing'.
-  $permissions['administer epd copyright and licensing'] = array(
-    'name' => 'administer epd copyright and licensing',
-    'roles' => array(
-      'administrator' => 'administrator',
-      'editor' => 'editor',
-    ),
-    'module' => 'epd_copyright_licensing',
   );
 
   // Exported permission: 'administer epd map descriptions'.

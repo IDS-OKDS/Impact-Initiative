@@ -28,7 +28,7 @@ function epd_events_context_default_contexts() {
       'blocks' => array(
         'views-events-block' => array(
           'module' => 'views',
-          'delta' => 'events-block',
+          'delta' => 'events-block_2',
           'region' => 'content',
           'weight' => '-10',
         ),

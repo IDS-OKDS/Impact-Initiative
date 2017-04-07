@@ -1,4 +1,4 @@
-.views-exposed-form .views-exposed-widget,
-.views-widget .chosen-container {
+#views-exposed-form-search-page .views-exposed-form .views-exposed-widget,
+#views-exposed-form-search-page .views-widget .chosen-container {
 	width:100% !important;
 }

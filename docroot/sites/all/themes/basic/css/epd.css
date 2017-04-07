@@ -923,14 +923,15 @@ input.form-submit { padding: 4px 8px; background-color: rgba(0,130,243,1); color
 }
 
 /* Event Hub */
-.block-views-events-block,
+.block-views-events-block_2,
 .block-views-events-block_1 {
   border-top: 1px solid black;
 }
-
-.block-views-events-block .title,
-.block-views-events-block_1 .title {
-  display: none;
+.view-events  .views-row {
+  padding: 1em;
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+  margin: 2em 0;
 }
 
 .view-events .node-event {

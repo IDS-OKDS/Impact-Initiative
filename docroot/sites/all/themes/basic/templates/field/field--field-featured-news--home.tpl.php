@@ -12,6 +12,11 @@
 		    if($referenced_node):
 		    	$fields_content[$delta]['url'] = url('node/'.$referenced_node->nid);
 		    	$fields_content[$delta]['title'] = $referenced_node->title;
+				if (isset($referenced_node->field_short_title[LANGUAGE_NONE])) {
+					if ($referenced_node->field_short_title[LANGUAGE_NONE][0]['value'] !== '') {
+						$fields_content[$delta]['title'] = $referenced_node->field_short_title[LANGUAGE_NONE][0]['value'];
+					}
+				}
 		    	$fields_content[$delta]['nid'] = $referenced_node->nid;
 		    	$render_arr = field_view_field('node', $referenced_node, 'body', array(
 													  'type' => 'text_summary_or_trimmed', 
@@ -115,7 +120,7 @@
 				</div>
 				
 				<div class="w-col w-col-6 impact-lab">
-					<h2 class="h2featured alternative"><span class="icon-font impact "></span><?php print 'The Impact Lab'; ?></h2>
+					<h2 class="h2featured alternative"><span class="icon-font impact "></span><?php print l('The Impact Lab', 'node/1166'); ?></h2>
 					<?php $block = module_invoke('epd_copyright_licensing', 'block_view','epd_about_impact_lab');
 						  print render($block['content']);?>
 					<!--p class="contentp">Find out <a href="">what makes impact work</a></p-->

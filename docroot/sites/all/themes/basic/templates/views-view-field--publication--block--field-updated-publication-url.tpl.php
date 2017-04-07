@@ -39,7 +39,7 @@ if (isset($row->field_field_updated_publication_url[0])) {
 	$new_url = '';
 }
 //drupal_set_message('<pre>'.print_r($new[0]['raw'],true).'</pre>');
-print ('Orig '.$orig_url.'<br>new '.$new_url.'<br>');
+//print ('Orig '.$orig_url.'<br>new '.$new_url.'<br>');
 if (trim($new_url)!='') {
 		print l($new_url, $new_url);
 } else {
