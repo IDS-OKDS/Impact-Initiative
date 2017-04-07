@@ -1047,6 +1047,26 @@ h4.top-tip-title { font-weight: bold; }
     float: right;
     margin-left: 40px;
 }
+
+.impact-lab-intro {
+	float: left;
+    width: 48%;
+}
+.video-playlist {
+	float: right;
+    width: 48%;
+}
+.video-playlist-wrapper {
+    padding: 10px;
+    background-color: #eee;
+    border-radius: 10px;
+	margin-bottom: 20px;
+}
+.video-playlist-wrapper p { font-size: 0.8em; line-height: 1.6em; padding: 10px 0; }
+.video-playlist-wrapper iframe {
+	max-width: 100%; 
+}
+
 .contentp.flex {
   width: 66%;
 }
