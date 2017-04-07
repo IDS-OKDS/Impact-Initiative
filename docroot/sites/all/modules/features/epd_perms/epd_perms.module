@@ -1,5 +1,7 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the epd_perms feature.
  */
+
+include_once 'epd_perms.features.inc';
