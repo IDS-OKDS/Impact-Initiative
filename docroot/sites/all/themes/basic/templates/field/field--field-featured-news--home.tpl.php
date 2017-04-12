@@ -24,8 +24,8 @@
 													));
 		    	$fields_content[$delta]['body'] = render($render_arr);
 		    	//$image_path = basic_epd_get_field_image_path('field_supporting_image', $referenced_node);
-			$image_path = image_style_url('large', basic_epd_get_field_image_uri('field_supporting_image', $referenced_node));  
-		    	$fields_content[$delta]['style'] = "<style>.featuredphoto_{$referenced_node->nid}{ background-image:url($image_path);}</style>";   
+				$image_path = image_style_url('large', basic_epd_get_field_image_uri('field_supporting_image', $referenced_node));  
+		    	$fields_content[$delta]['style'] = "<style>.featuredphoto_{$referenced_node->nid}{ background-image:url($image_path) !important;}</style>";   
 		    ?>
             <?php endif; ?>
         <?php endforeach; ?>
