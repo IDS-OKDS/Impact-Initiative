@@ -481,12 +481,70 @@ function epd_events_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-home-field_featured_news'.
+  $field_instances['node-home-field_featured_news'] = array(
+    'bundle' => 'home',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'links' => TRUE,
+          'view_mode' => 'default',
+        ),
+        'type' => 'entityreference_entity_view',
+        'weight' => 0,
+      ),
+      'image_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'text_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_featured_news',
+    'label' => 'News and Views',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 4,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Aside');
   t('Body');
   t('Date');
   t('Location');
+  t('News and Views');
   t('Related Blogs');
   t('Related Projects');
   t('Resources');
