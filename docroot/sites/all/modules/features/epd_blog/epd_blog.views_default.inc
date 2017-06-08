@@ -256,7 +256,7 @@ function epd_blog_views_default_views() {
   $handler->display->display_options['fields']['created']['label'] = 'Posted';
   $handler->display->display_options['fields']['created']['element_type'] = 'strong';
   $handler->display->display_options['fields']['created']['date_format'] = 'custom';
-  $handler->display->display_options['fields']['created']['custom_date_format'] = 'd-m-Y';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'jS F';
   $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
   /* Field: Content: Supporting Image */
   $handler->display->display_options['fields']['field_supporting_image']['id'] = 'field_supporting_image';
