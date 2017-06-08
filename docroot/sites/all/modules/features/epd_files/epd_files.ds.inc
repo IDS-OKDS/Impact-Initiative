@@ -39,6 +39,18 @@ function epd_files_ds_field_settings_info() {
   $ds_fieldsetting->bundle = 'image';
   $ds_fieldsetting->view_mode = 'image_with_caption';
   $ds_fieldsetting->settings = array(
+    'field_file_image_attribution' => array(
+      'formatter_settings' => array(
+        'ft' => array(
+          'ow' => TRUE,
+          'ow-el' => 'div',
+          'ow-cl' => 'caption',
+          'ow-def-cl' => FALSE,
+          'ow-at' => '',
+          'ow-def-at' => FALSE,
+        ),
+      ),
+    ),
     'field_file_caption' => array(
       'formatter_settings' => array(
         'ft' => array(
@@ -104,6 +116,20 @@ function epd_files_ds_layout_settings_info() {
   $ds_layout->view_mode = 'image_with_caption';
   $ds_layout->layout = 'ds_reset';
   $ds_layout->settings = array(
+    'regions' => array(
+      'ds_content' => array(
+        0 => 'group_lab_image',
+        1 => 'file',
+        2 => 'field_file_caption',
+        3 => 'field_file_image_attribution',
+      ),
+    ),
+    'fields' => array(
+      'group_lab_image' => 'ds_content',
+      'file' => 'ds_content',
+      'field_file_caption' => 'ds_content',
+      'field_file_image_attribution' => 'ds_content',
+    ),
     'classes' => array(),
     'wrappers' => array(
       'ds_content' => 'div',
@@ -113,19 +139,6 @@ function epd_files_ds_layout_settings_info() {
     'layout_attributes_merge' => 1,
     'layout_link_attribute' => '',
     'layout_link_custom' => '',
-    'layout_disable_css' => FALSE,
-    'regions' => array(
-      'ds_content' => array(
-        0 => 'group_lab_image',
-        1 => 'file',
-        2 => 'field_file_caption',
-      ),
-    ),
-    'fields' => array(
-      'group_lab_image' => 'ds_content',
-      'file' => 'ds_content',
-      'field_file_caption' => 'ds_content',
-    ),
   );
   $export['file|image|image_with_caption'] = $ds_layout;
 

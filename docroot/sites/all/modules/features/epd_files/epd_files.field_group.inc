@@ -56,8 +56,9 @@ function epd_files_field_group_info() {
     'label' => 'Lab image',
     'weight' => '0',
     'children' => array(
-      0 => 'field_file_caption',
-      1 => 'file',
+      0 => 'field_file_image_attribution',
+      1 => 'field_file_caption',
+      2 => 'file',
     ),
     'format_type' => 'div',
     'format_settings' => array(

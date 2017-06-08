@@ -116,9 +116,8 @@ function epd_files_field_default_field_instances() {
       ),
       'image_with_caption' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 4,
       ),
       'media_responsive' => array(
@@ -187,7 +186,7 @@ function epd_files_field_default_field_instances() {
         'weight' => 2,
       ),
       'image_with_caption' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'module' => 'text',
         'settings' => array(),
         'type' => 'text_default',
@@ -271,9 +270,8 @@ function epd_files_field_default_field_instances() {
       ),
       'image_with_caption' => array(
         'label' => 'above',
-        'module' => 'text',
         'settings' => array(),
-        'type' => 'text_default',
+        'type' => 'hidden',
         'weight' => 5,
       ),
       'media_responsive' => array(
