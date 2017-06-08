@@ -96,6 +96,9 @@ function basic_preprocess_html(&$vars) {
 
 function basic_preprocess_page(&$vars, $hook) {
 
+    // add scroll to top button
+    drupal_add_js('//arrow.scrolltotop.com/arrow88.js', 'external');
+
 	if (isset($vars['node_title'])) {
 		$vars['title'] = $vars['node_title'];
 	}
