@@ -1257,3 +1257,9 @@ h4.top-tip-title { font-weight: bold; }
 .vocabulary-people {
     padding-bottom: 10px;
 }
+
+div.alert { transition: all .2s ease-in-out; -moz-box-shadow: 3px 3px 3px #aaa; -webkit-box-shadow: 3px 3px 10px #aaa; box-shadow: 3px 3px 10px #aaa; 
+margin: 0 10px 10px 10px; border: 1px solid #aaa;}
+div.alert h3 { margin: 0;text-transform: uppercase;color: #fff; padding: 10px; background-color: #26275f }
+div.alert .alert-inner { padding: 10px; }
+div.alert:hover{ transform: scale(1.02);-moz-transform: scale(1.02);-ms-transform: scale(1.02);-webkit-transform: scale(1.02);-o-transform: scale(1.02);}
