@@ -49,7 +49,7 @@ web:
             # suffixed with "s" (seconds), "m" (minutes), "h" (hours), "d"
             # (days), "w" (weeks), "M" (months, as 30 days) or "y" (years, as
             # 365 days).
-            expires: 5m
+            expires: 1d
 
             # Whether to forward disallowed and missing resources from this
             # location to the application.
