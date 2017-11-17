@@ -6,7 +6,7 @@ http://www.{default}/:
   cache:
     enabled: true
     headers: ['Accept', 'Accept-Language', 'X-Language-Locale']
-    cookies: []
+    cookies: ["/^SESS.*/"]
     default_ttl: 300
   ssi:
     enabled: false
