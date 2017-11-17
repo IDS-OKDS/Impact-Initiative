@@ -5,12 +5,9 @@ http://www.{default}/:
     paths: {}
   cache:
     enabled: true
-    default_ttl: 300
-    cookies:
-    - '*'
-    headers:
-    - Accept
-    - Accept-Language
+    headers: ['Accept', 'Accept-Language', 'X-Language-Locale']
+    cookies: ['*']
+    default_ttl: 60
   ssi:
     enabled: false
   upstream: app:http
