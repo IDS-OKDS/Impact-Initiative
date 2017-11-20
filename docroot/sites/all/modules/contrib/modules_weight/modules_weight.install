@@ -1,0 +1,21 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function module_weight_install() {
+  // Show or not the core modules.
+  variable_set('show_system_modules', FALSE);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function module_weight_uninstall() {
+  variable_del('show_system_modules');
+}
