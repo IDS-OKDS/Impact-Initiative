@@ -125,6 +125,14 @@
 						  print render($block['content']);?>
 					<!--p class="contentp">Find out <a href="">what makes impact work</a></p-->
 					
+					<div class="alert">
+						<h3>Calling ESRC DFID Grant Holders</h3>
+						<div class="alert-inner clearfix">
+							<div class="download-pdf-button top"><?php print l('Access support now', 'node/1255'); ?></div>
+							<p>Discover how to maximise the impact of your project</p>
+						</div>
+					</div>
+
 					<h3>Edited collection of articles</h3>
 					<?php print views_embed_view('impact_lab_landing_page', 'edited_collection_list_block');?>
 					<h3>Learning guides</h3>
