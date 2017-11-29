@@ -7,102 +7,160 @@
  * - On submission, trigger a batch task which iterates through each row in the file.
  */
 
+define('EPD_RC_API_SEARCH', 'http://gtr.rcuk.ac.uk/search/'); 
 define('EPD_RC_API', 'http://gtr.rcuk.ac.uk/gtr/api/');
+
+function _epd_get_parent_mlid($path) {
+	$mlid = db_query("SELECT mlid FROM {menu_links} WHERE link_path = ':path'", array(':path'=>$path))->fetchField();
+	//drupal_set_message('MLID = '.$mlid);
+	return $mlid;
+}
 
 /**
  * Implement hook_menu()
  */
 function epdmod_menu() {
 	$items['admin/config/epd'] = array(
-    'title' => 'Impact Initiative site administration',
-    'description' => 'Settings related to managing the Impact Initiative website.',
-    'position' => 'left',
-    'weight' => -15,
-    'page callback' => 'system_admin_menu_block_page',
-    'access arguments' => array('access administration pages'),
-    'file' => 'system.admin.inc',
-	'file path' => drupal_get_path('module', 'system'),
+		'title' => 'Impact Initiative site administration',
+		'description' => 'Settings related to managing the Impact Initiative website.',
+		'position' => 'left',
+		'weight' => -15,
+		'page callback' => 'system_admin_menu_block_page',
+		'access arguments' => array('access administration pages'),
+		'file' => 'system.admin.inc',
+		'file path' => drupal_get_path('module', 'system'),
 	);
 
 	$items['admin/config/epd/updates'] = array(
-    'title' => 'Ad-hoc data updates',
-    'description' => 'Updates related to updating data - USE WITH CARE.',
-    'page callback' => 'epdmod_updates_page',
-    'access arguments' => array('access administration pages'),
-    );
+		'title' => 'Data updates',
+		'description' => 'Updates to Impact Initiative website data.',
+		'position' => 'left',
+		'type' => MENU_NORMAL_ITEM, //menu type.
+		'weight' => 0,
+		'access arguments' => array('access administration pages'),
+		'file' => 'system.admin.inc',
+		'file path' => drupal_get_path('module', 'system'),
+	);
 
-	$items['admin/config/epd/import'] = array(
-    'title' => 'Import CSV',
-    'description' => 'Import project content from a <abbr title="Comma Separated Values">CSV</abbr> file . Used to call external API',
-	// 'access callback' => 'user_access',
-    'access arguments' => array('administer site configuration'),
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('epdmod_form'),
-	//  'file' => 'epdmod.admin.inc',
+	$items['admin/config/epd/imports'] = array(
+		'title' => 'Data imports',
+		'description' => 'Initial data imports from GTR.',
+		'access arguments' => array('access administration pages'),
+		'file' => 'system.admin.inc',
+		'file path' => drupal_get_path('module', 'system'),
+		'type' => MENU_NORMAL_ITEM, //menu type.
 	);
-	$items['admin/config/epd/ids-import'] = array(
-    'title' => 'Import IDS Additional data CSV',
-    'description' => 'Import additional data from IDS into imported content',
-	// 'access callback' => 'user_access',
-    'access arguments' => array('administer site configuration'),
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('epdmod_idsinternal_form'),
-	//  'file' => 'epdmod.admin.inc',
+
+	$items['admin/config/epd/exports'] = array(
+		'title' => 'Data exports for OpenDocs',
+		'description' => 'Export data for OpenDocs, archiving and updating.',
+		'access arguments' => array('access administration pages'),
+		'file' => 'system.admin.inc',
+		'file path' => drupal_get_path('module', 'system'),
+		'type' => MENU_NORMAL_ITEM, //menu type.
 	);
-	$items['admin/config/epd/locations'] = array(
-    'title' => 'Populate locations',
-    'description' => 'Populate the Project location fields based on the Open Calais data.',
-	// 'access callback' => 'user_access',
-    'access arguments' => array('administer site configuration'),
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('epdmod_location_form'),
-	//  'file' => 'epdmod.admin.inc',
+
+	$items['admin/config/epd/imports/import'] = array(
+		'title' => 'Import CSV',
+		'description' => 'Import project content from a <abbr title="Comma Separated Values">CSV</abbr> file . Used to call external API',
+		'access arguments' => array('administer site configuration'),
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('epdmod_form'),
+	);
+
+	$items['admin/config/epd/imports/ids-import'] = array(
+		'title' => 'Import IDS Additional data CSV',
+		'description' => 'Import additional data from IDS into imported content',
+		'access arguments' => array('administer site configuration'),
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('epdmod_idsinternal_form'),
+		//'plid' => _epd_get_parent_mlid('admin/config/epd/imports'),
+	);
+
+	$items['admin/config/epd/updates/locations'] = array(
+		'title' => 'Populate locations',
+		'description' => 'Populate the Project location fields based on the Open Calais data.',
+		'access arguments' => array('administer site configuration'),
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('epdmod_location_form'),
 	);
 	
-	$items['admin/config/epd/updates/keywords'] = array(
-    'title' => 'Import keywords data CSV',
-    'description' => 'Import additional keywords data into content',
-	// 'access callback' => 'user_access',
-    'access arguments' => array('administer site configuration'),
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('epdmod_keywords_form'),
-	//  'file' => 'epdmod.admin.inc',
-	);
-	$items['admin/config/epd/updates/keyword_mappings'] = array(
-    'title' => 'Process keyword mappings',
-    'description' => 'Process II keywords, based on imported keywords',
-	// 'access callback' => 'user_access',
-    'access arguments' => array('administer site configuration'),
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('epdmod_process_mapped_keywords_form'),
-	//  'file' => 'epdmod.admin.inc',
-	);
-	$items['admin/config/epd/updates/url_updates'] = array(
-    'title' => 'Process URL updates',
-    'description' => 'Process updated URLs, by node id. New URLs come from OpenDocs or elsewhere on the web',
-    'access arguments' => array('administer site configuration'),
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('epdmod_process_url_updates_form'),
-	);return $items ;
-}
-
-/**
- * Build a form to upload CSV to.
- */
-function epdmod_updates_page() {
-	$content['raw_markup'] = array(
-		'#type' => 'markup',
-		'#markup' => '<ul>'.
-					'<li>'.l('Import keyword mappings', 'admin/config/epd/updates/keywords').'</li>'.
-					'<li>'.l('Process keyword mappings', 'admin/config/epd/updates/keyword_mappings').'</li>'.
-					'<li>'.l('Import URL updates', 'admin/config/epd/updates/url_updates').'</li>'.
-					'</ul>',
+	$items['admin/config/epd/imports/keywords'] = array(
+		'title' => 'Import keywords data CSV',
+		'description' => 'Import additional keywords data into content',
+		'access arguments' => array('administer site configuration'),
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('epdmod_keywords_form'),
 	);
 
-  return $content;
-	
+	$items['admin/config/epd/imports/keyword_mappings'] = array(
+		'title' => 'Process keyword mappings',
+		'description' => 'Process II keywords, based on imported keywords',
+		'access arguments' => array('administer site configuration'),
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('epdmod_process_mapped_keywords_form'),
+	);
+
+	$items['admin/config/epd/imports/url_updates'] = array(
+		'title' => 'Process URL updates',
+		'description' => 'Process updated URLs, by node id. New URLs come from OpenDocs or elsewhere on the web',
+		'access arguments' => array('administer site configuration'),
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('epdmod_process_url_updates_form'),
+	);
+
+	$items['admin/config/epd/updates/update_pubs_from_gtr'] = array(
+		'title' => 'Update single project with publications from GTR (Research Fish)',
+		'description' => 'Import new publications from '.l('GTR', EPD_RC_API_SEARCH).', by grant id.',
+		'access arguments' => array('administer site configuration'),
+		'page callback' => 'drupal_get_form',
+		'page arguments' => array('epdmod_update_pubs_from_gtr_form'),
+	);
+
+	$items['node/%node/import-publications'] = array(
+		'title' => 'Import publications from GTR',
+		'access callback' => '_epdmod_project_access_check',
+		'page arguments' => array(1),
+		'access arguments' => array(1),
+		'type' => MENU_LOCAL_TASK,
+		'page callback' => '_epdmod_import_publications',
+	);
+
+	return $items ;
 }
-  
+
+
+function epdmod_menu_link_alter(&$item) {
+
+	if ($item['link_path']=='/admin/config/epd/updates/projects') {
+		// This is done automatically
+		//$item['plid'] = _epd_get_parent_mlid('/admin/config/epd/updates');
+	}
+}
+
+function _epdmod_project_access_check($node) {
+	if ($node->type != 'project') {
+		return FALSE;
+	}
+	if (user_access('access administration menu')) {
+		return TRUE;
+	}
+	return FALSE;
+}
+
+
+function _epdmod_import_publications($node) {
+	if (!is_object($node)) {
+		$node = node_load($node);
+	}
+
+	_epdmod_get_project_outcomes($node);
+	node_save($node);
+	drupal_set_message('Project '. l($node->title,'node/'.$node->nid).' updated');
+	drupal_goto('node/'.$node->nid);
+	return true;
+}
+
   
 /**
  * Build a form to upload CSV to.
@@ -275,7 +333,24 @@ function epdmod_process_url_updates_form() {
     );
     return $form ;
 }
-
+/**
+ * Build a simple form to enter grant id 
+ */
+function epdmod_update_pubs_from_gtr_form() {
+    
+   $form['grant_reference'] = array(
+    '#title' => t('Grant reference'),
+    '#type'  => 'textfield',
+    '#default_value'  => '',
+    '#size' => 10,
+    '#description' => t('The grant reference value.'),    
+    );
+   $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Update publications'),
+    );
+    return $form ;
+}
 
 /**
  * Build a simple form to start location 
@@ -418,6 +493,28 @@ function epdmod_form_submit(&$form, &$form_state) {
 }
 
 
+function epdmod_update_pubs_from_gtr_form_submit(&$form, &$form_state) {
+
+    $batch = array(
+    'title' => t('Updating publications ...'),
+    'operations' => array(),
+    'init_message' => t('Commencing'),
+    'progress_message' => t('Processed @current out of @total.'),
+    'error_message' => t('An error occurred during processing'),
+    'finished' => 'epdmod_import_finished',
+	) ;
+
+	if ( isset( $form_state['values']['grant_reference'] ) ) {
+		$grant_reference = $form_state['values']['grant_reference'];
+		drupal_set_message('Processing '. $grant_reference);
+		//foreach ($form_state['values']['grant_reference'] as $grant_reference) {
+			$node = _epdmod_load_node_from_field('grant_reference', $grant_reference, 'project');
+			$values = array($node); 
+			$batch['operations'][] = array('_epdmod_get_project_outcomes', $values);
+		//}
+	}
+	batch_set($batch);
+}
 /**
  * This is for the IDS internal import data
  */
@@ -1049,11 +1146,11 @@ function _epdmod_create_project_node($project) {
 	}
 
 	$node->body[$node->language][0]['format'] = 'full_html';
-	$node->body[$node->language][0]['value'] = $project->abstractText;
+	$node->body[$node->language][0]['value'] = nl2br($project->abstractText);
 
 	if(isset($project->potentialImpact)){
 		$node->field_potential_impact[$node->language][0]['format'] = 'full_html';
-		$node->field_potential_impact[$node->language][0]['value'] = nlbr($project->potentialImpact);
+		$node->field_potential_impact[$node->language][0]['value'] = nl2br($project->potentialImpact);
 	}
 
 	_epdmod_process_project_links($node, $project->links->link);
@@ -1089,31 +1186,294 @@ function _epdmod_node_save(&$node){
 	//drupal_set_message( "Node with nid " . $node->nid . " saved!\n");
 }
 
+
+/****************************
+* Create actions for VBO to process publications
+****************************/
+function epdmod_action_info() {
+	return array(
+		/*'epdmod_add_outcomes' => array(
+			'type' => 'node',
+			'label' => t('Get [new?] outcomes (publications) for a project'),
+			'behavior' => array('changes_property'),
+			'configurable' => FALSE,
+			'vbo_configurable' => TRUE,
+			'triggers' => array('any'),
+		),*/
+		'epdmod_update_themes_for_publications' => array(
+			'type' => 'node',
+			'label' => t('Update themes for a publication (add project primary theme)'),
+			'behavior' => array('changes_property'),
+			'configurable' => FALSE,
+			'vbo_configurable' => FALSE,
+			'pass rows' => TRUE, // This is useful, but might pass a lot of stuff we don't need
+			'triggers' => array('any'),
+		),
+		'epdmod_update_project_publications_from_gtr' => array(
+			'type' => 'node',
+			'label' => t('Update publications for a project from gtr'),
+			'behavior' => array('changes_property'),
+			'configurable' => FALSE,
+			'vbo_configurable' => FALSE,
+			'pass rows' => TRUE, // This is useful, but might pass a lot of stuff we don't need
+			'triggers' => array('any'),
+		),
+
+		'epdmod_update_publication_in_opendocs_flag' => array(
+			'type' => 'node',
+			'label' => t('Update publications to indicate if a document is in OpenDocs'),
+			'behavior' => array('changes_property'),
+			'configurable' => FALSE,
+			'vbo_configurable' => FALSE,
+			'pass rows' => TRUE, 
+			'triggers' => array('any'),
+		),
+	);
+}
+
+// EXAMPLE ONLY
+function epdmod_epdmod_add_outcomes_views_bulk_operations_form($options) {
+  $form = array();
+  $form['hero'] = array(
+    '#type' => 'select', 
+    '#title' => t('Choose your super hero'),
+    '#options' => array(
+      'Iron Man' => t('Iron Man'),
+      'Bat Man' => t('Bat Man'),
+    ),
+    '#default_value' => !empty($options['hero']) ? $options['hero'] : '',
+  );
+  
+  return $form;
+}
+
+
+function epdmod_update_publication_in_opendocs_flag(&$node, $context) {
+
+	// Works on a publications node
+	// Get publications and then get any new ones from gtr
+
+	$publication_id = $node->nid;
+	$urls = array();
+	if(isset($node->field_publication_url[LANGUAGE_NONE])){
+		foreach($node->field_publication_url[LANGUAGE_NONE] as $url){
+			$urls[] = $url['value'];
+		}
+	}
+	if(isset($node->field_updated_publication_url[LANGUAGE_NONE])){
+		foreach($node->field_updated_publication_url[LANGUAGE_NONE] as $url){
+			$urls[] = $url['url'];
+		}
+	}
+	if (_epdmod_is_in_opendocs($urls)) {
+		$node->field_in_opendocs[$node->language][0]['value'] = '1';
+	} else {
+		$node->field_in_opendocs[$node->language][0]['value'] = '0';
+	}
+	node_save($node);
+	
+}
+
+function _epdmod_is_in_opendocs($urls) {
+	foreach($urls as $url) {
+		if (strpos($url, 'opendocs.ids.ac.uk') !== false) {
+			return true; 
+		}
+	}
+	return false;
+}
+
+function epdmod_update_project_publications_from_gtr(&$node, $context) {
+
+	// Works on a project node
+	// Get publications and then get any new ones from gtr
+
+	$project_id = $node->nid;
+	if(isset($node->field_publications[LANGUAGE_NONE])){
+		foreach($node->field_publications[LANGUAGE_NONE] as $node_ref){
+			if(isset($node_ref['target_id'])){
+				$child_nids[] = $node_ref['target_id'];
+			}
+		}
+	}
+	foreach($child_nids as $child_nid){
+		$pub = node_load($child_nid);
+		//foreach($pub->field_publications)
+		//
+		//$urls = 
+	}
+	
+	//$node = _epdmod_load_node_from_field('grant_reference', $project->identifiers->identifier[0]->value, $bundle);
+	//drupal_set_message(print_r($node,true));	
+	_epdmod_get_project_outcomes($node);
+
+}
+
+
+function epdmod_update_themes_for_publications(&$node, $context) {
+  
+  // Get the parent project(s). This is project no
+  /*$project_nids = taxonomy_select_nodes($tid, FALSE);
+			foreach($project_nids as $project_nid) {
+				$node = node_load($project_nid);
+  */
+  //drupal_set_message(print_r($context,true));
+
+  $theme = '';
+  foreach($context['rows'] as $row) {
+	//drupal_set_message(print_r($row->field_publications_node_nid, true));
+	$project_nid = $row->field_publications_node_nid;
+	$project = node_load($project_nid);
+	//drupal_set_message(print_r($project->field_primary_theme, true));
+	if(isset($project->field_primary_theme[LANGUAGE_NONE])) {
+		//drupal_set_message(print_r($project->field_primary_theme[LANGUAGE_NONE],true));
+		foreach($project->field_primary_theme[LANGUAGE_NONE] as $tid) {
+			$primary_theme_tid = $tid['tid'];
+		}
+
+		$publication = node_load($node->nid);
+		//$publication->field_primary_theme[$publication->language][0]['tid'] = $primary_theme_tid;
+
+		
+		$theme_exists = FALSE;
+		foreach($publication->field_themes[LANGUAGE_NONE] as $term) {
+			if ($term['tid'] == $primary_theme_tid) { 
+				$theme_exists = TRUE; 
+			}
+		}
+		if ($theme_exists == FALSE) {
+			$publication->field_themes[LANGUAGE_NONE][] = array('tid'=>$primary_theme_tid);
+			node_save($publication);
+		}
+		$term = taxonomy_term_load($primary_theme_tid);
+		$theme = $term->name;
+	}
+  }
+
+  $message = t('Publication <a href="/node/%nid">%title</a> - update theme to %theme', array(
+    '%nid' => $node->nid,
+    '%title' => $node->title,
+    '%theme' => $theme,
+  ));
+  drupal_set_message($message);
+}
+
+function _epdmod_get_project_outcomes(&$node) {
+
+	//drupal_set_message(print_r($node->field_grant_reference,true));
+
+	if (!isset($node->field_grant_reference[$node->language])) {
+		drupal_set_message('Project has no grant id! '. l($node->title, 'node/'.$node->nid) );
+	}
+	
+	// We need the ES grant id first, otherwise use the RES one
+	$grant_reference_ES = '';
+	$grant_reference_RES = '';
+	foreach( $node->field_grant_reference[$node->language] as $grant_reference) {
+		if (substr($grant_reference['value'], 0, 2) == 'ES') {
+			$grant_reference_ES = $grant_reference['value'];
+		} else {
+			$grant_reference_RES = $grant_reference['value'];
+		}
+	}
+	if ($grant_reference_ES !== '') {
+		$grant_id = $grant_reference_ES;
+	} else {
+		$grant_id = $grant_reference_RES;
+	}
+	$endpoint = EPD_RC_API_SEARCH . "project/?term=" . $grant_id . "&fields=pro.gr";
+	
+	// Get the project id from GTR by searching by Grant Id.
+	//drupal_set_message(l($endpoint,$endpoint));
+
+	$search_obj = _epdmod_curl_request($endpoint);
+	//drupal_set_message(print_r($search_obj,true));
+
+	if (!isset($search_obj->searchResult->results)) {
+		drupal_set_message('Project not found at GTR, using Grant Id '. $grant_id . ' using API request '. l($endpoint,$endpoint));
+		return FALSE;
+	}
+	
+	// So we have at least one project - get the GTR project id
+	$results = $search_obj->searchResult->results;
+	$cnt = 0;$project_id ='';
+	foreach($results as $project) {
+		//drupal_set_message(print_r($project,true));
+		if ($cnt == 0) {
+			$project_id = $project->projectComposition->project->id;
+			$cnt++;
+		}
+	}
+	if ($project_id == '') {
+		drupal_set_message('Project Id not found for project '.l($node->title, 'node/'.$node->nid). ' using API request '. l($endpoint,$endpoint) );
+		return FALSE;
+	}
+	$endpoint = EPD_RC_API . "projects/" . $project_id . "/outcomes";
+	$outcomes_obj = _epdmod_curl_request($endpoint);
+	//drupal_set_message(l($endpoint,$endpoint));
+	// drupal_set_message(print_r($outcomes_obj,true));
+
+	// Display the publications
+	if(isset($outcomes_obj->publication)) {
+		foreach($outcomes_obj->publication as $publication){
+			$pub = 'Found publication: ';
+			$pub .= $publication->title.' || ';
+			$pub .= $publication->type.' || ';
+			$pub .= $publication->author.' || ';
+			if (isset($publication->publicationUrl)) { $pub .= l($publication->publicationUrl,$publication->publicationUrl).'<br/>'; }
+			drupal_set_message($pub);
+		}
+	}
+
+	// Now update the list of pubs, and add to the project node.
+	_epdmod_process_project_outcomes($node, $project_id);
+
+	return;
+
+}
+
 function _epdmod_process_project_outcomes(&$node, $project_id) {
 	//$project_id = "FE0A725B-DF5E-47F7-BB84-768E38CE440B";
 	$endpoint = EPD_RC_API . "projects/" . $project_id . "/outcomes";
 
 	$outcomes_obj = _epdmod_curl_request($endpoint);
-	//	print_r($outcomes_obj);
-	//	usleep(12500);
-	//	die();
+
 	/* Get publications and save to nodes and/or retrive nodes */
 	if(count($outcomes_obj->publication)) { $node->field_publications[$node->language] = array(); }
-	$cnt = 0;
 	foreach($outcomes_obj->publication as $publication){
 		$bundle = 'publication';
-		$publication_node = _epdmod_load_node_from_field('publication_url', $publication->publicationUrl, $bundle);
+		
+		if (isset($publication->publicationUrl)) {
+			$publication_node = _epdmod_load_node_from_field('publication_url', $publication->publicationUrl, $bundle);
+		} else {
+			// We may have set an id so use that.
+			if (isset($publication->id)) {
+				$publication_node = _epdmod_load_node_from_field('gtr_publication_id', $publication->id, $bundle);
+			} else {
+				$publication_node = NULL;
+			}
+		}
 		if(!$publication_node){
 			$publication_node = _epdmod_node_init($publication->title, $bundle);
-		}
+
+			if(isset($publication->datePublished) && $publication->datePublished > 0){
+				_epdmod_apply_node_fields($publication_node, 'published_date', _epdmod_format_date_for_field($publication->datePublished));
+			}
+			if(isset($publication->author)){
+				_epdmod_apply_node_fields($publication_node, 'author', $publication->author, NULL, 'tid');
+			}
+		} 
+
+		// If a pub already existed, we're only going to override some fields. Some, like Id, don't matter as they should be fixed.
+
+		if(isset($publication->id)){
+			_epdmod_apply_node_fields($publication_node, 'gtr_publication_id', $publication->id);
+		}		
 		if(isset($publication->publicationUrl)){
 			_epdmod_apply_node_fields($publication_node, 'publication_url', $publication->publicationUrl);
 		}
 		if(isset($publication->type)){
 			_epdmod_apply_node_fields($publication_node, 'publication_type', $publication->type, NULL, 'tid');
-		}
-		if(isset($publication->author)){
-			_epdmod_apply_node_fields($publication_node, 'author', $publication->author, NULL, 'tid');
 		}
 		if(isset($publication->volumeTitle)){
 			_epdmod_apply_node_fields($publication_node, 'volume_title', $publication->volumeTitle);
@@ -1124,19 +1484,20 @@ function _epdmod_process_project_outcomes(&$node, $project_id) {
 		if(isset($publication->issue)){
 			_epdmod_apply_node_fields($publication_node, 'issue', $publication->issue);
 		}
-		if(isset($publication->datePublished) && $publication->datePublished > 0){
-			_epdmod_apply_node_fields($publication_node, 'published_date', _epdmod_format_date_for_field($publication->datePublished));
+		if(isset($publication->abstractText) && $publication->abstractText > 0){
+			$publication_node->body[$publication_node->language][0]['value'] = nl2br($publication->abstractText);
 		}
 		$publication_nid = _epdmod_node_save($publication_node);
+
+		/* Save those nodes to project node reference field */
 		if($publication_nid){
 			if(!_epdmod_has_entityid_in_field($node->field_publications[$node->language], $publication_nid)){
-				$node->field_publications[$node->language][$cnt]['target_id'] = $publication_nid;
-				$node->field_publications[$node->language][$cnt]['entity'] = $publication_node;
-				$cnt++;
+				$node->field_publications[$node->language][] = array('target_id' => $publication_nid, 'entity' => $publication_node);
 			}
 		}
+		
 	}
-	/* Save those nodes to project node reference field */
+	
 }
 
 function _epdmod_has_entityid_in_field($field, $entityid){
@@ -1299,6 +1660,8 @@ function _epdmod_curl_request($endpoint){
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	// Set the url
 	curl_setopt($ch, CURLOPT_URL, $endpoint);
+	// Add to log
+	watchdog('epdmod', 'Call to GTR: '.l($endpoint, $endpoint));
 	// Execute
 	$result=curl_exec($ch);
 	// Closing
@@ -1365,6 +1728,10 @@ function _epdmod_apply_themes_to_child_node($child_nid, $parent_node){
 	$theme_tids = (isset($parent_node->field_themes[LANGUAGE_NONE])) ? $parent_node->field_themes[LANGUAGE_NONE] : array();
 	$keyword_tids = (isset($parent_node->field_keywords[LANGUAGE_NONE])) ? $parent_node->field_keywords[LANGUAGE_NONE] : array();
 
+	// Add primary theme for good measure
+	$primary_theme_tids = (isset($parent_node->field_primary_theme[LANGUAGE_NONE])) ? $parent_node->field_primary_theme[LANGUAGE_NONE] : array();
+	$theme_tids =  array_merge($theme_tids, $primary_theme_tids);
+		;
 	$child_node = node_load($child_nid);
 
 	if(_epdmod_terms_array_match($parent_node->field_themes, $child_node->field_themes) &&
@@ -1459,18 +1826,7 @@ function epdmod_gmap($op, &$map)
     }
 }*/
 
-/*
-function epdmod_form_alter(&$form, $form_state, $form_id) {
-	if ($form_id == 'views_exposed_form' && $form_state['view']->name == 'search') {
-		$form['field_organisations_tid'] = array(
-			'#type' => 'autocomplete_deluxe',
-			'#autocomplete_deluxe_path' => url('autocomplete_deluxe/taxonomy/field_organisations', array('absolute' => TRUE)),
-			'#multiple' => TRUE,
-			'#autocomplete_min_length' => 0,
-			'#autocomplete_multiple_delimiter' => ',',
-		);
-	};
-}*/
+
 
 
 function epdmod_form_alter(&$form, $form_state, $form_id) {
@@ -1484,6 +1840,15 @@ function epdmod_form_alter(&$form, $form_state, $form_id) {
 		);*/
 	 	$form['#action'] = url('search');
 	};
+
+	// Always make the field_publication_id read only (it is set by import from GTR)
+	$form['field_gtr_publication_id']['#disabled'] = TRUE;
+
+	$form['field_publication_type']['#disabled'] = TRUE;
+	$form['field_volume_title']['#disabled'] = TRUE;
+	$form['field_journal_title']['#disabled'] = TRUE;
+	$form['field_issue']['#disabled'] = TRUE;
+
 }
 
 function epdmod_get_theme_color($tid){
