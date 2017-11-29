@@ -5,12 +5,9 @@ http://www.{default}/:
     paths: {}
   cache:
     enabled: true
-    default_ttl: 0
-    cookies:
-    - '*'
-    headers:
-    - Accept
-    - Accept-Language
+    headers: ['Accept', 'Accept-Language', 'X-Language-Locale']
+    cookies: ["/^SESS.*/"]
+    default_ttl: 300
   ssi:
     enabled: false
   upstream: app:http
