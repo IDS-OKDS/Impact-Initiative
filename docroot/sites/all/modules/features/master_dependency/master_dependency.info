@@ -35,5 +35,4 @@ dependencies[] = epd_themes
 dependencies[] = epd_top_tips
 dependencies[] = epd_tokens
 dependencies[] = epd_impact_lab_landing_page
-dependencies[] = epd_top_menu
 dependencies[] = epd_taxo_people
