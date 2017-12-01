@@ -217,6 +217,7 @@ function epd_events_field_default_field_instances() {
         'module' => 'entityreference',
         'settings' => array(
           'links' => 1,
+          'use_content_language' => TRUE,
           'view_mode' => 'image_teaser',
         ),
         'type' => 'entityreference_entity_view',
@@ -261,6 +262,7 @@ function epd_events_field_default_field_instances() {
         'module' => 'entityreference',
         'settings' => array(
           'links' => 1,
+          'use_content_language' => TRUE,
           'view_mode' => 'text_teaser',
         ),
         'type' => 'entityreference_entity_view',
@@ -305,6 +307,7 @@ function epd_events_field_default_field_instances() {
         'module' => 'entityreference',
         'settings' => array(
           'links' => 0,
+          'use_content_language' => TRUE,
           'view_mode' => 'text_teaser',
         ),
         'type' => 'entityreference_entity_view',
@@ -493,6 +496,7 @@ function epd_events_field_default_field_instances() {
         'module' => 'entityreference',
         'settings' => array(
           'links' => TRUE,
+          'use_content_language' => TRUE,
           'view_mode' => 'default',
         ),
         'type' => 'entityreference_entity_view',

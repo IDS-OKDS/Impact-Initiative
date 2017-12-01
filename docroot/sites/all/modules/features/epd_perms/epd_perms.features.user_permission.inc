@@ -939,6 +939,7 @@ function epd_perms_user_default_permissions() {
     'name' => 'administer menu',
     'roles' => array(
       'administrator' => 'administrator',
+      'editor' => 'editor',
     ),
     'module' => 'menu',
   );
@@ -1085,6 +1086,7 @@ function epd_perms_user_default_permissions() {
     'name' => 'administer url aliases',
     'roles' => array(
       'administrator' => 'administrator',
+      'editor' => 'editor',
     ),
     'module' => 'path',
   );

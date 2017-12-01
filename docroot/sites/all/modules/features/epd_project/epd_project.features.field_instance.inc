@@ -72,6 +72,7 @@ function epd_project_field_default_field_instances() {
         'module' => 'entityreference',
         'settings' => array(
           'links' => 1,
+          'use_content_language' => TRUE,
           'view_mode' => 'teaser',
         ),
         'type' => 'entityreference_entity_view',
@@ -1132,6 +1133,7 @@ function epd_project_field_default_field_instances() {
         'label' => 'hidden',
         'module' => 'entityreference',
         'settings' => array(
+          'bypass_access' => FALSE,
           'link' => 1,
         ),
         'type' => 'entityreference_label',
@@ -1718,7 +1720,119 @@ function epd_project_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 9,
+      'weight' => 11,
+    ),
+  );
+
+  // Exported field_instance: 'node-publication-field_gtr_publication_id'.
+  $field_instances['node-publication-field_gtr_publication_id'] = array(
+    'bundle' => 'publication',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'The ID used by <a href="http://gtr.rcuk.ac.uk">Gateway to Research</a> to manage this publication. This field is stored so that publications are not re-imported, even if they have no url.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 15,
+      ),
+      'image_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'text_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_gtr_publication_id',
+    'label' => 'GTR Publication Id',
+    'required' => 0,
+    'settings' => array(
+      'linkit' => array(
+        'button_text' => 'Search',
+        'enable' => 0,
+        'profile' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 50,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 6,
+    ),
+  );
+
+  // Exported field_instance: 'node-publication-field_in_opendocs'.
+  $field_instances['node-publication-field_in_opendocs'] = array(
+    'bundle' => 'publication',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'Indicates if a publication has been archived in OpenDocs. The url will be in the url or update_url field.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
+      ),
+      'image_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'text_teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'ds_extras_field_template' => '',
+    'entity_type' => 'node',
+    'field_name' => 'field_in_opendocs',
+    'label' => 'In OpenDocs',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 7,
     ),
   );
 
@@ -1769,7 +1883,7 @@ function epd_project_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 8,
     ),
   );
 
@@ -1820,7 +1934,7 @@ function epd_project_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 7,
+      'weight' => 9,
     ),
   );
 
@@ -1871,7 +1985,7 @@ function epd_project_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'taxonomy_autocomplete',
-      'weight' => 14,
+      'weight' => 16,
     ),
   );
 
@@ -1880,10 +1994,10 @@ function epd_project_field_default_field_instances() {
     'bundle' => 'publication',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => '',
+    'description' => 'Publications should always inherit their primary theme from the parent Project',
     'display' => array(
       'default' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 12,
@@ -1895,7 +2009,7 @@ function epd_project_field_default_field_instances() {
         'weight' => 0,
       ),
       'teaser' => array(
-        'label' => 'above',
+        'label' => 'hidden',
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 0,
@@ -1907,9 +2021,10 @@ function epd_project_field_default_field_instances() {
         'weight' => 0,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_primary_theme',
-    'label' => 'Primary theme',
+    'label' => 'Primary theme DO NOT USE',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -1921,7 +2036,7 @@ function epd_project_field_default_field_instances() {
         'apply_chosen' => '',
       ),
       'type' => 'options_select',
-      'weight' => 12,
+      'weight' => 14,
     ),
   );
 
@@ -1969,7 +2084,7 @@ function epd_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 10,
+      'weight' => 12,
     ),
   );
 
@@ -2078,7 +2193,7 @@ function epd_project_field_default_field_instances() {
         'year_range' => '-3:+3',
       ),
       'type' => 'date_text',
-      'weight' => 11,
+      'weight' => 13,
     ),
   );
 
@@ -2126,7 +2241,7 @@ function epd_project_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 13,
+      'weight' => 15,
     ),
   );
 
@@ -2135,7 +2250,7 @@ function epd_project_field_default_field_instances() {
     'bundle' => 'publication',
     'default_value' => NULL,
     'deleted' => 0,
-    'description' => 'An updated URL for when the initial URL is overridden, usually because the original link is no longer working. ',
+    'description' => 'An updated URL for when the initial URL is overridden, usually because the original link is no longer working or has been added to OpenDocs ',
     'display' => array(
       'default' => array(
         'label' => 'above',
@@ -2162,6 +2277,7 @@ function epd_project_field_default_field_instances() {
         'weight' => 0,
       ),
     ),
+    'ds_extras_field_template' => '',
     'entity_type' => 'node',
     'field_name' => 'field_updated_publication_url',
     'label' => 'Updated publication URL',
@@ -2265,15 +2381,8 @@ function epd_project_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'date',
-        'settings' => array(
-          'format_type' => 'long',
-          'fromto' => 'both',
-          'multiple_from' => '',
-          'multiple_number' => '',
-          'multiple_to' => '',
-        ),
-        'type' => 'date_default',
+        'settings' => array(),
+        'type' => 'hidden',
         'weight' => 13,
       ),
       'image_teaser' => array(
@@ -2369,7 +2478,7 @@ function epd_project_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 8,
+      'weight' => 10,
     ),
   );
 
@@ -3123,7 +3232,7 @@ function epd_project_field_default_field_instances() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('An updated URL for when the initial URL is overridden, usually because the original link is no longer working. ');
+  t('An updated URL for when the initial URL is overridden, usually because the original link is no longer working or has been added to OpenDocs ');
   t('Assets');
   t('Author');
   t('Body');
@@ -3138,9 +3247,12 @@ function epd_project_field_default_field_instances() {
   t('Fund End Date');
   t('Fund Start Date');
   t('Fund Value');
+  t('GTR Publication Id');
   t('Grant Category');
   t('Grant Reference');
   t('Impact Initiative keywords. These are used for searching and superseed the imported keywords');
+  t('In OpenDocs');
+  t('Indicates if a publication has been archived in OpenDocs. The url will be in the url or update_url field.');
   t('Issue');
   t('Journal Title');
   t('Keywords');
@@ -3160,6 +3272,7 @@ function epd_project_field_default_field_instances() {
   t('Post Code');
   t('Potential Impact');
   t('Primary theme');
+  t('Primary theme DO NOT USE');
   t('Project Status');
   t('Project latitude');
   t('Project longitude');
@@ -3167,6 +3280,7 @@ function epd_project_field_default_field_instances() {
   t('Publication Type');
   t('Publication URL');
   t('Publications');
+  t('Publications should always inherit their primary theme from the parent Project');
   t('Published Date');
   t('Region');
   t('Short Title');
@@ -3174,6 +3288,7 @@ function epd_project_field_default_field_instances() {
   t('Tags sourced from OpenCalais about City.');
   t('Tags sourced from OpenCalais about Country.');
   t('Tags sourced from OpenCalais about Province Or State.');
+  t('The ID used by <a href="http://gtr.rcuk.ac.uk">Gateway to Research</a> to manage this publication. This field is stored so that publications are not re-imported, even if they have no url.');
   t('Themes');
   t('URL broken');
   t('URL updated');

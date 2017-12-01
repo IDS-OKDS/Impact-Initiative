@@ -121,6 +121,7 @@ function epd_project_views_default_views() {
   $handler->display->display_options['fields']['field_primary_theme']['id'] = 'field_primary_theme';
   $handler->display->display_options['fields']['field_primary_theme']['table'] = 'field_data_field_primary_theme';
   $handler->display->display_options['fields']['field_primary_theme']['field'] = 'field_primary_theme';
+  $handler->display->display_options['fields']['field_primary_theme']['exclude'] = TRUE;
   $handler->display->display_options['fields']['field_primary_theme']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_primary_theme']['type'] = 'token_formatters_term_reference';
   $handler->display->display_options['fields']['field_primary_theme']['settings'] = array(

@@ -3,6 +3,7 @@ core = 7.x
 package = Features
 dependencies[] = better_exposed_filters
 dependencies[] = context
+dependencies[] = ctools
 dependencies[] = epd_map_descriptions
 dependencies[] = ip_geoloc
 dependencies[] = quicktabs
